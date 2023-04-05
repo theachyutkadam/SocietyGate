@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tenent_histories
   resources :flats
   resources :floors
   resources :wings
