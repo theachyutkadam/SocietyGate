@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sectors
   resources :user_informations
   resources :users
   resources :societies
