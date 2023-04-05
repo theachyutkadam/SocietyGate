@@ -27,6 +27,10 @@ Things you may want to cover:
 * ...
 
 
+rails g scaffold society name city state location status:integer registration_number contact email address:text
+git add . && git commit -m "Society model scaffold"
+
+rails g scaffold user username password email status:integer is_admin:boolean token society:references type:integer is_primary_user:boolean
 git add . && git commit -m "User model scaffold"
 
 rails g scaffold user_information first_name middle_name last_name contact gender:integer birth_date:date pan_card_number adhaar_card_number is_handicap:boolean handicap_details:text  maritial_status:integer user:references
@@ -74,7 +78,7 @@ git add . && git commit -m "Complaint model scaffold"
 rails g scaffold event name sector:references start_at:datetime end_at:datetime is_private flat:references
 git add . && git commit -m "Event model scaffold"
 
-rails g scaffold commitee title sector:references members_limit:integer
+rails g scaffold commity title sector:references members_limit:integer
 git add . && git commit -m "Commity model scaffold"
 
 rails g scaffold commitee_member name user:references members_count:integer commity:references designation:integer
