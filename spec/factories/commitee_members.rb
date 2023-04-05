@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: commitee_members
@@ -23,7 +25,7 @@
 #
 FactoryBot.define do
   factory :commitee_member do
-    name { "MyString" }
+    name { 'MyString' }
     user { nil }
     members_count { 1 }
     commity { nil }

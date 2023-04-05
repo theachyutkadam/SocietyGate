@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -24,11 +26,11 @@
 #
 FactoryBot.define do
   factory :event do
-    name { "MyString" }
+    name { 'MyString' }
     sector { nil }
-    start_at { "2023-04-05 21:24:08" }
-    end_at { "2023-04-05 21:24:08" }
-    is_private { "MyString" }
+    start_at { '2023-04-05 21:24:08' }
+    end_at { '2023-04-05 21:24:08' }
+    is_private { 'MyString' }
     flat { nil }
   end
 end

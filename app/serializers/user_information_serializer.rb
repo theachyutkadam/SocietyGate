@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_informations
@@ -27,6 +29,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserInformationSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number, :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status
+  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number,
+             :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status
   has_one :user
 end

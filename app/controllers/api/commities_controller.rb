@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CommitiesController < ApplicationController
-  before_action :set_commity, only: %i[ show update destroy ]
+  before_action :set_commity, only: %i[show update destroy]
 
   # GET /commities
   def index
@@ -39,13 +41,14 @@ class CommitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_commity
-      @commity = Commity.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def commity_params
-      params.require(:commity).permit(:title, :sector_id, :members_limit)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_commity
+    @commity = Commity.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def commity_params
+    params.require(:commity).permit(:title, :sector_id, :members_limit)
+  end
 end

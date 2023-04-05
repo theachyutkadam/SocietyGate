@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tenent_histories
@@ -22,5 +24,5 @@
 #
 class TenentHistory < ApplicationRecord
   belongs_to :flat
-  belongs_to :tenant, class_name: "User"
+  belongs_to :tenant, class_name: 'User'
 end

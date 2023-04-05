@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class WingsController < ApplicationController
-  before_action :set_wing, only: %i[ show update destroy ]
+  before_action :set_wing, only: %i[show update destroy]
 
   # GET /wings
   def index
@@ -39,13 +41,14 @@ class WingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wing
-      @wing = Wing.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def wing_params
-      params.require(:wing).permit(:name, :sector_id, :number_of_lifts, :structure)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_wing
+    @wing = Wing.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def wing_params
+    params.require(:wing).permit(:name, :sector_id, :number_of_lifts, :structure)
+  end
 end

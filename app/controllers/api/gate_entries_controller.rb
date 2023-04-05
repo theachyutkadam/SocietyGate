@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class GateEntriesController < ApplicationController
-  before_action :set_gate_entry, only: %i[ show update destroy ]
+  before_action :set_gate_entry, only: %i[show update destroy]
 
   # GET /gate_entries
   def index
@@ -39,13 +41,15 @@ class GateEntriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gate_entry
-      @gate_entry = GateEntry.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def gate_entry_params
-      params.require(:gate_entry).permit(:type, :status, :flat_id, :vehicle_number, :first_name, :last_name, :gender, :contact, :vehicale_image_url, :person_image_url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_gate_entry
+    @gate_entry = GateEntry.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def gate_entry_params
+    params.require(:gate_entry).permit(:type, :status, :flat_id, :vehicle_number, :first_name, :last_name, :gender,
+                                       :contact, :vehicale_image_url, :person_image_url)
+  end
 end

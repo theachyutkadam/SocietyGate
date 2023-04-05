@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SocietiesController < ApplicationController
-  before_action :set_society, only: %i[ show update destroy ]
+  before_action :set_society, only: %i[show update destroy]
 
   # GET /societies
   def index
@@ -39,13 +41,15 @@ class SocietiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_society
-      @society = Society.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def society_params
-      params.require(:society).permit(:name, :city, :state, :location, :status, :registration_number, :contact, :email, :address)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_society
+    @society = Society.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def society_params
+    params.require(:society).permit(:name, :city, :state, :location, :status, :registration_number, :contact, :email,
+                                    :address)
+  end
 end

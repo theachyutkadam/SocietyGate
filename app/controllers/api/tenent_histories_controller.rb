@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TenentHistoriesController < ApplicationController
-  before_action :set_tenent_history, only: %i[ show update destroy ]
+  before_action :set_tenent_history, only: %i[show update destroy]
 
   # GET /tenent_histories
   def index
@@ -39,13 +41,14 @@ class TenentHistoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tenent_history
-      @tenent_history = TenentHistory.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tenent_history_params
-      params.require(:tenent_history).permit(:tenant_id, :flat_id, :move_in_at, :move_out_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tenent_history
+    @tenent_history = TenentHistory.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tenent_history_params
+    params.require(:tenent_history).permit(:tenant_id, :flat_id, :move_in_at, :move_out_at)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ParkingsController < ApplicationController
-  before_action :set_parking, only: %i[ show update destroy ]
+  before_action :set_parking, only: %i[show update destroy]
 
   # GET /parkings
   def index
@@ -39,13 +41,14 @@ class ParkingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_parking
-      @parking = Parking.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def parking_params
-      params.require(:parking).permit(:number, :is_covered, :size_in_feet, :sector_id, :owner_id, :flat_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_parking
+    @parking = Parking.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def parking_params
+    params.require(:parking).permit(:number, :is_covered, :size_in_feet, :sector_id, :owner_id, :flat_id)
+  end
 end

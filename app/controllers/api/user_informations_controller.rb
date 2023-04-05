@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UserInformationsController < ApplicationController
-  before_action :set_user_information, only: %i[ show update destroy ]
+  before_action :set_user_information, only: %i[show update destroy]
 
   # GET /user_informations
   def index
@@ -39,13 +41,15 @@ class UserInformationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_information
-      @user_information = UserInformation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_information_params
-      params.require(:user_information).permit(:first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number, :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_information
+    @user_information = UserInformation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_information_params
+    params.require(:user_information).permit(:first_name, :middle_name, :last_name, :contact, :gender, :birth_date,
+                                             :pan_card_number, :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :user_id)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CommiteeMembersController < ApplicationController
-  before_action :set_commitee_member, only: %i[ show update destroy ]
+  before_action :set_commitee_member, only: %i[show update destroy]
 
   # GET /commitee_members
   def index
@@ -39,13 +41,14 @@ class CommiteeMembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_commitee_member
-      @commitee_member = CommiteeMember.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def commitee_member_params
-      params.require(:commitee_member).permit(:name, :user_id, :members_count, :commity_id, :designation)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_commitee_member
+    @commitee_member = CommiteeMember.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def commitee_member_params
+    params.require(:commitee_member).permit(:name, :user_id, :members_count, :commity_id, :designation)
+  end
 end

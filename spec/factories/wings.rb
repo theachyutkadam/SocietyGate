@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: wings
@@ -20,7 +22,7 @@
 #
 FactoryBot.define do
   factory :wing do
-    name { "MyString" }
+    name { 'MyString' }
     sector { nil }
     number_of_lifts { 1 }
     structure { 1 }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: commities
@@ -19,7 +21,7 @@
 #
 FactoryBot.define do
   factory :commity do
-    title { "MyString" }
+    title { 'MyString' }
     sector { nil }
     members_limit { 1 }
   end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ComplaintsController < ApplicationController
-  before_action :set_complaint, only: %i[ show update destroy ]
+  before_action :set_complaint, only: %i[show update destroy]
 
   # GET /complaints
   def index
@@ -39,13 +41,14 @@ class ComplaintsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_complaint
-      @complaint = Complaint.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def complaint_params
-      params.require(:complaint).permit(:title, :type, :user_id, :description, :sector_id, :flat_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_complaint
+    @complaint = Complaint.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def complaint_params
+    params.require(:complaint).permit(:title, :type, :user_id, :description, :sector_id, :flat_id)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AmenitiesController < ApplicationController
-  before_action :set_amenity, only: %i[ show update destroy ]
+  before_action :set_amenity, only: %i[show update destroy]
 
   # GET /amenities
   def index
@@ -39,13 +41,15 @@ class AmenitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_amenity
-      @amenity = Amenity.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def amenity_params
-      params.require(:amenity).permit(:name, :start_time, :end_time, :is_paid, :only_for, :fee, :sector_id, :terms_and_conditions)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_amenity
+    @amenity = Amenity.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def amenity_params
+    params.require(:amenity).permit(:name, :start_time, :end_time, :is_paid, :only_for, :fee, :sector_id,
+                                    :terms_and_conditions)
+  end
 end

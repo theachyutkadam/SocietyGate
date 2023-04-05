@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: family_members
@@ -27,6 +29,7 @@
 #  fk_rails_...  (flat_id => flats.id)
 #
 class FamilyMemberSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number, :avatar_url, :maritial_status, :status, :relation_with
+  attributes :id, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number,
+             :avatar_url, :maritial_status, :status, :relation_with
   has_one :flat
 end

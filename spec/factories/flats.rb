@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: flats
@@ -37,8 +39,8 @@ FactoryBot.define do
     is_rented { false }
     tenant { nil }
     structure { 1 }
-    letter_box_number { "MyString" }
-    electricity_meter_number { "MyString" }
-    gas_meter_number { "MyString" }
+    letter_box_number { 'MyString' }
+    electricity_meter_number { 'MyString' }
+    gas_meter_number { 'MyString' }
   end
 end

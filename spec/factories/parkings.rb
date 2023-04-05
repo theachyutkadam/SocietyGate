@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: parkings
@@ -26,7 +28,7 @@
 #
 FactoryBot.define do
   factory :parking do
-    number { "MyString" }
+    number { 'MyString' }
     is_covered { false }
     size_in_feet { 1 }
     sector { nil }
