@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :complaints
   resources :family_members
   resources :gate_entries
