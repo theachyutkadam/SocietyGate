@@ -5,7 +5,7 @@ class CreateParkings < ActiveRecord::Migration[7.0]
       t.boolean :is_covered
       t.integer :size_in_feet
       t.references :sector, null: false, foreign_key: true
-      t.references :owner, null: false, foreign_key: true
+      t.references :owner, null: false, foreign_key: { to_table: :users }
       t.references :flat, null: false, foreign_key: true
 
       t.timestamps
