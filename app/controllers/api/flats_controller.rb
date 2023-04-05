@@ -1,55 +1,57 @@
 # frozen_string_literal: true
 
-class FlatsController < ApplicationController
-  before_action :set_flat, only: %i[show update destroy]
+module Api
+  class FlatsController < ApplicationController
+    before_action :set_flat, only: %i[show update destroy]
 
-  # GET /flats
-  def index
-    @flats = Flat.all
+    # GET /flats
+    def index
+      @flats = Flat.all
 
-    render json: @flats
-  end
-
-  # GET /flats/1
-  def show
-    render json: @flat
-  end
-
-  # POST /flats
-  def create
-    @flat = Flat.new(flat_params)
-
-    if @flat.save
-      render json: @flat, status: :created, location: @flat
-    else
-      render json: @flat.errors, status: :unprocessable_entity
+      render json: @flats
     end
-  end
 
-  # PATCH/PUT /flats/1
-  def update
-    if @flat.update(flat_params)
+    # GET /flats/1
+    def show
       render json: @flat
-    else
-      render json: @flat.errors, status: :unprocessable_entity
     end
-  end
 
-  # DELETE /flats/1
-  def destroy
-    @flat.destroy
-  end
+    # POST /flats
+    def create
+      @flat = Flat.new(flat_params)
 
-  private
+      if @flat.save
+        render json: @flat, status: :created, location: @flat
+      else
+        render json: @flat.errors, status: :unprocessable_entity
+      end
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_flat
-    @flat = Flat.find(params[:id])
-  end
+    # PATCH/PUT /flats/1
+    def update
+      if @flat.update(flat_params)
+        render json: @flat
+      else
+        render json: @flat.errors, status: :unprocessable_entity
+      end
+    end
 
-  # Only allow a list of trusted parameters through.
-  def flat_params
-    params.require(:flat).permit(:number, :owner_id, :floor_id, :area_in_feet, :is_rented, :tenant_id, :structure,
-                                 :letter_box_number, :electricity_meter_number, :gas_meter_number)
+    # DELETE /flats/1
+    def destroy
+      @flat.destroy
+    end
+
+    private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_flat
+      @flat = Flat.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def flat_params
+      params.require(:flat).permit(:number, :owner_id, :floor_id, :area_in_feet, :is_rented, :tenant_id, :structure,
+                                   :letter_box_number, :electricity_meter_number, :gas_meter_number)
+    end
   end
 end
