@@ -51,7 +51,7 @@ module Api
     # Only allow a list of trusted parameters through.
     def user_information_params
       params.require(:user_information).permit(:first_name, :middle_name, :last_name, :contact, :gender, :birth_date,
-                                               :pan_card_number, :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :user_id)
+                                               :pan_card_number, :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :user_id, :avatar)
     end
   end
 end
