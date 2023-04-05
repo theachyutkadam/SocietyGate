@@ -83,3 +83,10 @@ git add . && git commit -m "Commity model scaffold"
 
 rails g scaffold commitee_member name user:references members_count:integer commity:references designation:integer
 git add . && git commit -m "CommiteeMember model scaffold"
+
+bin/rails db:environment:set RAILS_ENV=development && rails db:drop db:create db:migrate
+
+rails g annotate:install
+
+rails g motor:install && rake db:migrate
+<!-- rails g motor:upgrade && rake db:migrate -->
