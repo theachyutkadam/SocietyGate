@@ -26,10 +26,10 @@
 #
 FactoryBot.define do
   factory :vehicle do
-    number { 'MyString' }
-    name { 'MyString' }
+    number { "MyString" }
+    name { "MyString" }
     type { 1 }
-    color { 'MyString' }
+    color { "MyString" }
     flat { nil }
     user { nil }
   end

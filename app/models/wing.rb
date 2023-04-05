@@ -22,5 +22,5 @@
 #
 class Wing < ApplicationRecord
   belongs_to :sector
-  enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: 'other'
+  enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
 end

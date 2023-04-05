@@ -29,8 +29,8 @@ class User < ApplicationRecord
   belongs_to :society
   has_one :user_information, dependent: :destroy
 
-  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: 'active'
-  enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: 'owner'
+  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "active"
+  enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: "owner"
 
   validates :email, :password, :username, presence: true
   validates :email, :username, :token, uniqueness: true

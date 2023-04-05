@@ -44,7 +44,7 @@ module Api
 
     def login
       @user = User.find_by(email: params[:email])
-      return render json: { errors: 'User does not found', status: 400 } unless @user
+      return render json: { errors: "User does not found", status: 400 } unless @user
 
       if @user.password == params[:password]
         # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
@@ -54,16 +54,16 @@ module Api
         render json: { user_information_id: @user.user_information.id, auth_token: token, user_id: @user.id,
                        status: 200 }
       else
-        render json: { errors: 'Invalid credentials', status: 400 }
+        render json: { errors: "Invalid credentials", status: 400 }
       end
     end
 
     def logout
       if current_user.update(token: nil)
-        current_user = ''
-        render json: { auth_token: 'Logout successfully!!!' }
+        current_user = ""
+        render json: { auth_token: "Logout successfully!!!" }
       else
-        render json: { errors: 'Something went wrong' }, status: :unauthorized
+        render json: { errors: "Something went wrong" }, status: :unauthorized
       end
     end
 

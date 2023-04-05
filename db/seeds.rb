@@ -7,12 +7,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require 'factory_bot'
+require "factory_bot"
 
-require_relative './create_record'
-require_relative './upload_csv_data'
+require_relative "./create_record"
+require_relative "./upload_csv_data"
 
-Rails.logger.debug 'Seeding...'
+Rails.logger.debug "Seeding..."
 start_time = Time.zone.now
 
 create_admin_user # create data from another file.

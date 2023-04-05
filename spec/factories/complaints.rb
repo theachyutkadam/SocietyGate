@@ -28,10 +28,10 @@
 #
 FactoryBot.define do
   factory :complaint do
-    title { 'MyString' }
+    title { "MyString" }
     type { 1 }
     user { nil }
-    description { 'MyText' }
+    description { "MyText" }
     sector { nil }
     flat { nil }
   end

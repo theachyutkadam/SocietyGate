@@ -2,5 +2,5 @@
 
 @counter = 0
 def create_admin_user
-  p '+++'
+  Rails.logger.debug "+++"
 end
