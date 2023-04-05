@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :floors
   resources :wings
   resources :sectors
   resources :user_informations
