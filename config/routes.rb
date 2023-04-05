@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :commitee_members
   resources :commities
   resources :events
   resources :complaints
