@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -25,7 +27,7 @@ gem "redis", "~> 4.0"
 gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -37,17 +39,17 @@ gem "image_processing", "~> 1.2"
 gem "rack-cors"
 
 # Following gems are user added as per requirements.
-gem "active_model_serializers"
-gem "sidekiq"
-gem "sidekiq-cron"
 gem "aasm"
+gem "active_model_serializers"
 gem "acts_as_paranoid"
 gem "motor-admin", "~> 0.4.4"
+gem "sidekiq"
+gem "sidekiq-cron"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "database_cleaner"
+  gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "main"
   gem "rspec-rails", "~> 3.6"
@@ -63,4 +65,3 @@ group :development do
   gem "rubocop-rails", "~> 2.17", ">= 2.17.3"
   gem "rubocop-rspec", require: false
 end
-
