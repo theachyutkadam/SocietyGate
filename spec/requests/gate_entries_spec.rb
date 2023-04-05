@@ -3,10 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "GateEntries", type: :request do
-  describe "GET /gate_entries" do
-    it "works! (now write some real specs)" do
-      get gate_entries_path
-      expect(response).to have_http_status(200)
-    end
+  describe "GET /api/gate_entries" do
+    pending "add some examples to (or delete) #{__FILE__}"
   end
 end

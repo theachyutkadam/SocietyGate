@@ -25,7 +25,7 @@ require "rails_helper"
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe ParkingsController, type: :controller do
+RSpec.describe Api::ParkingsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Parking. As you add validations to Parking, be sure to
   # adjust the attributes here as well.

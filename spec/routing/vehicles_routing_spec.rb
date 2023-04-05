@@ -2,30 +2,30 @@
 
 require "rails_helper"
 
-RSpec.describe VehiclesController, type: :routing do
+RSpec.describe Api::VehiclesController, type: :routing do
   describe "routing" do
     it "routes to #index" do
-      expect(get: "/vehicles").to route_to("vehicles#index")
+      expect(get: "/api/vehicles").to route_to("api/vehicles#index")
     end
 
     it "routes to #show" do
-      expect(get: "/vehicles/1").to route_to("vehicles#show", id: "1")
+      expect(get: "/api/vehicles/1").to route_to("api/vehicles#show", id: "1")
     end
 
     it "routes to #create" do
-      expect(post: "/vehicles").to route_to("vehicles#create")
+      expect(post: "/api/vehicles").to route_to("api/vehicles#create")
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/vehicles/1").to route_to("vehicles#update", id: "1")
+      expect(put: "/api/vehicles/1").to route_to("api/vehicles#update", id: "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/vehicles/1").to route_to("vehicles#update", id: "1")
+      expect(patch: "/api/vehicles/1").to route_to("api/vehicles#update", id: "1")
     end
 
     it "routes to #destroy" do
-      expect(delete: "/vehicles/1").to route_to("vehicles#destroy", id: "1")
+      expect(delete: "/api/vehicles/1").to route_to("api/vehicles#destroy", id: "1")
     end
   end
 end

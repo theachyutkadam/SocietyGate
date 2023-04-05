@@ -25,7 +25,7 @@ require "rails_helper"
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe CommitiesController, type: :controller do
+RSpec.describe Api::CommitiesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Commity. As you add validations to Commity, be sure to
   # adjust the attributes here as well.

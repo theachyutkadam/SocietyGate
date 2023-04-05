@@ -25,7 +25,7 @@ require "rails_helper"
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe TenentHistoriesController, type: :controller do
+RSpec.describe Api::TenentHistoriesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # TenentHistory. As you add validations to TenentHistory, be sure to
   # adjust the attributes here as well.

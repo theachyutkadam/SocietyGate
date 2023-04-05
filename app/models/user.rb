@@ -26,6 +26,8 @@
 #  fk_rails_...  (society_id => societies.id)
 #
 class User < ApplicationRecord
+  include AASM
+
   belongs_to :society
   has_one :user_information, dependent: :destroy
 

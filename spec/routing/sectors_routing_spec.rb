@@ -2,30 +2,30 @@
 
 require "rails_helper"
 
-RSpec.describe SectorsController, type: :routing do
+RSpec.describe Api::SectorsController, type: :routing do
   describe "routing" do
     it "routes to #index" do
-      expect(get: "/sectors").to route_to("sectors#index")
+      expect(get: "/api/sectors").to route_to("api/sectors#index")
     end
 
     it "routes to #show" do
-      expect(get: "/sectors/1").to route_to("sectors#show", id: "1")
+      expect(get: "/api/sectors/1").to route_to("api/sectors#show", id: "1")
     end
 
     it "routes to #create" do
-      expect(post: "/sectors").to route_to("sectors#create")
+      expect(post: "/api/sectors").to route_to("api/sectors#create")
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/sectors/1").to route_to("sectors#update", id: "1")
+      expect(put: "/api/sectors/1").to route_to("api/sectors#update", id: "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/sectors/1").to route_to("sectors#update", id: "1")
+      expect(patch: "/api/sectors/1").to route_to("api/sectors#update", id: "1")
     end
 
     it "routes to #destroy" do
-      expect(delete: "/sectors/1").to route_to("sectors#destroy", id: "1")
+      expect(delete: "/api/sectors/1").to route_to("api/sectors#destroy", id: "1")
     end
   end
 end

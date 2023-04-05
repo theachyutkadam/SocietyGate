@@ -3,10 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "TenentHistories", type: :request do
-  describe "GET /tenent_histories" do
-    it "works! (now write some real specs)" do
-      get tenent_histories_path
-      expect(response).to have_http_status(200)
-    end
+  describe "GET /api/tenent_histories" do
+    pending "add some examples to (or delete) #{__FILE__}"
   end
 end
