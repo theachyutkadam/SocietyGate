@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :tenent_histories
   resources :flats
   resources :floors
