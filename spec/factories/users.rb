@@ -27,14 +27,14 @@
 #
 FactoryBot.define do
   factory :user do
-    username { 'MyString' }
-    password { 'MyString' }
-    email { 'MyString' }
-    status { 1 }
+    username { Faker::Alphanumeric.alphanumeric(number: 10) }
+    email { Faker::Internet.email }
+    password { '123456' }
+    token { Faker::Internet.device_token }
     is_admin { false }
-    token { 'MyString' }
-    society { nil }
-    type { 1 }
-    is_primary_user { false }
+    status { User.statuses.keys.sample }
+    society { 'LR' }
+    type { User.types.keys.sample }
+    is_primary_user { true }
   end
 end

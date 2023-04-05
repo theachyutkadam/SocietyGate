@@ -28,4 +28,5 @@
 #
 class GateEntry < ApplicationRecord
   belongs_to :flat
+  enum entry_type: { guest: 0, delivery: 1, home_maintenance: 2, other: 3 }
 end

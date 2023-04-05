@@ -30,17 +30,16 @@
 #
 FactoryBot.define do
   factory :user_information do
-    first_name { 'MyString' }
-    middle_name { 'MyString' }
-    last_name { 'MyString' }
-    contact { 'MyString' }
-    gender { 1 }
-    birth_date { '2023-04-05' }
-    pan_card_number { 'MyString' }
-    adhaar_card_number { 'MyString' }
+    first_name { Faker::Name.first_name }
+    middle_name { Faker::Name.middle_name }
+    last_name { Faker::Name.last_name }
+    contact { Faker::Base.numerify('##########') }
+    birth_date { 18.years.ago }
+    gender { UserInformation.genders.keys.sample }
+    maritial_status { UserInformation.maritial_statuses.keys.sample }
+    pan_card_number { Faker::Base.bothify('?????####?') }
+    adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
     handicap_details { 'MyText' }
-    maritial_status { 1 }
-    user { nil }
   end
 end

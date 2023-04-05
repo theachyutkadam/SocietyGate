@@ -30,6 +30,16 @@
 #
 class UserInformationSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number,
-             :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :avatar_url
+             :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :avatar_url, :full_name
   has_one :user
+
+  def birth_date
+    object.birth_date.to_fs(:long)
+  end
+
+  def full_name
+    object.full_name
+  rescue StandardError
+    nil
+  end
 end

@@ -30,4 +30,5 @@ class Complaint < ApplicationRecord
   belongs_to :user
   belongs_to :sector
   belongs_to :flat
+  enum complaint_type: { electric: 0, plumbing: 1, gas_connection: 2, carpenter: 3, other: 4 }
 end
