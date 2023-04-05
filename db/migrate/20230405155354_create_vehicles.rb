@@ -5,7 +5,7 @@ class CreateVehicles < ActiveRecord::Migration[7.0]
     create_table :vehicles do |t|
       t.string :number
       t.string :name
-      t.integer :type
+      t.integer :vehicle_type
       t.string :color
       t.references :flat, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true

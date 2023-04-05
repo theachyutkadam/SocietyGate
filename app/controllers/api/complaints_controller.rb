@@ -50,7 +50,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def complaint_params
-      params.require(:complaint).permit(:title, :type, :user_id, :description, :sector_id, :flat_id)
+      params.require(:complaint).permit(:title, :complaint_type, :user_id, :description, :sector_id, :flat_id)
     end
   end
 end

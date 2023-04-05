@@ -50,7 +50,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def vehicle_params
-      params.require(:vehicle).permit(:number, :name, :type, :color, :flat_id, :user_id)
+      params.require(:vehicle).permit(:number, :name, :vehicle_type, :color, :flat_id, :user_id)
     end
   end
 end

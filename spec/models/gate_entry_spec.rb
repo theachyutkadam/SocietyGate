@@ -6,12 +6,12 @@
 #
 #  id                 :bigint           not null, primary key
 #  contact            :string
+#  entry_type         :integer
 #  first_name         :string
 #  gender             :integer
 #  last_name          :string
 #  person_image_url   :string
 #  status             :integer
-#  type               :integer
 #  vehicale_image_url :string
 #  vehicle_number     :string
 #  created_at         :datetime         not null

@@ -4,15 +4,15 @@
 #
 # Table name: vehicles
 #
-#  id         :bigint           not null, primary key
-#  color      :string
-#  name       :string
-#  number     :string
-#  type       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  flat_id    :bigint           not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  color        :string
+#  name         :string
+#  number       :string
+#  vehicle_type :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  flat_id      :bigint           not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #
@@ -25,7 +25,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class VehicleSerializer < ActiveModel::Serializer
-  attributes :id, :number, :name, :type, :color
+  attributes :id, :number, :name, :vehicle_type, :color
   has_one :flat
   has_one :user
 end

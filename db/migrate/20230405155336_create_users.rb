@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :is_admin
       t.string :token
       t.references :society, null: false, foreign_key: true
-      t.integer :type
+      t.integer :user_type
       t.boolean :is_primary_user
 
       t.timestamps

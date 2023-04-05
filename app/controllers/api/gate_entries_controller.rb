@@ -50,7 +50,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def gate_entry_params
-      params.require(:gate_entry).permit(:type, :status, :flat_id, :vehicle_number, :first_name, :last_name, :gender,
+      params.require(:gate_entry).permit(:entry_type, :status, :flat_id, :vehicle_number, :first_name, :last_name, :gender,
                                          :contact, :vehicale_image_url, :person_image_url)
     end
   end

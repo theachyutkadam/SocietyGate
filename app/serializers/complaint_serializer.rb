@@ -4,15 +4,15 @@
 #
 # Table name: complaints
 #
-#  id          :bigint           not null, primary key
-#  description :text
-#  title       :string
-#  type        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  flat_id     :bigint           not null
-#  sector_id   :bigint           not null
-#  user_id     :bigint           not null
+#  id             :bigint           not null, primary key
+#  complaint_type :integer
+#  description    :text
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  flat_id        :bigint           not null
+#  sector_id      :bigint           not null
+#  user_id        :bigint           not null
 #
 # Indexes
 #
@@ -27,7 +27,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ComplaintSerializer < ActiveModel::Serializer
-  attributes :id, :title, :type, :description
+  attributes :id, :title, :complaint_type, :description
   has_one :user
   has_one :sector
   has_one :flat

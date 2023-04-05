@@ -4,15 +4,15 @@
 #
 # Table name: complaints
 #
-#  id          :bigint           not null, primary key
-#  description :text
-#  title       :string
-#  type        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  flat_id     :bigint           not null
-#  sector_id   :bigint           not null
-#  user_id     :bigint           not null
+#  id             :bigint           not null, primary key
+#  complaint_type :integer
+#  description    :text
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  flat_id        :bigint           not null
+#  sector_id      :bigint           not null
+#  user_id        :bigint           not null
 #
 # Indexes
 #
@@ -29,7 +29,7 @@
 FactoryBot.define do
   factory :complaint do
     title { "MyString" }
-    type { 1 }
+    complaint_type { 1 }
     user { nil }
     description { "MyText" }
     sector { nil }

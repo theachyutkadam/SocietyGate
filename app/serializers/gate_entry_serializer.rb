@@ -6,12 +6,12 @@
 #
 #  id                 :bigint           not null, primary key
 #  contact            :string
+#  entry_type         :integer
 #  first_name         :string
 #  gender             :integer
 #  last_name          :string
 #  person_image_url   :string
 #  status             :integer
-#  type               :integer
 #  vehicale_image_url :string
 #  vehicle_number     :string
 #  created_at         :datetime         not null
@@ -27,7 +27,7 @@
 #  fk_rails_...  (flat_id => flats.id)
 #
 class GateEntrySerializer < ActiveModel::Serializer
-  attributes :id, :type, :status, :vehicle_number, :first_name, :last_name, :gender, :contact, :vehicale_image_url,
+  attributes :id, :entry_type, :status, :vehicle_number, :first_name, :last_name, :gender, :contact, :vehicale_image_url,
              :person_image_url
   has_one :flat
 end

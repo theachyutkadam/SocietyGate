@@ -11,7 +11,7 @@
 #  password        :string
 #  status          :integer
 #  token           :string
-#  type            :integer
+#  user_type       :integer
 #  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -34,7 +34,7 @@ FactoryBot.define do
     is_admin { false }
     status { User.statuses.keys.sample }
     society { "LR" }
-    type { User.types.keys.sample }
+    user_type { User.types.keys.sample }
     is_primary_user { true }
   end
 end

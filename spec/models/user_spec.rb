@@ -11,7 +11,7 @@
 #  password        :string
 #  status          :integer
 #  token           :string
-#  type            :integer
+#  user_type       :integer
 #  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
