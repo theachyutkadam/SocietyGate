@@ -1,4 +1,4 @@
 class TenentHistory < ApplicationRecord
-  belongs_to :tenant
   belongs_to :flat
+  belongs_to :tenant, class_name: "User"
 end
