@@ -10,13 +10,13 @@
 #  gas_meter_number         :string
 #  is_rented                :boolean
 #  letter_box_number        :string
-#  number                   :integer
+#  number                   :string
 #  structure                :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  floor_id                 :bigint           not null
 #  owner_id                 :bigint           not null
-#  tenant_id                :bigint           not null
+#  tenant_id                :bigint
 #
 # Indexes
 #
@@ -33,5 +33,7 @@
 class Flat < ApplicationRecord
   belongs_to :floor
   belongs_to :owner, class_name: "User"
-  belongs_to :tenant, class_name: "User"
+  belongs_to :tenant, class_name: "User", optional: true
+
+  enum structure: { one: 0, two: 1, three: 2 }
 end

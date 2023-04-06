@@ -1,5 +1,8 @@
 # SocietyGate
 This API application create for manage the society system, like gate_entry, notice, events, maintenance etc.
+* Factory Create Issues in console.
+- require 'factory_bot'
+- include FactoryBot::Syntax::Methods
 
 # README
 
@@ -36,10 +39,10 @@ git add . && git commit -m "User model scaffold"
 rails g scaffold user_information first_name middle_name last_name contact gender:integer birth_date:date pan_card_number adhaar_card_number is_handicap:boolean handicap_details:text  maritial_status:integer user:references
 git add . && git commit -m "UserInformation model scaffold"
 
-rails g scaffold sector society:references name location status:integer
-git add . && git commit -m "Sector model scaffold"
+rails g scaffold building society:references name location status:integer
+git add . && git commit -m "Building model scaffold"
 
-rails g scaffold wing name sector:references number_of_lifts:integer structure:integer
+rails g scaffold wing name building:references number_of_lifts:integer structure:integer
 git add . && git commit -m "Wing model scaffold"
 
 rails g scaffold floor number:integer number_of_flats:integer is_refuge_area:boolean wing:references fire_exebution:boolean service_at:datetime
@@ -54,10 +57,10 @@ git add . && git commit -m "TenentHistory model scaffold"
 rails g scaffold address building flat_number:integer road taluka district state pin_code user:references
 git add . && git commit -m "Address model scaffold"
 
-rails g scaffold amenity name start_time:datetime end_time:datetime is_paid:boolean only_for:integer fee:float sector:references terms_and_conditions:text
+rails g scaffold amenity name start_time:datetime end_time:datetime is_paid:boolean only_for:integer fee:float building:references terms_and_conditions:text
 git add . && git commit -m "Amenity model scaffold"
 
-rails g scaffold parking number is_covered:boolean size_in_feet:integer sector:references owner:references flat:references
+rails g scaffold parking number is_covered:boolean size_in_feet:integer building:references owner:references flat:references
 git add . && git commit -m "Parking model scaffold"
 
 rails g scaffold vehicle number name vehicle_type:integer color flat:references user:references
@@ -72,13 +75,13 @@ git add . && git commit -m "GateEntry model scaffold"
 rails g scaffold family_member first_name last_name contact birth_date:date gender:integer flat:references pan_card_number adhaar_card_number avatar_url maritial_status:integer status:integer relation_with:integer
 git add . && git commit -m "FamilyMember model scaffold"
 
-rails g scaffold complaint title complaint_type:integer user:references description:text sector:references flat:references
+rails g scaffold complaint title complaint_type:integer user:references description:text building:references flat:references
 git add . && git commit -m "Complaint model scaffold"
 
-rails g scaffold event name sector:references start_at:datetime end_at:datetime is_private flat:references
+rails g scaffold event name building:references start_at:datetime end_at:datetime is_private flat:references
 git add . && git commit -m "Event model scaffold"
 
-rails g scaffold commity title sector:references members_limit:integer
+rails g scaffold commity title building:references members_limit:integer
 git add . && git commit -m "Commity model scaffold"
 
 rails g scaffold commitee_member name user:references members_count:integer commity:references designation:integer

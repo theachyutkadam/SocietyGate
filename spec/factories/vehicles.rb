@@ -6,6 +6,7 @@
 #
 #  id           :bigint           not null, primary key
 #  color        :string
+#  company      :string
 #  name         :string
 #  number       :string
 #  vehicle_type :integer
@@ -26,11 +27,10 @@
 #
 FactoryBot.define do
   factory :vehicle do
-    number { "MyString" }
-    name { "MyString" }
-    vehicle_type { 1 }
-    color { "MyString" }
-    flat { nil }
-    user { nil }
+    number { Faker::Base.bothify("??##??####") }
+    company { Faker::Vehicle.make }
+    name { Faker::Vehicle.model }
+    vehicle_type { Vehicle.vehicle_types.keys.sample }
+    color { Faker::Vehicle.color }
   end
 end

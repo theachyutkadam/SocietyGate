@@ -28,15 +28,15 @@
 #
 FactoryBot.define do
   factory :gate_entry do
-    entry_type { 1 }
-    status { 1 }
-    flat { nil }
-    vehicle_number { "MyString" }
-    first_name { "MyString" }
-    last_name { "MyString" }
+    entry_type { GateEntry.entry_types.keys.sample }
+    status { GateEntry.statuses.keys.sample }
     gender { 1 }
-    contact { "MyString" }
-    vehicale_image_url { "MyString" }
-    person_image_url { "MyString" }
+    # gender { GateEntry.genders.keys.sample }
+    vehicle_number {Faker::Base.bothify("??##??####") }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    contact {Faker::Base.bothify("##########") }
+    vehicale_image_url { "vehicale_image_url" }
+    person_image_url { "person_image_url" }
   end
 end

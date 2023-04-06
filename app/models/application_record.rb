@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.record_count
     Rails.logger.debug "***************************************"
-    Rails.logger.debug "---#{Sector.count} - Sector"
+    Rails.logger.debug "---#{Building.count} - Building"
     Rails.logger.debug "---#{Society.count} - Society"
     Rails.logger.debug "---#{User.count} - User"
     Rails.logger.debug "---#{UserInformation.count} - UserInformation"

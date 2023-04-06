@@ -14,25 +14,24 @@
 #  terms_and_conditions :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  sector_id            :bigint           not null
+#  building_id          :bigint           not null
 #
 # Indexes
 #
-#  index_amenities_on_sector_id  (sector_id)
+#  index_amenities_on_building_id  (building_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sector_id => sectors.id)
+#  fk_rails_...  (building_id => buildings.id)
 #
 FactoryBot.define do
   factory :amenity do
-    name { "MyString" }
-    start_time { "2023-04-05 21:23:49" }
-    end_time { "2023-04-05 21:23:49" }
+    name { %w[SwimmingPool Garden Clubhouse Tennies].shuffle.sample }
+    start_time { Date.today }
+    end_time { Faker::Date.forward(days: 23) }
     is_paid { false }
-    only_for { 1 }
-    fee { 1.5 }
-    sector { nil }
-    terms_and_conditions { "MyText" }
+    only_for { Amenity.only_fors.keys.sample }
+    fee { 0.0 }
+    terms_and_conditions { Faker::Lorem.question(word_count: 4) }
   end
 end

@@ -25,10 +25,8 @@
 #
 FactoryBot.define do
   factory :commitee_member do
-    name { "MyString" }
-    user { nil }
+    name { Faker::Name.name }
+    designation { CommiteeMember.designations.keys.sample }
     members_count { 1 }
-    commity { nil }
-    designation { 1 }
   end
 end

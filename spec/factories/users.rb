@@ -33,8 +33,7 @@ FactoryBot.define do
     token { Faker::Internet.device_token }
     is_admin { false }
     status { User.statuses.keys.sample }
-    society { "LR" }
-    user_type { User.types.keys.sample }
+    user_type { User.user_types.keys.sample }
     is_primary_user { true }
   end
 end

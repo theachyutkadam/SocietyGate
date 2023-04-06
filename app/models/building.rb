@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: sectors
+# Table name: buildings
 #
 #  id         :bigint           not null, primary key
 #  location   :string
@@ -14,13 +14,13 @@
 #
 # Indexes
 #
-#  index_sectors_on_society_id  (society_id)
+#  index_buildings_on_society_id  (society_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (society_id => societies.id)
 #
-class SectorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :status
-  has_one :society
+class Building < ApplicationRecord
+  belongs_to :society
+  enum status: { active: 0, blocked: 1, closed: 2 }, _default: "active"
 end

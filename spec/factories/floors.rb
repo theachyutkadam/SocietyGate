@@ -7,7 +7,7 @@
 #  id              :bigint           not null, primary key
 #  fire_exebution  :boolean
 #  is_refuge_area  :boolean
-#  number          :integer
+#  number          :string
 #  number_of_flats :integer
 #  service_at      :datetime
 #  created_at      :datetime         not null
@@ -24,11 +24,10 @@
 #
 FactoryBot.define do
   factory :floor do
-    number { 1 }
-    number_of_flats { 1 }
+    number { Faker::Base.numerify("###") }
+    number_of_flats { Faker::Base.numerify("##") }
     is_refuge_area { false }
-    wing { nil }
     fire_exebution { false }
-    service_at { "2023-04-05 21:23:43" }
+    service_at { Date.today }
   end
 end

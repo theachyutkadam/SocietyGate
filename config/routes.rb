@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :flats
     resources :floors
     resources :wings
-    resources :sectors
+    resources :buildings
     resources :user_informations
     resources :users
     resources :societies

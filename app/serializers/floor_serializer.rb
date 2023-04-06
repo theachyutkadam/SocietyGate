@@ -7,7 +7,7 @@
 #  id              :bigint           not null, primary key
 #  fire_exebution  :boolean
 #  is_refuge_area  :boolean
-#  number          :integer
+#  number          :string
 #  number_of_flats :integer
 #  service_at      :datetime
 #  created_at      :datetime         not null

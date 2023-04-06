@@ -3,7 +3,7 @@
 class CreateFloors < ActiveRecord::Migration[7.0]
   def change
     create_table :floors do |t|
-      t.integer :number
+      t.string :number
       t.integer :number_of_flats
       t.boolean :is_refuge_area
       t.references :wing, null: false, foreign_key: true

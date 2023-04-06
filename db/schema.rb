@@ -43,11 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "building"
     t.integer "flat_number"
-    t.string "road"
-    t.string "taluka"
-    t.string "district"
+    t.string "building"
+    t.string "street_name"
+    t.string "city"
     t.string "state"
     t.string "pin_code"
     t.bigint "user_id", null: false
@@ -63,11 +62,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.boolean "is_paid"
     t.integer "only_for"
     t.float "fee"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.text "terms_and_conditions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sector_id"], name: "index_amenities_on_sector_id"
+    t.index ["building_id"], name: "index_amenities_on_building_id"
+  end
+
+  create_table "buildings", force: :cascade do |t|
+    t.bigint "society_id", null: false
+    t.string "name"
+    t.string "location"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["society_id"], name: "index_buildings_on_society_id"
   end
 
   create_table "commitee_members", force: :cascade do |t|
@@ -84,11 +93,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
 
   create_table "commities", force: :cascade do |t|
     t.string "title"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.integer "members_limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sector_id"], name: "index_commities_on_sector_id"
+    t.index ["building_id"], name: "index_commities_on_building_id"
   end
 
   create_table "complaints", force: :cascade do |t|
@@ -96,12 +105,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.integer "complaint_type"
     t.bigint "user_id", null: false
     t.text "description"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.bigint "flat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_complaints_on_building_id"
     t.index ["flat_id"], name: "index_complaints_on_flat_id"
-    t.index ["sector_id"], name: "index_complaints_on_sector_id"
     t.index ["user_id"], name: "index_complaints_on_user_id"
   end
 
@@ -117,15 +126,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.datetime "start_at"
     t.datetime "end_at"
-    t.string "is_private"
+    t.boolean "is_private"
     t.bigint "flat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_events_on_building_id"
     t.index ["flat_id"], name: "index_events_on_flat_id"
-    t.index ["sector_id"], name: "index_events_on_sector_id"
   end
 
   create_table "family_members", force: :cascade do |t|
@@ -147,12 +156,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   end
 
   create_table "flats", force: :cascade do |t|
-    t.integer "number"
+    t.string "number"
     t.integer "area_in_feet"
     t.boolean "is_rented"
     t.bigint "floor_id", null: false
     t.bigint "owner_id", null: false
-    t.bigint "tenant_id", null: false
+    t.bigint "tenant_id"
     t.integer "structure"
     t.string "letter_box_number"
     t.string "electricity_meter_number"
@@ -165,7 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   end
 
   create_table "floors", force: :cascade do |t|
-    t.integer "number"
+    t.string "number"
     t.integer "number_of_flats"
     t.boolean "is_refuge_area"
     t.bigint "wing_id", null: false
@@ -196,24 +205,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.string "number"
     t.boolean "is_covered"
     t.integer "size_in_feet"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.bigint "owner_id", null: false
     t.bigint "flat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_parkings_on_building_id"
     t.index ["flat_id"], name: "index_parkings_on_flat_id"
     t.index ["owner_id"], name: "index_parkings_on_owner_id"
-    t.index ["sector_id"], name: "index_parkings_on_sector_id"
-  end
-
-  create_table "sectors", force: :cascade do |t|
-    t.bigint "society_id", null: false
-    t.string "name"
-    t.string "location"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["society_id"], name: "index_sectors_on_society_id"
   end
 
   create_table "societies", force: :cascade do |t|
@@ -276,6 +275,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
 
   create_table "vehicles", force: :cascade do |t|
     t.string "number"
+    t.string "company"
     t.string "name"
     t.integer "vehicle_type"
     t.string "color"
@@ -289,42 +289,42 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
 
   create_table "wings", force: :cascade do |t|
     t.string "name"
-    t.bigint "sector_id", null: false
+    t.bigint "building_id", null: false
     t.integer "number_of_lifts"
     t.integer "structure"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sector_id"], name: "index_wings_on_sector_id"
+    t.index ["building_id"], name: "index_wings_on_building_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
-  add_foreign_key "amenities", "sectors"
+  add_foreign_key "amenities", "buildings"
+  add_foreign_key "buildings", "societies"
   add_foreign_key "commitee_members", "commities"
   add_foreign_key "commitee_members", "users"
-  add_foreign_key "commities", "sectors"
+  add_foreign_key "commities", "buildings"
+  add_foreign_key "complaints", "buildings"
   add_foreign_key "complaints", "flats"
-  add_foreign_key "complaints", "sectors"
   add_foreign_key "complaints", "users"
   add_foreign_key "documents", "users"
+  add_foreign_key "events", "buildings"
   add_foreign_key "events", "flats"
-  add_foreign_key "events", "sectors"
   add_foreign_key "family_members", "flats"
   add_foreign_key "flats", "floors"
   add_foreign_key "flats", "users", column: "owner_id"
   add_foreign_key "flats", "users", column: "tenant_id"
   add_foreign_key "floors", "wings"
   add_foreign_key "gate_entries", "flats"
+  add_foreign_key "parkings", "buildings"
   add_foreign_key "parkings", "flats"
-  add_foreign_key "parkings", "sectors"
   add_foreign_key "parkings", "users", column: "owner_id"
-  add_foreign_key "sectors", "societies"
   add_foreign_key "tenent_histories", "flats"
   add_foreign_key "tenent_histories", "users", column: "tenant_id"
   add_foreign_key "user_informations", "users"
   add_foreign_key "users", "societies"
   add_foreign_key "vehicles", "flats"
   add_foreign_key "vehicles", "users"
-  add_foreign_key "wings", "sectors"
+  add_foreign_key "wings", "buildings"
 end

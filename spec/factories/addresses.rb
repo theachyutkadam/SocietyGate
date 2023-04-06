@@ -6,12 +6,11 @@
 #
 #  id          :bigint           not null, primary key
 #  building    :string
-#  district    :string
+#  city        :string
 #  flat_number :integer
 #  pin_code    :string
-#  road        :string
 #  state       :string
-#  taluka      :string
+#  street_name :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint           not null
@@ -26,13 +25,11 @@
 #
 FactoryBot.define do
   factory :address do
-    building { "MyString" }
-    flat_number { 1 }
-    road { "MyString" }
-    taluka { "MyString" }
-    district { "MyString" }
-    state { "MyString" }
-    pin_code { "MyString" }
-    user { nil }
+    flat_number { Faker::Address.zip }
+    building { Faker::Address.building_number }
+    street_name { Faker::Address.street_address }
+    city { Faker::Address.city }
+    state { Faker::Address.state }
+    pin_code { Faker::Number.number(digits: 6) }
   end
 end

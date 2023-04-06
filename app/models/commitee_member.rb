@@ -26,4 +26,5 @@
 class CommiteeMember < ApplicationRecord
   belongs_to :user
   belongs_to :commity
+  enum designation: { admin: 0, suprevisor: 1, member: 2 }
 end

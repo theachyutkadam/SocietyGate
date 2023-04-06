@@ -14,17 +14,17 @@
 #  terms_and_conditions :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  sector_id            :bigint           not null
+#  building_id          :bigint           not null
 #
 # Indexes
 #
-#  index_amenities_on_sector_id  (sector_id)
+#  index_amenities_on_building_id  (building_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sector_id => sectors.id)
+#  fk_rails_...  (building_id => buildings.id)
 #
 class AmenitySerializer < ActiveModel::Serializer
   attributes :id, :name, :start_time, :end_time, :is_paid, :only_for, :fee, :terms_and_conditions
-  has_one :sector
+  has_one :building
 end

@@ -22,9 +22,8 @@
 #
 FactoryBot.define do
   factory :document do
-    user { nil }
-    name { "MyString" }
-    images { "MyString" }
-    description { "MyText" }
+    name { "Pan Card" }
+    images { "None" }
+    description { Faker::Lorem.question(word_count: 10) }
   end
 end

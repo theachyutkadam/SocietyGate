@@ -10,13 +10,13 @@
 #  gas_meter_number         :string
 #  is_rented                :boolean
 #  letter_box_number        :string
-#  number                   :integer
+#  number                   :string
 #  structure                :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  floor_id                 :bigint           not null
 #  owner_id                 :bigint           not null
-#  tenant_id                :bigint           not null
+#  tenant_id                :bigint
 #
 # Indexes
 #
@@ -32,15 +32,12 @@
 #
 FactoryBot.define do
   factory :flat do
-    number { 1 }
-    owner { nil }
-    floor { nil }
-    area_in_feet { 1 }
+    number { Faker::Base.numerify("####") }
+    area_in_feet { 550 }
     is_rented { false }
-    tenant { nil }
-    structure { 1 }
-    letter_box_number { "MyString" }
-    electricity_meter_number { "MyString" }
-    gas_meter_number { "MyString" }
+    structure { Flat.structures.keys.sample }
+    letter_box_number { Faker::Base.numerify("######") }
+    electricity_meter_number { Faker::Base.numerify("##########") }
+    gas_meter_number { Faker::Base.numerify("##########") }
   end
 end
