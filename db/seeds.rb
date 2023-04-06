@@ -10,13 +10,11 @@
 require "factory_bot"
 
 require_relative "./create_record"
-require_relative "./upload_csv_data"
 
 Rails.logger.debug "Seeding..."
 start_time = Time.zone.now
 
-create_admin_user # create data from another file.
-# start_csv_uploading # upload data from csv file
+start_seeding # create data from another file.
 
 end_time = Time.zone.now
 Rails.logger.debug "Seeding done from #{start_time} to #{end_time}."
