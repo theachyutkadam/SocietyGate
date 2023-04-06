@@ -25,7 +25,7 @@ FactoryBot.define do
     location { Faker::Address.street_name }
     status { Society.statuses.keys.sample }
     registration_number { Faker::Base.bothify("?????####?") }
-    contact { Faker::Base.numerify("##########")  }
+    contact { Faker::Base.numerify("##########") }
     email { Faker::Internet.email }
     address { Faker::Address.full_address }
   end

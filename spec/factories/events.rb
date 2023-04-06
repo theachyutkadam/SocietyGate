@@ -27,8 +27,8 @@
 FactoryBot.define do
   factory :event do
     name { Faker::Quote.singular_siegler }
-    start_at { Faker::Date.forward(days: 1)  }
-    end_at {  Faker::Date.forward(days: 2) }
+    start_at { Faker::Date.forward(days: 1) }
+    end_at { Faker::Date.forward(days: 2) }
     is_private { false }
   end
 end

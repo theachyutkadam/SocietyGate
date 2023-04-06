@@ -33,5 +33,5 @@ class FamilyMember < ApplicationRecord
   # enum gender: { male: 0, female: 1, other: 2 }
   enum maritial_status: { single: 0, married: 1, devorsed: 2 }
   enum status: { active: 0, pending: 1, blocked: 2, closed: 3 }, _default: "active"
-  enum relation_with: { mother: 0, father: 1, wife: 2, child: 3 , brother: 4, sister: 5, other: 6}
+  enum relation_with: { mother: 0, father: 1, wife: 2, child: 3, brother: 4, sister: 5, other: 6 }
 end

@@ -32,10 +32,10 @@ FactoryBot.define do
     status { GateEntry.statuses.keys.sample }
     gender { 1 }
     # gender { GateEntry.genders.keys.sample }
-    vehicle_number {Faker::Base.bothify("??##??####") }
+    vehicle_number { Faker::Base.bothify("??##??####") }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    contact {Faker::Base.bothify("##########") }
+    contact { Faker::Base.bothify("##########") }
     vehicale_image_url { "vehicale_image_url" }
     person_image_url { "person_image_url" }
   end

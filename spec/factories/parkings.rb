@@ -28,7 +28,7 @@
 #
 FactoryBot.define do
   factory :parking do
-    number { Faker::Base.bothify("??####")}
+    number { Faker::Base.bothify("??####") }
     is_covered { false }
     size_in_feet { Faker::Base.bothify("###") }
   end
