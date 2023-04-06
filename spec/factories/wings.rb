@@ -10,21 +10,20 @@
 #  structure       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  sector_id       :bigint           not null
+#  building_id     :bigint           not null
 #
 # Indexes
 #
-#  index_wings_on_sector_id  (sector_id)
+#  index_wings_on_building_id  (building_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sector_id => sectors.id)
+#  fk_rails_...  (building_id => buildings.id)
 #
 FactoryBot.define do
   factory :wing do
-    name { "MyString" }
-    sector { nil }
-    number_of_lifts { 1 }
-    structure { 1 }
+    name { [*('A'..'Z')].shuffle.sample }
+    number_of_lifts { rand(0..10) }
+    structure { Wing.structures.keys.sample }
   end
 end

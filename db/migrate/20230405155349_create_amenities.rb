@@ -9,7 +9,7 @@ class CreateAmenities < ActiveRecord::Migration[7.0]
       t.boolean :is_paid
       t.integer :only_for
       t.float :fee
-      t.references :sector, null: false, foreign_key: true
+      t.references :building, null: false, foreign_key: true
       t.text :terms_and_conditions
 
       t.timestamps

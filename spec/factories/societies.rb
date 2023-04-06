@@ -19,14 +19,14 @@
 #
 FactoryBot.define do
   factory :society do
-    name { "MyString" }
-    city { "MyString" }
-    state { "MyString" }
-    location { "MyString" }
-    status { 1 }
-    registration_number { "MyString" }
-    contact { "MyString" }
-    email { "MyString" }
-    address { "MyText" }
+    name { Faker::Superhero.power }
+    city { Faker::Address.city }
+    state { Faker::Address.state }
+    location { Faker::Address.street_name }
+    status { Society.statuses.keys.sample }
+    registration_number { Faker::Base.bothify("?????####?") }
+    contact { Faker::Base.numerify("##########")  }
+    email { Faker::Internet.email }
+    address { Faker::Address.full_address }
   end
 end

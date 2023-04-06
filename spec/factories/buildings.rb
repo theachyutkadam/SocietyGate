@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: sectors
+# Table name: buildings
 #
 #  id         :bigint           not null, primary key
 #  location   :string
@@ -14,12 +14,16 @@
 #
 # Indexes
 #
-#  index_sectors_on_society_id  (society_id)
+#  index_buildings_on_society_id  (society_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (society_id => societies.id)
 #
-class Sector < ApplicationRecord
-  belongs_to :society
+FactoryBot.define do
+  factory :building do
+    name { Faker::Base.bothify("??####") }
+    location { Faker::Address.city }
+    status { 1 }
+  end
 end

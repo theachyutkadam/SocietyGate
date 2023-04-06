@@ -9,17 +9,17 @@
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  sector_id     :bigint           not null
+#  building_id   :bigint           not null
 #
 # Indexes
 #
-#  index_commities_on_sector_id  (sector_id)
+#  index_commities_on_building_id  (building_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sector_id => sectors.id)
+#  fk_rails_...  (building_id => buildings.id)
 #
 class CommitySerializer < ActiveModel::Serializer
   attributes :id, :title, :members_limit
-  has_one :sector
+  has_one :building
 end

@@ -6,6 +6,7 @@
 #
 #  id           :bigint           not null, primary key
 #  color        :string
+#  company      :string
 #  name         :string
 #  number       :string
 #  vehicle_type :integer
@@ -27,5 +28,5 @@
 class Vehicle < ApplicationRecord
   belongs_to :flat
   belongs_to :user
-  enum vehicle_type: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
+  enum vehicle_type: { bike: 0, car: 1, other: 2 }
 end

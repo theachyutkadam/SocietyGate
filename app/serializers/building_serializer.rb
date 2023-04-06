@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: sectors
+# Table name: buildings
 #
 #  id         :bigint           not null, primary key
 #  location   :string
@@ -14,14 +14,13 @@
 #
 # Indexes
 #
-#  index_sectors_on_society_id  (society_id)
+#  index_buildings_on_society_id  (society_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (society_id => societies.id)
 #
-require "rails_helper"
-
-RSpec.describe Sector, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+class BuildingSerializer < ActiveModel::Serializer
+  attributes :id, :name, :location, :status
+  has_one :society
 end

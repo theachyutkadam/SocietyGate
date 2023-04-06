@@ -10,25 +10,25 @@
 #  size_in_feet :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  building_id  :bigint           not null
 #  flat_id      :bigint           not null
 #  owner_id     :bigint           not null
-#  sector_id    :bigint           not null
 #
 # Indexes
 #
-#  index_parkings_on_flat_id    (flat_id)
-#  index_parkings_on_owner_id   (owner_id)
-#  index_parkings_on_sector_id  (sector_id)
+#  index_parkings_on_building_id  (building_id)
+#  index_parkings_on_flat_id      (flat_id)
+#  index_parkings_on_owner_id     (owner_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (building_id => buildings.id)
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (owner_id => users.id)
-#  fk_rails_...  (sector_id => sectors.id)
 #
 class ParkingSerializer < ActiveModel::Serializer
   attributes :id, :number, :is_covered, :size_in_feet
-  has_one :sector
+  has_one :building
   has_one :owner
   has_one :flat
 end

@@ -28,5 +28,7 @@
 #
 class GateEntry < ApplicationRecord
   belongs_to :flat
+  # enum gender: { male: 0, female: 1, other: 2 }
   enum entry_type: { guest: 0, delivery: 1, home_maintenance: 2, other: 3 }
+  enum status: { pending: 0, allowed: 1, canceld: 2, exit: 3 }, _default: "pending"
 end

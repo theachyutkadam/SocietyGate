@@ -40,6 +40,6 @@ FactoryBot.define do
     pan_card_number { Faker::Base.bothify("?????####?") }
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
-    handicap_details { "MyText" }
+    handicap_details { Faker::Lorem.question(word_count: 4) }
   end
 end

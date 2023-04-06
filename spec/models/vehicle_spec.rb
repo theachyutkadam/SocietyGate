@@ -6,6 +6,7 @@
 #
 #  id           :bigint           not null, primary key
 #  color        :string
+#  company      :string
 #  name         :string
 #  number       :string
 #  vehicle_type :integer

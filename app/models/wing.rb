@@ -10,17 +10,17 @@
 #  structure       :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  sector_id       :bigint           not null
+#  building_id     :bigint           not null
 #
 # Indexes
 #
-#  index_wings_on_sector_id  (sector_id)
+#  index_wings_on_building_id  (building_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (sector_id => sectors.id)
+#  fk_rails_...  (building_id => buildings.id)
 #
 class Wing < ApplicationRecord
-  belongs_to :sector
+  belongs_to :building
   enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
 end

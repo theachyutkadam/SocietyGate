@@ -31,7 +31,7 @@ class User < ApplicationRecord
   belongs_to :society
   has_one :user_information, dependent: :destroy
 
-  enum status: { active: 0, inactive: 1, blocked: 2 }, _default: "active"
+  enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
   enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: "owner"
 
   validates :email, :password, :username, presence: true
@@ -43,14 +43,18 @@ class User < ApplicationRecord
 
   aasm :status, timestamps: true do
     state :active, initial: true
-    state :inactive, :blocked
+    state :pending, :blocked, :deleted
 
     event :activate do
-      transitions from: %i[inactive blocked], to: :active
+      transitions from: %i[pending blocked], to: :active
     end
 
     event :block do
-      transitions from: %i[active inactive], to: :blocked
+      transitions from: %i[active pending], to: :blocked
+    end
+
+    event :delete do
+      transitions from: %i[active pending blocked deleted], to: :deleted
     end
   end
 

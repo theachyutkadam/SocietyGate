@@ -18,4 +18,5 @@
 #  updated_at          :datetime         not null
 #
 class Society < ApplicationRecord
+  enum status: { active: 0, blocked: 1, closed: 2 }, _default: "active"
 end

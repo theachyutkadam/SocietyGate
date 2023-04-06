@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: sectors
+# Table name: buildings
 #
 #  id         :bigint           not null, primary key
 #  location   :string
@@ -14,17 +14,14 @@
 #
 # Indexes
 #
-#  index_sectors_on_society_id  (society_id)
+#  index_buildings_on_society_id  (society_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (society_id => societies.id)
 #
-FactoryBot.define do
-  factory :sector do
-    society { nil }
-    name { "MyString" }
-    location { "MyString" }
-    status { 1 }
-  end
+require "rails_helper"
+
+RSpec.describe Building, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
