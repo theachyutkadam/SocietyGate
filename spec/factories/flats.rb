@@ -34,7 +34,7 @@ FactoryBot.define do
   factory :flat do
     number { Faker::Base.numerify("####") }
     area_in_feet { 550 }
-    is_rented { false }
+    is_rented { [true, false].sample }
     structure { Flat.structures.keys.sample }
     letter_box_number { Faker::Base.numerify("######") }
     electricity_meter_number { Faker::Base.numerify("##########") }

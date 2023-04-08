@@ -4,51 +4,62 @@
 
 def start_seeding
   society = FactoryBot.create(:society)
-  19.times { |num| create_building(num, society) }
+  20.times { |num| create_building(num, society) }
 end
 
 def create_building(num, society)
   building = FactoryBot.create(:building, name: "R#{num + 1}", society: society)
-  Rails.logger.debug "building name - R#{num + 1}"
   puts
-  4.times { |num| create_wing(num, building) }
+  puts "building name - R#{num + 1}"
+  5.times { |num| create_wing(num, building) }
 end
 
 def create_wing(num, building)
   wing = FactoryBot.build(:wing, building: building)
   puts
-  Rails.logger.debug "wing name - #{building.name}/#{wing.name}"
+  puts "wing name - #{building.name}/#{wing.name}"
   if wing.valid?
     wing.save
-    24.times { |num| create_floor(num + 1, wing, building.society) }
+    22.times { |num| create_floor(num + 1, wing, building.society) }
   else
-    Rails.logger.debug "+++++++#{wing.errors.each { |error| Rails.logger.debug error.message }}++++++++"
+    puts "+++++++#{wing.errors.each { |error| puts error.message }}++++++++"
     create_wing(num, building)
   end
 end
 
 def create_floor(floor_num, wing, society)
   puts
-  Rails.logger.debug "floor - #{wing.name}-#{floor_num.ordinalize}"
+  puts "floor - #{wing.name}-#{floor_num.ordinalize}"
   floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing: wing, number_of_flats: 12)
   12.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
 end
 
 def create_flat(flat_num, floor, floor_num, society)
   number = "#{floor_num}#{format('%02d', flat_num)}"
-  Rails.logger.debug "flat-#{number} "
-  flat = FactoryBot.create(:flat, number: number, floor: floor, owner: create_user(society))
+  print "flat #{number} "
+  FactoryBot.create(:flat, number: number, floor: floor, owner: create_user(society))
 end
 
 def create_user(society)
   user = FactoryBot.build(:user, society: society)
   if user.valid?
     user.save
-    FactoryBot.create(:user_information, user: user)
-    User.find_by(email: user.email)
+    user = User.find_by(email: user.email)
+    create_user_information(user)
+    user
   else
-    Rails.logger.debug "@@@@@@User error - #{user.errors.each { |error| Rails.logger.debug error.message }}@@@@@@"
+    puts "@@@@@@User error - #{user.errors.each { |error| puts error.message }}@@@@@@"
     create_user(society)
+  end
+end
+def create_user_information(user)
+  user_info = FactoryBot.build(:user_information, user: user)
+  if user_info.valid?
+    user_info.save
+    UserInformation.find_by(contact: user_info.contact)
+  else
+    puts "@@@@@@UserInformation error - #{user_info.errors.each { |error| puts error.message }}@@@@@@"
+    create_user_information(user)
   end
 end
 
