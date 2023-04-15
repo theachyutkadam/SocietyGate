@@ -28,12 +28,21 @@
 #
 #  fk_rails_...  (flat_id => flats.id)
 #
+include Rails.application.routes.url_helpers
+
 class FamilyMemberSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number,
+  attributes :id, :link, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number,
              :avatar_url, :maritial_status, :status, :relation_with
   has_one :flat
 
   def birth_date
     object.birth_date.to_fs(:long)
+  end
+  def link
+    api_family_member_url(object)
+  end
+end
+  def link
+    api_address_url(object)
   end
 end

@@ -23,8 +23,13 @@
 #  fk_rails_...  (commity_id => commities.id)
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class CommiteeMemberSerializer < ActiveModel::Serializer
-  attributes :id, :name, :members_count, :designation
+  attributes :id, :link, :name, :members_count, :designation
   has_one :user
   has_one :commity
+  def link
+    api_commitee_member_url(object)
+  end
 end

@@ -20,7 +20,12 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class DocumentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :images, :description
+  attributes :id, :link, :name, :images, :description
   has_one :user
+  def link
+    api_document_url(object)
+  end
 end

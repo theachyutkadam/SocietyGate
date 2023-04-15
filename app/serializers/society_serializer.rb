@@ -17,6 +17,11 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
+include Rails.application.routes.url_helpers
+
 class SocietySerializer < ActiveModel::Serializer
-  attributes :id, :name, :city, :state, :location, :status, :registration_number, :contact, :email, :address
+  attributes :id, :link, :name, :city, :state, :location, :status, :registration_number, :contact, :email, :address
+  def link
+    api_society_url(object)
+  end
 end

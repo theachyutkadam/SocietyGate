@@ -24,7 +24,13 @@
 #
 #  fk_rails_...  (building_id => buildings.id)
 #
+include Rails.application.routes.url_helpers
+
 class AmenitySerializer < ActiveModel::Serializer
-  attributes :id, :name, :open_time, :close_time, :is_paid, :only_for, :fee, :terms_and_conditions
+  attributes :id, :link, :name, :open_time, :close_time, :is_paid, :only_for, :fee, :terms_and_conditions
   has_one :building
+
+  def link
+    api_amenity_url(object)
+  end
 end

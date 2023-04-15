@@ -26,9 +26,14 @@
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (owner_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class ParkingSerializer < ActiveModel::Serializer
-  attributes :id, :number, :is_covered, :size_in_feet
+  attributes :id, :link, :number, :is_covered, :size_in_feet
   has_one :building
   has_one :owner
   has_one :flat
+  def link
+    api_parking_url(object)
+  end
 end

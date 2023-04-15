@@ -25,8 +25,13 @@
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class VehicleSerializer < ActiveModel::Serializer
-  attributes :id, :number, :name, :vehicle_type, :color
+  attributes :id, :link, :number, :name, :vehicle_type, :color
   has_one :flat
   has_one :user
+  def link
+    api_vehicle_url(object)
+  end
 end

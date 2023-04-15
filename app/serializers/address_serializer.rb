@@ -23,7 +23,12 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id, :building, :flat_number, :road, :taluka, :district, :state, :pin_code
+  attributes :id, :link, :building, :flat_number, :road, :taluka, :district, :state, :pin_code
   has_one :user
+  def link
+    api_address_url(object)
+  end
 end

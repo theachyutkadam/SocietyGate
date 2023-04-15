@@ -19,7 +19,12 @@
 #
 #  fk_rails_...  (building_id => buildings.id)
 #
+include Rails.application.routes.url_helpers
+
 class CommitySerializer < ActiveModel::Serializer
-  attributes :id, :title, :members_limit
+  attributes :id, :link, :title, :members_limit
   has_one :building
+  def link
+    api_commity_url(object)
+  end
 end

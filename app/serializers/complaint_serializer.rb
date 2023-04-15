@@ -26,9 +26,14 @@
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class ComplaintSerializer < ActiveModel::Serializer
-  attributes :id, :title, :complaint_type, :description
+  attributes :id, :link, :title, :complaint_type, :description
   has_one :user
   has_one :building
   has_one :flat
+  def link
+    api_complaint_url(object)
+  end
 end

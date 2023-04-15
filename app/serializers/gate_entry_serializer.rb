@@ -26,8 +26,13 @@
 #
 #  fk_rails_...  (flat_id => flats.id)
 #
+include Rails.application.routes.url_helpers
+
 class GateEntrySerializer < ActiveModel::Serializer
-  attributes :id, :entry_type, :status, :vehicle_number, :first_name, :last_name, :gender, :contact, :vehicale_image_url,
+  attributes :id, :link, :entry_type, :status, :vehicle_number, :first_name, :last_name, :gender, :contact, :vehicale_image_url,
              :person_image_url
   has_one :flat
+  def link
+    api_gate_entry_url(object)
+  end
 end

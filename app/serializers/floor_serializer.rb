@@ -22,7 +22,12 @@
 #
 #  fk_rails_...  (wing_id => wings.id)
 #
+include Rails.application.routes.url_helpers
+
 class FloorSerializer < ActiveModel::Serializer
-  attributes :id, :number, :number_of_flats, :is_refuge_area, :fire_exebution, :service_at
+  attributes :id, :link, :number, :number_of_flats, :is_refuge_area, :fire_exebution, :service_at
   has_one :wing
+  def link
+    api_floor_url(object)
+  end
 end

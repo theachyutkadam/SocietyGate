@@ -22,8 +22,13 @@
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (tenant_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class TenentHistorySerializer < ActiveModel::Serializer
-  attributes :id, :move_in_at, :move_out_at
+  attributes :id, :link, :move_in_at, :move_out_at
   has_one :tenant
   has_one :flat
+  def link
+    api_tenent_history_url(object)
+  end
 end

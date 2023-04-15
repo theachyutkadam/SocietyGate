@@ -28,8 +28,10 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+include Rails.application.routes.url_helpers
+
 class UserInformationSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number,
+  attributes :id, :link, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :pan_card_number,
              :adhaar_card_number, :is_handicap, :handicap_details, :maritial_status, :avatar_url, :full_name
   has_one :user
 
@@ -41,5 +43,9 @@ class UserInformationSerializer < ActiveModel::Serializer
     object.full_name
   rescue StandardError
     nil
+  end
+
+  def link
+    api_user_information_url(object)
   end
 end

@@ -20,7 +20,12 @@
 #
 #  fk_rails_...  (society_id => societies.id)
 #
+include Rails.application.routes.url_helpers
+
 class BuildingSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :status
+  attributes :id, :link, :name, :location, :status
   has_one :society
+  def link
+    api_building_url(object)
+  end
 end
