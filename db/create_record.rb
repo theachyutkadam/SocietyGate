@@ -109,14 +109,18 @@ end
 def create_amenity(building)
   puts "Added amenity"
   amenity = FactoryBot.build(:amenity, building: building)
-  return amenity if amenity.save
+  if amenity.save
+    return amenity
+  else
+    puts "@@@@@@Amenity error - #{amenity.errors.each { |error| p error.message }}@@@@@@"
+    create_amenity(building)
+  end
 
-  create_amenity(building)
 end
 
 def create_parking(building, owner, flat)
   owner = flat.tenant if flat.is_rented
-  parking = FactoryBot.build(:parking, building: building, owner: owner, flat: flat)
+  parking = FactoryBot.build(:parking, number: "#{flat.letter_box_number}", building: building, owner: owner, flat: flat)
   puts "Assign Parking "
   if parking.save
     rand(1..4).times { |_num| create_vehicle(flat, owner) }
