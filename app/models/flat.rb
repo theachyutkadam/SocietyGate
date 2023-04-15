@@ -34,6 +34,23 @@ class Flat < ApplicationRecord
   belongs_to :floor
   belongs_to :owner, class_name: "User"
   belongs_to :tenant, class_name: "User", optional: true
+  delegate :wing, to: :floor
 
   enum structure: { one: 0, two: 1, three: 2 }
+
+  validates :electricity_meter_number, :gas_meter_number, :letter_box_number, :number, :structure, presence: true
+  validates :area_in_feet, numericality: true
+  validates :is_rented, inclusion: [true, false]
+
+  validate :tenant_available?
+
+  before_create :set_letter_box_number
+
+  def tenant_available?
+    errors.add(:tenant, "is required") if is_rented && !tenant
+  end
+
+  def set_letter_box_number
+    self.letter_box_number = "#{wing.building.name}-#{wing.name}-#{number}"
+  end
 end

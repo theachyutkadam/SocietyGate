@@ -11,8 +11,8 @@ class CreateFlats < ActiveRecord::Migration[7.0]
       t.references :tenant, null: true, foreign_key: { to_table: :users }
       t.integer :structure
       t.string :letter_box_number
-      t.string :electricity_meter_number
-      t.string :gas_meter_number
+      t.string :electricity_meter_number, null: false, index: { unique: true }
+      t.string :gas_meter_number, null: false, index: { unique: true }
 
       t.timestamps
     end

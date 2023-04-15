@@ -19,4 +19,7 @@
 #
 class Society < ApplicationRecord
   enum status: { active: 0, blocked: 1, closed: 2 }, _default: "active"
+
+  validates :city, :contact, :email, :location, :name, :registration_number, :state, presence: true
+  validates :contact, numericality: true, length: { is: 10 }
 end

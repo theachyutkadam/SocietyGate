@@ -24,7 +24,7 @@
 #
 FactoryBot.define do
   factory :tenent_history do
-    move_in_at { Faker::Date.backward(days: 500) }
+    move_in_at { Faker::Date.backward(days: 2000) }
     move_out_at { Faker::Date.backward(days: 25) }
   end
 end

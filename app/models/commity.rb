@@ -21,4 +21,7 @@
 #
 class Commity < ApplicationRecord
   belongs_to :building
+
+  validates :title, :members_limit, presence: true
+  validates :members_limit, numericality: true
 end

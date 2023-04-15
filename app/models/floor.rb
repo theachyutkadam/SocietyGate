@@ -24,4 +24,14 @@
 #
 class Floor < ApplicationRecord
   belongs_to :wing
+
+  validates :number_of_flats, :number, :service_at, presence: true
+  validates :number_of_flats, numericality: true
+  validates :is_refuge_area, :fire_exebution, inclusion: [true, false]
+
+  validate :service_at_needed?
+
+  def service_at_needed?
+    errors.add(:service_at, "can't be blank") if fire_exebution && service_at.nil?
+  end
 end

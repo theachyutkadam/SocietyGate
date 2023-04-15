@@ -34,12 +34,11 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     contact { Faker::Base.numerify("##########") }
     birth_date { 18.years.ago }
-    # gender { FamilyMember.genders.keys.sample }
-    gender { 1 }
+    gender { FamilyMember.genders.keys.sample }
     maritial_status { FamilyMember.maritial_statuses.keys.sample }
     pan_card_number { Faker::Base.bothify("?????####?") }
     adhaar_card_number { Faker::Number.number(digits: 12) }
-    avatar_url { "MyString" }
+    # avatar_url { "MyString" }
     status { FamilyMember.statuses.keys.sample }
     relation_with { FamilyMember.relation_withs.keys.sample }
   end

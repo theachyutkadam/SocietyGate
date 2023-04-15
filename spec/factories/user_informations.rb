@@ -41,5 +41,15 @@ FactoryBot.define do
     adhaar_card_number { Faker::Number.number(digits: 12) }
     is_handicap { false }
     handicap_details { Faker::Lorem.question(word_count: 4) }
+    # avatar_url { Faker::Avatar.image }
+    # transient do
+    #   # avatar { file_fixture("avatar.jpg") }
+    #   after :build do |user_information, evaluator|
+    #     user_information.avatar.attach(
+    #       io: evaluator.avatar.open,
+    #       filename: Faker::Avatar.image,
+    #     )
+    #   end
+    # end
   end
 end

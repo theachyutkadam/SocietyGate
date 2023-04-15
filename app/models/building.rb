@@ -23,4 +23,6 @@
 class Building < ApplicationRecord
   belongs_to :society
   enum status: { active: 0, blocked: 1, closed: 2 }, _default: "active"
+
+  validates :name, :status, presence: true
 end

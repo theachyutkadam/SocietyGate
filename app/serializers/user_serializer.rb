@@ -26,6 +26,6 @@
 #  fk_rails_...  (society_id => societies.id)
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :password, :email, :status, :is_admin, :token, :user_type, :is_primary_user
+  attributes :id, :password, :email, :status, :is_admin, :token, :user_type, :is_primary_user
   has_one :society
 end

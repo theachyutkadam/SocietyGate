@@ -25,4 +25,13 @@
 class TenentHistory < ApplicationRecord
   belongs_to :flat
   belongs_to :tenant, class_name: "User"
+
+  validates :move_in_at, presence: true
+  validate :move_out_date_is_greater?
+
+  def move_out_date_is_greater?
+    return unless move_out_at
+
+    errors.add(:move_out_at, "should be greather than move_in_at") if move_out_at <= move_in_at
+  end
 end

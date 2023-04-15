@@ -25,4 +25,7 @@
 #
 class Address < ApplicationRecord
   belongs_to :user
+
+  validates :building, :city, :flat_number, :pin_code, :state, presence: true
+  validates :pin_code, numericality: true, length: { is: 6 }
 end

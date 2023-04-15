@@ -25,6 +25,6 @@
 #  fk_rails_...  (building_id => buildings.id)
 #
 class AmenitySerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_time, :end_time, :is_paid, :only_for, :fee, :terms_and_conditions
+  attributes :id, :name, :open_time, :close_time, :is_paid, :only_for, :fee, :terms_and_conditions
   has_one :building
 end

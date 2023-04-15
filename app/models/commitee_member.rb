@@ -27,4 +27,15 @@ class CommiteeMember < ApplicationRecord
   belongs_to :user
   belongs_to :commity
   enum designation: { admin: 0, suprevisor: 1, member: 2 }
+
+  validates :name, :members_count, :designation, presence: true
+  validates :members_count, numericality: true
+  validate :check_members_limit
+
+  def check_members_limit
+    return unless CommiteeMember.where(commity_id: commity.id).count > commity.members_limit
+
+    errors.add(:members_count,
+               "limit over")
+  end
 end

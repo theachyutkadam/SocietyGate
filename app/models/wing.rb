@@ -25,8 +25,8 @@ class Wing < ApplicationRecord
   enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
 
   validates :name, presence: true
-  # validates :name, uniqueness: true
   validates :structure, inclusion: { in: structures.keys }
+  validates :number_of_lifts, numericality: true
 
   validate :check_wing_uniqueness
 

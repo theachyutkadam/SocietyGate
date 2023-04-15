@@ -34,8 +34,9 @@ class User < ApplicationRecord
   enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
   enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: "owner"
 
-  validates :email, :password, :username, presence: true
-  validates :email, :username, :token, uniqueness: true
+  validates :is_admin, :is_primary_user, inclusion: [true, false]
+  validates :email, :password, presence: true
+  validates :email, :token, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 

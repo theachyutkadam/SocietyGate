@@ -52,13 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id", unique: true
   end
 
   create_table "amenities", force: :cascade do |t|
     t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.time "open_time"
+    t.time "close_time"
     t.boolean "is_paid"
     t.integer "only_for"
     t.float "fee"
@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commity_id"], name: "index_commitee_members_on_commity_id"
-    t.index ["user_id"], name: "index_commitee_members_on_user_id"
+    t.index ["user_id"], name: "index_commitee_members_on_user_id", unique: true
   end
 
   create_table "commities", force: :cascade do |t|
@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
 
   create_table "complaints", force: :cascade do |t|
     t.string "title"
+    t.integer "status"
     t.integer "complaint_type"
     t.bigint "user_id", null: false
     t.text "description"
@@ -140,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   create_table "family_members", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "contact"
+    t.string "contact", null: false
     t.date "birth_date"
     t.integer "gender"
     t.bigint "flat_id", null: false
@@ -152,7 +153,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.integer "relation_with"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["adhaar_card_number"], name: "index_family_members_on_adhaar_card_number", unique: true
+    t.index ["contact"], name: "index_family_members_on_contact", unique: true
     t.index ["flat_id"], name: "index_family_members_on_flat_id"
+    t.index ["pan_card_number"], name: "index_family_members_on_pan_card_number", unique: true
   end
 
   create_table "flats", force: :cascade do |t|
@@ -164,11 +168,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.bigint "tenant_id"
     t.integer "structure"
     t.string "letter_box_number"
-    t.string "electricity_meter_number"
-    t.string "gas_meter_number"
+    t.string "electricity_meter_number", null: false
+    t.string "gas_meter_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["electricity_meter_number"], name: "index_flats_on_electricity_meter_number", unique: true
     t.index ["floor_id"], name: "index_flats_on_floor_id"
+    t.index ["gas_meter_number"], name: "index_flats_on_gas_meter_number", unique: true
     t.index ["owner_id"], name: "index_flats_on_owner_id"
     t.index ["tenant_id"], name: "index_flats_on_tenant_id"
   end
@@ -216,17 +222,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   end
 
   create_table "societies", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "city"
     t.string "state"
     t.string "location"
     t.integer "status"
-    t.string "registration_number"
-    t.string "contact"
-    t.string "email"
+    t.string "registration_number", null: false
+    t.string "contact", null: false
+    t.string "email", null: false
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["contact"], name: "index_societies_on_contact", unique: true
+    t.index ["email"], name: "index_societies_on_email", unique: true
+    t.index ["name"], name: "index_societies_on_name", unique: true
+    t.index ["registration_number"], name: "index_societies_on_registration_number", unique: true
   end
 
   create_table "tenent_histories", force: :cascade do |t|
@@ -244,33 +254,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
-    t.string "contact"
+    t.string "contact", null: false
     t.integer "gender"
     t.date "birth_date"
-    t.string "pan_card_number"
-    t.string "adhaar_card_number"
+    t.string "pan_card_number", null: false
+    t.string "adhaar_card_number", null: false
     t.boolean "is_handicap"
     t.text "handicap_details"
     t.integer "maritial_status"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_informations_on_user_id"
+    t.index ["adhaar_card_number"], name: "index_user_informations_on_adhaar_card_number", unique: true
+    t.index ["contact"], name: "index_user_informations_on_contact", unique: true
+    t.index ["pan_card_number"], name: "index_user_informations_on_pan_card_number", unique: true
+    t.index ["user_id"], name: "index_user_informations_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
     t.string "password"
-    t.string "email"
+    t.string "email", null: false
     t.integer "status"
     t.boolean "is_admin"
-    t.string "token"
+    t.string "token", null: false
     t.bigint "society_id", null: false
     t.integer "user_type"
     t.boolean "is_primary_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["society_id"], name: "index_users_on_society_id"
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
   create_table "vehicles", force: :cascade do |t|

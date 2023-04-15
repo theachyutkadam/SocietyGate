@@ -49,6 +49,7 @@ class UserInformation < ApplicationRecord
             :middle_name,
             presence: true
 
+  validates :is_handicap, inclusion: [true, false]
   validates :gender, inclusion: { in: genders.keys }
   validates :adhaar_card_number, numericality: true, length: { is: 12 }
   validates :contact, numericality: true, length: { is: 10 }

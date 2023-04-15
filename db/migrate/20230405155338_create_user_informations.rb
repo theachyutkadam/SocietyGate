@@ -6,15 +6,15 @@ class CreateUserInformations < ActiveRecord::Migration[7.0]
       t.string :first_name
       t.string :middle_name
       t.string :last_name
-      t.string :contact
+      t.string :contact, null: false, index: { unique: true }
       t.integer :gender
       t.date :birth_date
-      t.string :pan_card_number
-      t.string :adhaar_card_number
+      t.string :pan_card_number, null: false, index: { unique: true }
+      t.string :adhaar_card_number, null: false, index: { unique: true }
       t.boolean :is_handicap
       t.text :handicap_details
       t.integer :maritial_status
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true, index: { unique: true }
 
       t.timestamps
     end
