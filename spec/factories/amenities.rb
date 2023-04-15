@@ -27,8 +27,8 @@
 FactoryBot.define do
   factory :amenity do
     name { %w[SwimmingPool Garden Clubhouse Tennies].shuffle.sample }
-    open_time { Date.today }
-    close_time { Faker::Date.forward(days: 23) }
+    open_time { Faker::Time.backward(period: :morning).strftime("%I:%M %p") }
+    close_time { Faker::Time.backward(period: :evening).strftime("%I:%M %p") }
     is_paid { false }
     only_for { Amenity.only_fors.keys.sample }
     fee { 0.0 }
