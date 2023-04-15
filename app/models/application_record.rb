@@ -11,7 +11,7 @@ class ApplicationRecord < ActiveRecord::Base
     Rails.logger.debug "---#{UserInformation.count} - UserInformation"
     Rails.logger.debug "---#{Wing.count} - Wing"
     Rails.logger.debug "---#{Floor.count} - Floor"
-    Rails.logger.debug "---#{TenentHistory.count} - TenentHistory"
+    Rails.logger.debug "---#{TenantHistory.count} - TenantHistory"
     Rails.logger.debug "---#{Flat.count} - Flat"
     Rails.logger.debug "---#{Address.count} - Address"
     Rails.logger.debug "---#{Amenity.count} - Amenity"

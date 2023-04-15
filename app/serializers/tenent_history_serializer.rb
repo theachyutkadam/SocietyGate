@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: tenent_histories
+# Table name: tenant_histories
 #
 #  id          :bigint           not null, primary key
 #  move_in_at  :date
@@ -14,8 +14,8 @@
 #
 # Indexes
 #
-#  index_tenent_histories_on_flat_id    (flat_id)
-#  index_tenent_histories_on_tenant_id  (tenant_id)
+#  index_tenant_histories_on_flat_id    (flat_id)
+#  index_tenant_histories_on_tenant_id  (tenant_id)
 #
 # Foreign Keys
 #
@@ -24,11 +24,11 @@
 #
 include Rails.application.routes.url_helpers
 
-class TenentHistorySerializer < ActiveModel::Serializer
+class TenantHistorySerializer < ActiveModel::Serializer
   attributes :id, :link, :move_in_at, :move_out_at
   has_one :tenant
   has_one :flat
   def link
-    api_tenent_history_url(object)
+    api_tenant_history_url(object)
   end
 end

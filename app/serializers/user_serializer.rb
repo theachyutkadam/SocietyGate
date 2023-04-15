@@ -28,7 +28,7 @@
 include Rails.application.routes.url_helpers
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :link, :password, :email, :status, :is_admin, :token, :user_type, :is_primary_user
+  attributes :id, :link, :password, :email, :status, :is_admin, :user_type, :is_primary_user
   has_one :society
   def link
     api_user_url(object)

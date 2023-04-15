@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :parkings
     resources :amenities
     resources :addresses
-    resources :tenent_histories
+    resources :tenant_histories
     resources :flats
     resources :floors
     resources :wings

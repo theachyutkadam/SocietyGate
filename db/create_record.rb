@@ -48,7 +48,7 @@ def create_flat(flat_num, floor, floor_num, society)
 
   if flat.is_rented
     puts "Add Tenant with UI "
-    5.times { |number| create_tenent_history(flat, flat.tenant, number) }
+    5.times { |number| create_tenant_history(flat, flat.tenant, number) }
   end
 
   create_parking(flat.wing.building, flat.owner, flat)
@@ -81,7 +81,7 @@ def create_user_information(user)
   end
 end
 
-def create_tenent_history(flat, tenant, number)
+def create_tenant_history(flat, tenant, number)
   tenant_user = User.tenant.sample
   move_in_at = Faker::Date.backward(days: 2000)
   move_out_at = Faker::Date.backward(days: 25)
@@ -91,11 +91,11 @@ def create_tenent_history(flat, tenant, number)
     move_out_at = nil
   end
   puts "tenant history created"
-  tenent_history = FactoryBot.build(:tenent_history, flat: flat, tenant: tenant_user, move_in_at: move_in_at,
+  tenant_history = FactoryBot.build(:tenant_history, flat: flat, tenant: tenant_user, move_in_at: move_in_at,
                                                      move_out_at: move_out_at)
-  return tenent_history if tenent_history.save
+  return tenant_history if tenant_history.save
 
-  create_tenent_history(flat, tenant, number)
+  create_tenant_history(flat, tenant, number)
 end
 
 def create_address(user)

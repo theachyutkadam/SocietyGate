@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: tenent_histories
+# Table name: tenant_histories
 #
 #  id          :bigint           not null, primary key
 #  move_in_at  :date
@@ -14,15 +14,15 @@
 #
 # Indexes
 #
-#  index_tenent_histories_on_flat_id    (flat_id)
-#  index_tenent_histories_on_tenant_id  (tenant_id)
+#  index_tenant_histories_on_flat_id    (flat_id)
+#  index_tenant_histories_on_tenant_id  (tenant_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (flat_id => flats.id)
 #  fk_rails_...  (tenant_id => users.id)
 #
-class TenentHistory < ApplicationRecord
+class TenantHistory < ApplicationRecord
   belongs_to :flat
   belongs_to :tenant, class_name: "User"
 

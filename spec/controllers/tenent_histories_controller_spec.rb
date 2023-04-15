@@ -25,9 +25,9 @@ require "rails_helper"
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe Api::TenentHistoriesController, type: :controller do
+RSpec.describe Api::TenantHistoriesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
-  # TenentHistory. As you add validations to TenentHistory, be sure to
+  # TenantHistory. As you add validations to TenantHistory, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     skip("Add a hash of attributes valid for your model")
@@ -39,12 +39,12 @@ RSpec.describe Api::TenentHistoriesController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # TenentHistoriesController. Be sure to keep this updated too.
+  # TenantHistoriesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      tenent_history = TenentHistory.create! valid_attributes
+      tenant_history = TenantHistory.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -52,31 +52,31 @@ RSpec.describe Api::TenentHistoriesController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      tenent_history = TenentHistory.create! valid_attributes
-      get :show, params: { id: tenent_history.to_param }, session: valid_session
+      tenant_history = TenantHistory.create! valid_attributes
+      get :show, params: { id: tenant_history.to_param }, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new TenentHistory" do
+      it "creates a new TenantHistory" do
         expect do
-          post :create, params: { tenent_history: valid_attributes }, session: valid_session
-        end.to change(TenentHistory, :count).by(1)
+          post :create, params: { tenant_history: valid_attributes }, session: valid_session
+        end.to change(TenantHistory, :count).by(1)
       end
 
-      it "renders a JSON response with the new tenent_history" do
-        post :create, params: { tenent_history: valid_attributes }, session: valid_session
+      it "renders a JSON response with the new tenant_history" do
+        post :create, params: { tenant_history: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq("application/json")
-        expect(response.location).to eq(tenent_history_url(TenentHistory.last))
+        expect(response.location).to eq(tenant_history_url(TenantHistory.last))
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the new tenent_history" do
-        post :create, params: { tenent_history: invalid_attributes }, session: valid_session
+      it "renders a JSON response with errors for the new tenant_history" do
+        post :create, params: { tenant_history: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
       end
@@ -89,27 +89,27 @@ RSpec.describe Api::TenentHistoriesController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       end
 
-      it "updates the requested tenent_history" do
-        tenent_history = TenentHistory.create! valid_attributes
-        put :update, params: { id: tenent_history.to_param, tenent_history: new_attributes }, session: valid_session
-        tenent_history.reload
+      it "updates the requested tenant_history" do
+        tenant_history = TenantHistory.create! valid_attributes
+        put :update, params: { id: tenant_history.to_param, tenant_history: new_attributes }, session: valid_session
+        tenant_history.reload
         skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the tenent_history" do
-        tenent_history = TenentHistory.create! valid_attributes
+      it "renders a JSON response with the tenant_history" do
+        tenant_history = TenantHistory.create! valid_attributes
 
-        put :update, params: { id: tenent_history.to_param, tenent_history: valid_attributes }, session: valid_session
+        put :update, params: { id: tenant_history.to_param, tenant_history: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq("application/json")
       end
     end
 
     context "with invalid params" do
-      it "renders a JSON response with errors for the tenent_history" do
-        tenent_history = TenentHistory.create! valid_attributes
+      it "renders a JSON response with errors for the tenant_history" do
+        tenant_history = TenantHistory.create! valid_attributes
 
-        put :update, params: { id: tenent_history.to_param, tenent_history: invalid_attributes }, session: valid_session
+        put :update, params: { id: tenant_history.to_param, tenant_history: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
       end
@@ -117,11 +117,11 @@ RSpec.describe Api::TenentHistoriesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested tenent_history" do
-      tenent_history = TenentHistory.create! valid_attributes
+    it "destroys the requested tenant_history" do
+      tenant_history = TenantHistory.create! valid_attributes
       expect do
-        delete :destroy, params: { id: tenent_history.to_param }, session: valid_session
-      end.to change(TenentHistory, :count).by(-1)
+        delete :destroy, params: { id: tenant_history.to_param }, session: valid_session
+      end.to change(TenantHistory, :count).by(-1)
     end
   end
 end

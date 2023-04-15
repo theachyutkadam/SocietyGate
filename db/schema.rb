@@ -239,15 +239,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
     t.index ["registration_number"], name: "index_societies_on_registration_number", unique: true
   end
 
-  create_table "tenent_histories", force: :cascade do |t|
+  create_table "tenant_histories", force: :cascade do |t|
     t.bigint "tenant_id", null: false
     t.bigint "flat_id", null: false
     t.date "move_in_at"
     t.date "move_out_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["flat_id"], name: "index_tenent_histories_on_flat_id"
-    t.index ["tenant_id"], name: "index_tenent_histories_on_tenant_id"
+    t.index ["flat_id"], name: "index_tenant_histories_on_flat_id"
+    t.index ["tenant_id"], name: "index_tenant_histories_on_tenant_id"
   end
 
   create_table "user_informations", force: :cascade do |t|
@@ -334,8 +334,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_162504) do
   add_foreign_key "parkings", "buildings"
   add_foreign_key "parkings", "flats"
   add_foreign_key "parkings", "users", column: "owner_id"
-  add_foreign_key "tenent_histories", "flats"
-  add_foreign_key "tenent_histories", "users", column: "tenant_id"
+  add_foreign_key "tenant_histories", "flats"
+  add_foreign_key "tenant_histories", "users", column: "tenant_id"
   add_foreign_key "user_informations", "users"
   add_foreign_key "users", "societies"
   add_foreign_key "vehicles", "flats"

@@ -51,8 +51,8 @@ git add . && git commit -m "Floor model scaffold"
 rails g scaffold flat number:integer owner:references floor:references area_in_feet:integer is_rented:boolean tenant:references structure:integer letter_box_number electricity_meter_number gas_meter_number
 git add . && git commit -m "Flat model scaffold"
 
-rails g scaffold tenent_history tenant:references flat:references move_in_at:date move_out_at:date
-git add . && git commit -m "TenentHistory model scaffold"
+rails g scaffold tenant_history tenant:references flat:references move_in_at:date move_out_at:date
+git add . && git commit -m "TenantHistory model scaffold"
 
 rails g scaffold address building flat_number:integer road taluka district state pin_code user:references
 git add . && git commit -m "Address model scaffold"
@@ -108,7 +108,7 @@ wing = create(:wing, building: building)
 floor = create(:floor, wing: wing)
 flat = create(:flat, floor: floor, owner: user, tenant: user2)
 address = create(:address, user: user)
-tenent_history = create(:tenent_history, flat: flat, tenant: user2)
+tenant_history = create(:tenant_history, flat: flat, tenant: user2)
 amenity = create(:amenity, building: building)
 parking = create(:parking, building: building, flat: flat, owner: user2)
 vehicle = create(:vehicle, flat: flat, user: user2)

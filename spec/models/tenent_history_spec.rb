@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: tenent_histories
+# Table name: tenant_histories
 #
 #  id          :bigint           not null, primary key
 #  move_in_at  :date
@@ -14,8 +14,8 @@
 #
 # Indexes
 #
-#  index_tenent_histories_on_flat_id    (flat_id)
-#  index_tenent_histories_on_tenant_id  (tenant_id)
+#  index_tenant_histories_on_flat_id    (flat_id)
+#  index_tenant_histories_on_tenant_id  (tenant_id)
 #
 # Foreign Keys
 #
@@ -24,6 +24,6 @@
 #
 require "rails_helper"
 
-RSpec.describe TenentHistory, type: :model do
+RSpec.describe TenantHistory, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

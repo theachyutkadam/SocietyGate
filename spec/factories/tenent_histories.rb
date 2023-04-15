@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: tenent_histories
+# Table name: tenant_histories
 #
 #  id          :bigint           not null, primary key
 #  move_in_at  :date
@@ -14,8 +14,8 @@
 #
 # Indexes
 #
-#  index_tenent_histories_on_flat_id    (flat_id)
-#  index_tenent_histories_on_tenant_id  (tenant_id)
+#  index_tenant_histories_on_flat_id    (flat_id)
+#  index_tenant_histories_on_tenant_id  (tenant_id)
 #
 # Foreign Keys
 #
@@ -23,7 +23,7 @@
 #  fk_rails_...  (tenant_id => users.id)
 #
 FactoryBot.define do
-  factory :tenent_history do
+  factory :tenant_history do
     move_in_at { Faker::Date.backward(days: 2000) }
     move_out_at { Faker::Date.backward(days: 25) }
   end

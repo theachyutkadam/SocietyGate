@@ -1,56 +1,56 @@
 # frozen_string_literal: true
 
 module Api
-  class TenentHistoriesController < ApplicationController
-    before_action :set_tenent_history, only: %i[show update destroy]
+  class TenantHistoriesController < ApplicationController
+    before_action :set_tenant_history, only: %i[show update destroy]
 
-    # GET /tenent_histories
+    # GET /tenant_histories
     def index
-      @tenent_histories = TenentHistory.all
+      @tenant_histories = TenantHistory.all
 
-      render json: @tenent_histories
+      render json: @tenant_histories
     end
 
-    # GET /tenent_histories/1
+    # GET /tenant_histories/1
     def show
-      render json: @tenent_history
+      render json: @tenant_history
     end
 
-    # POST /tenent_histories
+    # POST /tenant_histories
     def create
-      @tenent_history = TenentHistory.new(tenent_history_params)
+      @tenant_history = TenantHistory.new(tenant_history_params)
 
-      if @tenent_history.save
-        render json: @tenent_history, status: :created, location: @tenent_history
+      if @tenant_history.save
+        render json: @tenant_history, status: :created, location: @tenant_history
       else
-        render json: @tenent_history.errors, status: :unprocessable_entity
+        render json: @tenant_history.errors, status: :unprocessable_entity
       end
     end
 
-    # PATCH/PUT /tenent_histories/1
+    # PATCH/PUT /tenant_histories/1
     def update
-      if @tenent_history.update(tenent_history_params)
-        render json: @tenent_history
+      if @tenant_history.update(tenant_history_params)
+        render json: @tenant_history
       else
-        render json: @tenent_history.errors, status: :unprocessable_entity
+        render json: @tenant_history.errors, status: :unprocessable_entity
       end
     end
 
-    # DELETE /tenent_histories/1
+    # DELETE /tenant_histories/1
     def destroy
-      @tenent_history.destroy
+      @tenant_history.destroy
     end
 
     private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_tenent_history
-      @tenent_history = TenentHistory.find(params[:id])
+    def set_tenant_history
+      @tenant_history = TenantHistory.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def tenent_history_params
-      params.require(:tenent_history).permit(:tenant_id, :flat_id, :move_in_at, :move_out_at)
+    def tenant_history_params
+      params.require(:tenant_history).permit(:tenant_id, :flat_id, :move_in_at, :move_out_at)
     end
   end
 end
