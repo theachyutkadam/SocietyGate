@@ -5,12 +5,12 @@
 # Table name: amenities
 #
 #  id                   :bigint           not null, primary key
-#  end_time             :datetime
+#  close_time           :time
 #  fee                  :float
 #  is_paid              :boolean
 #  name                 :string
 #  only_for             :integer
-#  start_time           :datetime
+#  open_time            :time
 #  terms_and_conditions :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

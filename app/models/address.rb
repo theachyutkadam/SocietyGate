@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_addresses_on_user_id  (user_id)
+#  index_addresses_on_user_id  (user_id) UNIQUE
 #
 # Foreign Keys
 #

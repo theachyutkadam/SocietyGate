@@ -4,14 +4,14 @@
 
 def start_seeding
   society = FactoryBot.create(:society)
-  20.times { |num| create_building(num, society) }
+  3.times { |num| create_building(num, society) }
 end
 
 def create_building(num, society)
   building = FactoryBot.create(:building, name: "R#{num + 1}", society: society)
   puts
   puts "building name - R#{num + 1}"
-  5.times do |num|
+  2.times do |num|
     create_amenity(building)
     create_wing(num, building)
   end
@@ -23,7 +23,7 @@ def create_wing(num, building)
   puts "wing name - #{building.name}/#{wing.name}"
   if wing.valid?
     wing.save
-    22.times { |num| create_floor(num + 1, wing, building.society) }
+    10.times { |num| create_floor(num + 1, wing, building.society) }
   else
     puts "+++++++#{wing.errors.each { |error| puts error.message }}++++++++"
     create_wing(num, building)
@@ -33,7 +33,7 @@ end
 def create_floor(floor_num, wing, society)
   puts "floor - #{wing.name}-#{floor_num.ordinalize}"
   floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing: wing, number_of_flats: 12)
-  12.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
+  6.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
   puts
 end
 
@@ -48,7 +48,7 @@ def create_flat(flat_num, floor, floor_num, society)
 
   if flat.is_rented
     puts "Add Tenant with UI "
-    5.times { |number| create_tenant_history(flat, flat.tenant, number) }
+    3.times { |number| create_tenant_history(flat, flat.tenant, number) }
   end
 
   create_parking(flat.wing.building, flat.owner, flat)
@@ -85,7 +85,7 @@ def create_tenant_history(flat, tenant, number)
   tenant_user = User.tenant.sample
   move_in_at = Faker::Date.backward(days: 2000)
   move_out_at = Faker::Date.backward(days: 25)
-  if number == 4
+  if number == 2
     tenant_user = tenant
     move_in_at = Date.today
     move_out_at = nil
@@ -94,6 +94,7 @@ def create_tenant_history(flat, tenant, number)
   tenant_history = FactoryBot.build(:tenant_history, flat: flat, tenant: tenant_user, move_in_at: move_in_at,
                                                      move_out_at: move_out_at)
   return tenant_history if tenant_history.save
+  puts "@@@@@@TH error - #{tenant_history.errors.each { |error| puts error.message }}@@@@@@"
 
   create_tenant_history(flat, tenant, number)
 end

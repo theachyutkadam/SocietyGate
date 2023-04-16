@@ -7,15 +7,22 @@
 #  id                  :bigint           not null, primary key
 #  address             :text
 #  city                :string
-#  contact             :string
-#  email               :string
+#  contact             :string           not null
+#  email               :string           not null
 #  location            :string
-#  name                :string
-#  registration_number :string
+#  name                :string           not null
+#  registration_number :string           not null
 #  state               :string
 #  status              :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#
+# Indexes
+#
+#  index_societies_on_contact              (contact) UNIQUE
+#  index_societies_on_email                (email) UNIQUE
+#  index_societies_on_name                 (name) UNIQUE
+#  index_societies_on_registration_number  (registration_number) UNIQUE
 #
 FactoryBot.define do
   factory :society do

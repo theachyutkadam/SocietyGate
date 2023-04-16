@@ -5,21 +5,22 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  email           :string
+#  email           :string           not null
 #  is_admin        :boolean
 #  is_primary_user :boolean
 #  password        :string
 #  status          :integer
-#  token           :string
+#  token           :string           not null
 #  user_type       :integer
-#  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  society_id      :bigint           not null
 #
 # Indexes
 #
+#  index_users_on_email       (email) UNIQUE
 #  index_users_on_society_id  (society_id)
+#  index_users_on_token       (token) UNIQUE
 #
 # Foreign Keys
 #

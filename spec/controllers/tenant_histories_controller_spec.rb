@@ -39,7 +39,7 @@ RSpec.describe Api::TenantHistoriesController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # TenentHistoriesController. Be sure to keep this updated too.
+  # TenantHistoriesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do

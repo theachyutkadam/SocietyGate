@@ -16,7 +16,7 @@
 # Indexes
 #
 #  index_commitee_members_on_commity_id  (commity_id)
-#  index_commitee_members_on_user_id     (user_id)
+#  index_commitee_members_on_user_id     (user_id) UNIQUE
 #
 # Foreign Keys
 #
