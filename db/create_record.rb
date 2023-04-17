@@ -165,7 +165,7 @@ def create_event
 end
 
 def create_commity(building)
-  puts "Add Commity "
+  puts "Add Commity"
   commity = FactoryBot.build(:commity, building: building, title: "#{building.name} Admin")
   return commity if commity.save
 
