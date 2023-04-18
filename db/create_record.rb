@@ -72,11 +72,16 @@ end
 def create_user_information(user)
   user_info = FactoryBot.build(:user_information, user: user)
   if user_info.save
-    UserInformation.find_by(contact: user_info.contact)
+    user_info.avatar.attach(
+      io: File.open(Dir.glob(File.join(Rails.root, '/public/avatar/', '*')).sample),
+      filename: "#{user_info.id}.jpg"
+    )
+    puts "++++++++++++++"
+    puts user_info.avatar_blob.inspect
+    puts "++++++++++++++"
+    user_info
   else
-    puts "@@@@@@UserInformation error - #{user_info.errors.each do |error|
-                                                          puts error.message
-                                                        end}@@@@@@"
+    puts "@@@@@@UserInformation error - #{user_info.errors.each { |error| puts error.message }}@@@@@@"
     create_user_information(user)
   end
 end

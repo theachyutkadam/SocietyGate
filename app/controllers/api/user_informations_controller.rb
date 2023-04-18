@@ -6,7 +6,7 @@ module Api
 
     # GET /user_informations
     def index
-      @user_informations = UserInformation.includes(:user).last(100)
+      @user_informations = UserInformation.includes(:user).all
 
       render json: @user_informations
     end

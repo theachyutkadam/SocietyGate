@@ -6,7 +6,7 @@ module Api
 
     # GET /tenant_histories
     def index
-      @tenant_histories = TenantHistory.all
+      @tenant_histories = TenantHistory.includes(:tenant, :flat).all
 
       render json: @tenant_histories
     end

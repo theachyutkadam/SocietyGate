@@ -41,11 +41,8 @@ class FamilyMemberSerializer < ActiveModel::Serializer
   def birth_date
     object.birth_date.to_fs(:long)
   end
+
   def link
     api_family_member_url(object)
-  end
-end
-  def link
-    api_address_url(object)
   end
 end

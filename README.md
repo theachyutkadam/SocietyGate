@@ -100,7 +100,10 @@ include FactoryBot::Syntax::Methods
 
 society = create(:society)
 user = create(:user, society: society)
+
 user_information = create(:user_information, user: user)
+user_information.avatar.attach(io: File.open(Dir.glob(File.join(Rails.root, '/public/avatar/', '*')).sample), filename: "#{user_information.id}.jpg")
+
 user2 = create(:user, society: society)
 user_information2 = create(:user_information, user: user2)
 building = create(:building, society: society)

@@ -23,10 +23,7 @@
 #
 #  fk_rails_...  (building_id => buildings.id)
 #  fk_rails_...  (flat_id => flats.id)
-#
-    api_address_url(object)
-  end
-end_at      :datetime
+#  end_at      :datetime
 #  is_private  :boolean
 #  name        :string
 #  start_at    :datetime
