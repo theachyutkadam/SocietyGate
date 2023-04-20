@@ -39,7 +39,7 @@ class User < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
   validates :password, length: { in: 6..20 }
 
-  after_create :set_token
+  before_create :set_token
 
   aasm :status, timestamps: true do
     state :active, initial: true
@@ -59,12 +59,12 @@ class User < ApplicationRecord
   end
 
   def generate_token
-    token = Faker::Internet.device_token
-    generate_token if User.where(token: token).any?
-    token
+    user_token = Faker::Internet.device_token
+    generate_token if User.where(token: user_token).any?
+    user_token
   end
 
   def set_token
-    update(token: generate_token)
+    self.token = generate_token
   end
 end
