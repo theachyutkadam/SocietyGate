@@ -36,6 +36,15 @@ class Flat < ApplicationRecord
   belongs_to :floor
   belongs_to :owner, class_name: "User"
   belongs_to :tenant, class_name: "User", optional: true
+
+  has_many :complaints, dependent: :destroy
+  has_many :events, dependent: :destroy
+  has_many :gate_entries, dependent: :destroy
+  has_many :tenant_histories, dependent: :destroy
+  has_many :vehicles, dependent: :destroy
+  has_many :parkings, dependent: :destroy
+  has_many :family_members, dependent: :destroy
+
   delegate :wing, to: :floor
 
   enum structure: { one: 0, two: 1, three: 2 }

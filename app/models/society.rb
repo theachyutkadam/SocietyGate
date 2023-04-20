@@ -25,6 +25,9 @@
 #  index_societies_on_registration_number  (registration_number) UNIQUE
 #
 class Society < ApplicationRecord
+  has_many :users, dependent: :destroy
+  has_many :buildings, dependent: :destroy
+
   enum status: { active: 0, blocked: 1, closed: 2 }, _default: "active"
 
   validates :city, :contact, :email, :location, :name, :registration_number, :state, presence: true

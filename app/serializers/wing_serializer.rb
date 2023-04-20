@@ -24,7 +24,7 @@ include Rails.application.routes.url_helpers
 
 class WingSerializer < ActiveModel::Serializer
   attributes :id, :link, :name, :number_of_lifts, :structure
-  has_one :building
+  # has_one :building
   def link
     api_wing_url(object)
   end

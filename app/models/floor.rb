@@ -24,6 +24,7 @@
 #
 class Floor < ApplicationRecord
   belongs_to :wing
+  has_many :flats, dependent: :destroy
 
   validates :number_of_flats, :number, :service_at, presence: true
   validates :number_of_flats, numericality: true
