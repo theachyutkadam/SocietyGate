@@ -27,4 +27,9 @@
 class Event < ApplicationRecord
   belongs_to :building
   belongs_to :flat
+
+  validates :name, :start_at, :end_at, presence: true
+  validates :is_private, inclusion: [true, false]
+
+  validates_comparison_of :end_at, greater_than: :start_at
 end

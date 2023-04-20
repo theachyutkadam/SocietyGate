@@ -2,11 +2,13 @@
 
 module Api
   class WingsController < ApplicationController
+    before_action :set_building
     before_action :set_wing, only: %i[show update destroy]
 
     # GET /wings
     def index
-      @wings = Wing.all
+      @wings = @building.wings
+      # @wings = Wing.includes(:building).all
 
       render json: @wings
     end
@@ -18,7 +20,7 @@ module Api
 
     # POST /wings
     def create
-      @wing = Wing.new(wing_params)
+      @wing = @building.wings.new(wing_params)
 
       if @wing.save
         render json: @wing, status: :created, location: @wing
@@ -45,12 +47,17 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_wing
-      @wing = Wing.find(params[:id])
+      @wing = @building.wings.where(id: params[:id]).first
+    end
+
+    def set_building
+      # @building = Building.find(1)
+      @building = Building.find(params[:building_id])
     end
 
     # Only allow a list of trusted parameters through.
     def wing_params
-      params.require(:wing).permit(:name, :sector_id, :number_of_lifts, :structure)
+      params.require(:wing).permit(:name, :building_id, :number_of_lifts, :structure)
     end
   end
 end

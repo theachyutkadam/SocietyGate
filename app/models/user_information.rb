@@ -5,9 +5,9 @@
 # Table name: user_informations
 #
 #  id                 :bigint           not null, primary key
-#  adhaar_card_number :string
+#  adhaar_card_number :string           not null
 #  birth_date         :date
-#  contact            :string
+#  contact            :string           not null
 #  first_name         :string
 #  gender             :integer
 #  handicap_details   :text
@@ -15,14 +15,17 @@
 #  last_name          :string
 #  maritial_status    :integer
 #  middle_name        :string
-#  pan_card_number    :string
+#  pan_card_number    :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  user_id            :bigint           not null
 #
 # Indexes
 #
-#  index_user_informations_on_user_id  (user_id)
+#  index_user_informations_on_adhaar_card_number  (adhaar_card_number) UNIQUE
+#  index_user_informations_on_contact             (contact) UNIQUE
+#  index_user_informations_on_pan_card_number     (pan_card_number) UNIQUE
+#  index_user_informations_on_user_id             (user_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -49,6 +52,7 @@ class UserInformation < ApplicationRecord
             :middle_name,
             presence: true
 
+  validates :is_handicap, inclusion: [true, false]
   validates :gender, inclusion: { in: genders.keys }
   validates :adhaar_card_number, numericality: true, length: { is: 12 }
   validates :contact, numericality: true, length: { is: 10 }

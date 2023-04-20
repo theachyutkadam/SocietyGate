@@ -5,12 +5,12 @@
 # Table name: amenities
 #
 #  id                   :bigint           not null, primary key
-#  end_time             :datetime
+#  close_time           :time
 #  fee                  :float
 #  is_paid              :boolean
 #  name                 :string
 #  only_for             :integer
-#  start_time           :datetime
+#  open_time            :time
 #  terms_and_conditions :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -26,9 +26,9 @@
 #
 FactoryBot.define do
   factory :amenity do
-    name { %w[SwimmingPool Garden Clubhouse Tennies].shuffle.sample }
-    start_time { Date.today }
-    end_time { Faker::Date.forward(days: 23) }
+    name { %w[SwimmingPool Garden Clubhouse Tennies Carrom Chess Piano].shuffle.sample }
+    open_time { Faker::Time.backward(period: :morning).strftime("%I:%M %p") }
+    close_time { Faker::Time.backward(period: :evening).strftime("%I:%M %p") }
     is_paid { false }
     only_for { Amenity.only_fors.keys.sample }
     fee { 0.0 }

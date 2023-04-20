@@ -50,7 +50,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def amenity_params
-      params.require(:amenity).permit(:name, :start_time, :end_time, :is_paid, :only_for, :fee, :sector_id,
+      params.require(:amenity).permit(:name, :open_time, :close_time, :is_paid, :only_for, :fee, :sector_id,
                                       :terms_and_conditions)
     end
   end

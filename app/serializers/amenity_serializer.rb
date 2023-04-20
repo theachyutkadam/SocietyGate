@@ -5,12 +5,12 @@
 # Table name: amenities
 #
 #  id                   :bigint           not null, primary key
-#  end_time             :datetime
+#  close_time           :time
 #  fee                  :float
 #  is_paid              :boolean
 #  name                 :string
 #  only_for             :integer
-#  start_time           :datetime
+#  open_time            :time
 #  terms_and_conditions :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -24,7 +24,13 @@
 #
 #  fk_rails_...  (building_id => buildings.id)
 #
+include Rails.application.routes.url_helpers
+
 class AmenitySerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_time, :end_time, :is_paid, :only_for, :fee, :terms_and_conditions
+  attributes :id, :link, :name, :open_time, :close_time, :is_paid, :only_for, :fee, :terms_and_conditions
   has_one :building
+
+  def link
+    api_amenity_url(object)
+  end
 end

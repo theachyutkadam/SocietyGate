@@ -8,7 +8,7 @@
 #  adhaar_card_number :string
 #  avatar_url         :string
 #  birth_date         :date
-#  contact            :string
+#  contact            :string           not null
 #  first_name         :string
 #  gender             :integer
 #  last_name          :string
@@ -22,18 +22,27 @@
 #
 # Indexes
 #
-#  index_family_members_on_flat_id  (flat_id)
+#  index_family_members_on_adhaar_card_number  (adhaar_card_number) UNIQUE
+#  index_family_members_on_contact             (contact) UNIQUE
+#  index_family_members_on_flat_id             (flat_id)
+#  index_family_members_on_pan_card_number     (pan_card_number) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (flat_id => flats.id)
 #
+include Rails.application.routes.url_helpers
+
 class FamilyMemberSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number,
+  attributes :id, :link, :first_name, :last_name, :contact, :birth_date, :gender, :pan_card_number, :adhaar_card_number,
              :avatar_url, :maritial_status, :status, :relation_with
   has_one :flat
 
   def birth_date
     object.birth_date.to_fs(:long)
+  end
+
+  def link
+    api_family_member_url(object)
   end
 end

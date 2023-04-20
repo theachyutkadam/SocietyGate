@@ -8,7 +8,7 @@
 #  adhaar_card_number :string
 #  avatar_url         :string
 #  birth_date         :date
-#  contact            :string
+#  contact            :string           not null
 #  first_name         :string
 #  gender             :integer
 #  last_name          :string
@@ -22,7 +22,10 @@
 #
 # Indexes
 #
-#  index_family_members_on_flat_id  (flat_id)
+#  index_family_members_on_adhaar_card_number  (adhaar_card_number) UNIQUE
+#  index_family_members_on_contact             (contact) UNIQUE
+#  index_family_members_on_flat_id             (flat_id)
+#  index_family_members_on_pan_card_number     (pan_card_number) UNIQUE
 #
 # Foreign Keys
 #

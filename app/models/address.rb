@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_addresses_on_user_id  (user_id)
+#  index_addresses_on_user_id  (user_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -25,4 +25,7 @@
 #
 class Address < ApplicationRecord
   belongs_to :user
+
+  validates :building, :city, :flat_number, :pin_code, :state, presence: true
+  validates :pin_code, numericality: true, length: { is: 6 }
 end

@@ -23,4 +23,16 @@
 class Wing < ApplicationRecord
   belongs_to :building
   enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
+
+  validates :name, presence: true
+  validates :structure, inclusion: { in: structures.keys }
+  validates :number_of_lifts, numericality: true
+
+  validate :check_wing_uniqueness
+
+  def check_wing_uniqueness
+    return unless Wing.where(name: name, building_id: building_id).any?
+
+    errors.add(:name, "already exists")
+  end
 end

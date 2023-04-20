@@ -21,4 +21,8 @@
 #
 class Commity < ApplicationRecord
   belongs_to :building
+  has_many :commitee_members, dependent: :destroy
+
+  validates :title, :members_limit, presence: true
+  validates :members_limit, numericality: true
 end

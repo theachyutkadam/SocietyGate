@@ -30,4 +30,9 @@ class Parking < ApplicationRecord
   belongs_to :flat
   belongs_to :building
   belongs_to :owner, class_name: "User"
+
+  validates :number, :size_in_feet, presence: true
+  validates :is_covered, inclusion: [true, false]
+
+  validates :size_in_feet, numericality: true
 end

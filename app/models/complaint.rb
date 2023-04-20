@@ -7,6 +7,7 @@
 #  id             :bigint           not null, primary key
 #  complaint_type :integer
 #  description    :text
+#  status         :integer
 #  title          :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -30,5 +31,9 @@ class Complaint < ApplicationRecord
   belongs_to :user
   belongs_to :building
   belongs_to :flat
+
+  enum status: { active: 0, pending: 1, completed: 2, work_in_progress: 3 }, _default: "pending"
   enum complaint_type: { electric: 0, plumbing: 1, gas_connection: 2, carpenter: 3, other: 4 }
+
+  validates :status, :complaint_type, :title, presence: true
 end

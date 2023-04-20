@@ -26,8 +26,8 @@ FactoryBot.define do
   factory :floor do
     number { Faker::Base.numerify("###") }
     number_of_flats { Faker::Base.numerify("##") }
-    is_refuge_area { false }
-    fire_exebution { false }
+    is_refuge_area { Faker::Boolean.boolean }
+    fire_exebution { Faker::Boolean.boolean }
     service_at { Date.today }
   end
 end

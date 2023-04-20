@@ -6,8 +6,7 @@ module Api
 
     # GET /floors
     def index
-      @floors = Floor.all
-
+      @floors = Floor.includes(:wing).all
       render json: @floors
     end
 

@@ -33,7 +33,7 @@ Things you may want to cover:
 rails g scaffold society name city state location status:integer registration_number contact email address:text
 git add . && git commit -m "Society model scaffold"
 
-rails g scaffold user username password email status:integer is_admin:boolean token society:references user_type:integer is_primary_user:boolean
+rails g scaffold user password email status:integer is_admin:boolean token society:references user_type:integer is_primary_user:boolean
 git add . && git commit -m "User model scaffold"
 
 rails g scaffold user_information first_name middle_name last_name contact gender:integer birth_date:date pan_card_number adhaar_card_number is_handicap:boolean handicap_details:text  maritial_status:integer user:references
@@ -51,8 +51,8 @@ git add . && git commit -m "Floor model scaffold"
 rails g scaffold flat number:integer owner:references floor:references area_in_feet:integer is_rented:boolean tenant:references structure:integer letter_box_number electricity_meter_number gas_meter_number
 git add . && git commit -m "Flat model scaffold"
 
-rails g scaffold tenent_history tenant:references flat:references move_in_at:date move_out_at:date
-git add . && git commit -m "TenentHistory model scaffold"
+rails g scaffold tenant_history tenant:references flat:references move_in_at:date move_out_at:date
+git add . && git commit -m "TenantHistory model scaffold"
 
 rails g scaffold address building flat_number:integer road taluka district state pin_code user:references
 git add . && git commit -m "Address model scaffold"
@@ -93,3 +93,32 @@ rails g annotate:install
 
 rails g motor:install && rake db:migrate
 <!-- rails g motor:upgrade && rake db:migrate -->
+
+*Check factory data*
+require 'factory_bot'
+include FactoryBot::Syntax::Methods
+
+society = create(:society)
+user = create(:user, society: society)
+
+user_information = create(:user_information, user: user)
+user_information.avatar.attach(io: File.open(Dir.glob(File.join(Rails.root, '/public/avatar/', '*')).sample), filename: "#{user_information.id}.jpg")
+
+user2 = create(:user, society: society)
+user_information2 = create(:user_information, user: user2)
+building = create(:building, society: society)
+wing = create(:wing, building: building)
+floor = create(:floor, wing: wing)
+flat = create(:flat, floor: floor, owner: user, tenant: user2)
+address = create(:address, user: user)
+tenant_history = create(:tenant_history, flat: flat, tenant: user2)
+amenity = create(:amenity, building: building)
+parking = create(:parking, building: building, flat: flat, owner: user2)
+vehicle = create(:vehicle, flat: flat, user: user2)
+family_member = create(:family_member, flat: flat)
+document = create(:document, user: user)
+gate_entry = create(:gate_entry, flat: flat)
+complaint = create(:complaint, building: building, flat: flat, user: user2)
+event = create(:event, building: building, flat: flat)
+commity = create(:commity, building: building)
+commitee_member = create(:commitee_member, commity:commity, user: user)
