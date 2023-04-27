@@ -31,6 +31,8 @@ class Parking < ApplicationRecord
   belongs_to :building
   belongs_to :owner, class_name: "User"
 
+  delegate :society, to: :building
+
   validates :number, :size_in_feet, presence: true
   validates :is_covered, inclusion: [true, false]
 

@@ -2,11 +2,12 @@
 
 module Api
   class AmenitiesController < ApplicationController
+    before_action :set_building
     before_action :set_amenity, only: %i[show update destroy]
 
     # GET /amenities
     def index
-      @amenities = Amenity.all
+      @amenities = @building.amenities
 
       render json: @amenities
     end
@@ -45,7 +46,11 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_amenity
-      @amenity = Amenity.find(params[:id])
+      @amenity = @building.amenities.where(id: params[:id]).first
+    end
+
+    def set_building
+      @building = Building.find(params[:building_id])
     end
 
     # Only allow a list of trusted parameters through.

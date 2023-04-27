@@ -36,6 +36,7 @@ class Flat < ApplicationRecord
   belongs_to :floor
   belongs_to :owner, class_name: "User"
   belongs_to :tenant, class_name: "User", optional: true
+  delegate :wing, to: :floor
 
   has_many :complaints, dependent: :destroy
   has_many :events, dependent: :destroy

@@ -28,6 +28,8 @@
 class Vehicle < ApplicationRecord
   belongs_to :flat
   belongs_to :user
+  delegate :society, to: :user
+
   enum vehicle_type: { bike: 0, car: 1, other: 2 }
 
   validates :color, :company, :name, :number, :vehicle_type, presence: true

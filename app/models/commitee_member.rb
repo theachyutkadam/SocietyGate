@@ -26,6 +26,7 @@
 class CommiteeMember < ApplicationRecord
   belongs_to :user
   belongs_to :commity
+  delegate :building, to: :commity
   enum designation: { admin: 0, suprevisor: 1, member: 2 }
 
   validates :name, :members_count, :designation, presence: true

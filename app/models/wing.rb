@@ -23,6 +23,7 @@
 class Wing < ApplicationRecord
   belongs_to :building
   enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
+  delegate :society, to: :building
 
   validates :name, presence: true
   validates :structure, inclusion: { in: structures.keys }

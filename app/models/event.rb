@@ -27,6 +27,7 @@
 class Event < ApplicationRecord
   belongs_to :building
   belongs_to :flat
+  delegate :society, to: :building
 
   validates :name, :start_at, :end_at, presence: true
   validates :is_private, inclusion: [true, false]

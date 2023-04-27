@@ -26,6 +26,8 @@
 #
 class Amenity < ApplicationRecord
   belongs_to :building
+  delegate :society, to: :building
+
   enum only_for: { male: 0, female: 1, kids: 2, senior: 3 }
 
   validates :name, :open_time, :close_time, presence: true
