@@ -3,6 +3,8 @@
 require "sidekiq/web"
 require "sidekiq/cron/web"
 Rails.application.routes.draw do
+  get :health, controller:"application"
+
   namespace :api do
     mount Motor::Admin => "/motor_admin"
     mount Sidekiq::Web => "/admin/sidekiq"
@@ -24,11 +26,14 @@ Rails.application.routes.draw do
     resources :wings
     resources :buildings
     resources :user_informations
-    resources :users
     resources :societies
+
+    resources :users do
+      get "onboarding", on: :collection
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root "application#health"
 end

@@ -23,8 +23,7 @@
 include Rails.application.routes.url_helpers
 
 class BuildingSerializer < ActiveModel::Serializer
-  attributes :id, :link, :name, :location, :status
-  has_one :society
+  attributes :id, :link, :name, :location, :status, :society
   def link
     api_building_url(object)
   end

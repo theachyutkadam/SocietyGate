@@ -11,6 +11,13 @@ class ApplicationController < ActionController::API
     @login_user.user_information
   end
 
+  def health
+    records = ApplicationRecord.record_count
+    # render json: {count: records, routes: `Rails.application.routes.routes`}
+    # routes = `rails routes --expand | grep api/`
+    render json: {count: records}
+  end
+
   private
 
   def authenticate_user!

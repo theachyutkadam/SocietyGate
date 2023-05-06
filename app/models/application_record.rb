@@ -4,26 +4,29 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   def self.record_count
+    record_hash = {}
     puts "***************************************"
-    puts "---#{Society.count} - Society"
-    puts "---#{Building.count} - Building"
-    puts "---#{Wing.count} - Wing"
-    puts "---#{Floor.count} - Floor"
-    puts "---#{Flat.count} - Flat"
-    puts "---#{User.count} - User"
-    puts "---#{UserInformation.count} - UserInformation"
-    puts "---#{TenantHistory.count} - TenantHistory"
-    puts "---#{Address.count} - Address"
-    puts "---#{Parking.count} - Parking"
-    puts "---#{Vehicle.count} - Vehicle"
-    puts "---#{FamilyMember.count} - FamilyMember"
-    puts "---#{Document.count} - Document"
-    puts "---#{Amenity.count} - Amenity"
-    puts "---#{GateEntry.count} - GateEntry"
-    puts "---#{Complaint.count} - Complaint"
-    puts "---#{Event.count} - Event"
-    puts "---#{Commity.count} - Commity"
-    puts "---#{CommiteeMember.count} - CommiteeMember"
+    record_hash['society'] = Society.count
+    record_hash['building'] = Building.count
+    record_hash['wing'] = Wing.count
+    record_hash['floor'] = Floor.count
+    record_hash['flat'] = Flat.count
+    record_hash['user'] = User.count
+    record_hash['user_information'] = UserInformation.count
+    record_hash['tenant_history'] = TenantHistory.count
+    record_hash['address'] = Address.count
+    record_hash['parking'] = Parking.count
+    record_hash['vehicle'] = Vehicle.count
+    record_hash['family_member'] = FamilyMember.count
+    record_hash['document'] = Document.count
+    record_hash['amenity'] = Amenity.count
+    record_hash['gate_entry'] = GateEntry.count
+    record_hash['complain'] = Complaint.count
+    record_hash['event'] = Event.count
+    record_hash['commity'] = Commity.count
+    record_hash['commitee_member'] = CommiteeMember.count
+    puts record_hash.sort.to_h
     puts "***************************************"
+    return record_hash.sort_by(&:last).to_h
   end
 end

@@ -36,16 +36,11 @@ class User < ApplicationRecord
   has_many :documents, dependent: :destroy
   has_many :complaints, dependent: :destroy
   has_many :vehicles, dependent: :destroy
-
   has_many :parkings, class_name: "Parking", dependent: :destroy, foreign_key: :owner_id
-
   has_many :flat_tenants, class_name: "Flat", dependent: :destroy, foreign_key: :tenant_id
   has_many :flat_owners, class_name: "Flat", dependent: :destroy, foreign_key: :owner_id
-
   has_many :tenant_histories, class_name: "TenantHistory", dependent: :destroy, foreign_key: :tenant_id
-
   has_many :flats, dependent: :destroy
-  has_many :tenant_histories, dependent: :destroy
 
   enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
   enum user_type: { admin: 0, owner: 1, tenant: 2 }, _default: "owner"

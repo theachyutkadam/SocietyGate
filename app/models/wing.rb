@@ -22,6 +22,7 @@
 #
 class Wing < ApplicationRecord
   belongs_to :building
+  has_many :floors, dependent: :destroy
   enum structure: { east_west: 0, south_north: 1, other: 2 }, _default: "other"
   delegate :society, to: :building
 

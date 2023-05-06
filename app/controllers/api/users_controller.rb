@@ -51,8 +51,12 @@ module Api
         token = @user.generate_token
         @user.update(token: token)
         ahoy.authenticate(@user)
-        render json: { user_information_id: @user.user_information.id, auth_token: token, user_id: @user.id,
-                       status: 200 }
+        render json: {
+          user_information_id: @user.user_information.id,
+          auth_token: token,
+          user_id: @user.id,
+          status: 200
+        }
       else
         render json: { errors: "Invalid credentials", status: 400 }
       end
@@ -60,17 +64,52 @@ module Api
 
     def logout
       if current_user.update(token: nil)
-        current_user = ""
         render json: { auth_token: "Logout successfully!!!" }
       else
         render json: { errors: "Something went wrong" }, status: :unauthorized
       end
     end
 
+    def onboarding
+      society_details = []
+      wings = Wing.all
+
+      wings.each do |wing|
+        floor_details = []
+        floors = wing.floors
+
+        floors.each do |floor|
+          flat_numbers = []
+          flat_numbers = floor.flats.pluck(:number)
+          floor_details.append({
+            "id": floor.id,
+            "fire_exebution": floor.fire_exebution,
+            "is_refuge_area": floor.is_refuge_area,
+            "number": floor.number,
+            "flats_details": flat_numbers
+          })
+
+          society_details.append(
+            {"wings_details":
+              {
+                "id": wing.id,
+                "name": wing.name,
+                "floor_details": floor_details
+              }
+            }
+          )
+        end
+      end
+      render json: { data: society_details }
+    end
+
     private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+      puts "++++++dddd++++++"
+      p params
+      puts "++++++dddd++++++"
       @user = User.find(params[:id])
     end
 
