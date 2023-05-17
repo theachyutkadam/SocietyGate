@@ -10,10 +10,10 @@ end
 def create_building(num, society)
   building = FactoryBot.create(:building, name: "R#{num + 1}", society: society)
   puts
-  puts "building name - R#{num + 1}"
+  Rails.logger.debug "building name - R#{num + 1}"
   2.times do |num|
     create_amenity(building)
-    puts "Added amenity"
+    Rails.logger.debug "Added amenity"
     create_wing(num, building)
   end
   create_commity(building)
@@ -21,7 +21,7 @@ end
 
 def create_wing(num, building)
   wing = FactoryBot.build(:wing, building: building)
-  puts "wing name - #{building.name}/#{wing.name}"
+  Rails.logger.debug "wing name - #{building.name}/#{wing.name}"
   if wing.save
     10.times { |num| create_floor(num + 1, wing, building.society) }
   else
@@ -31,16 +31,16 @@ def create_wing(num, building)
 end
 
 def create_floor(floor_num, wing, society)
-  puts "floor - #{wing.name}-#{floor_num.ordinalize}"
+  Rails.logger.debug "floor - #{wing.name}-#{floor_num.ordinalize}"
   floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing: wing, number_of_flats: 12)
   6.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
 end
 
 def create_flat(flat_num, floor, floor_num, society)
   number = "#{floor_num}#{format('%02d', flat_num)}"
-  puts "flat #{number} "
+  Rails.logger.debug "flat #{number} "
   flat = FactoryBot.build(:flat, number: number, floor: floor, owner: create_user(society))
-  puts "Added Owner with UI "
+  Rails.logger.debug "Added Owner with UI "
 
   flat.tenant = create_user(society, user_type: "tenant") if flat.is_rented
   flat.save
@@ -48,7 +48,7 @@ def create_flat(flat_num, floor, floor_num, society)
   if flat.is_rented
     3.times do |number|
       create_tenant_history(flat, flat.tenant, number)
-      puts "tenant history created"
+      Rails.logger.debug "tenant history created"
     end
   end
 
@@ -62,7 +62,7 @@ def create_user(society, user_type: "owner")
   if user.save
     create_user_information(user)
     create_address(user)
-    puts "address created"
+    Rails.logger.debug "address created"
     user
   else
     return_error_log(user)
@@ -73,6 +73,7 @@ end
 def create_user_information(user)
   user_info = FactoryBot.build(:user_information, user: user)
   return user_info if user_info.save
+
   return_error_log(user_info)
   create_user_information(user)
 end
@@ -97,6 +98,7 @@ end
 def create_address(user)
   address = FactoryBot.build(:address, user: user)
   return address if address.save
+
   return_error_log(address)
   create_address(user)
 end
@@ -111,8 +113,9 @@ end
 
 def create_parking(building, owner, flat)
   owner = flat.tenant if flat.is_rented
-  parking = FactoryBot.build(:parking, number: "#{flat.letter_box_number}", building: building, owner: owner, flat: flat)
-  puts "Assign Parking "
+  parking = FactoryBot.build(:parking, number: flat.letter_box_number.to_s, building: building, owner: owner,
+                                       flat: flat)
+  Rails.logger.debug "Assign Parking "
   if parking.save
     rand(1..4).times { |_num| create_vehicle(flat, owner) }
     nil
@@ -124,7 +127,7 @@ def create_parking(building, owner, flat)
 end
 
 def create_vehicle(flat, user)
-  puts "Add Vehicle "
+  Rails.logger.debug "Add Vehicle "
   vehicle = FactoryBot.build(:vehicle, flat: flat, user: user)
   return vehicle if vehicle.save
 
@@ -134,7 +137,7 @@ end
 
 def create_family_member(flat)
   family_member = FactoryBot.build(:family_member, flat: flat)
-  puts "Add Family Member "
+  Rails.logger.debug "Add Family Member "
   return family_member if family_member.save
 
   return_error_log(family_member)
@@ -158,7 +161,7 @@ def create_event
 end
 
 def create_commity(building)
-  puts "Add Commity"
+  Rails.logger.debug "Add Commity"
   commity = FactoryBot.build(:commity, building: building, title: "#{building.name} Admin")
   return commity if commity.save
 
@@ -170,5 +173,7 @@ def create_commitee_member(commity, user)
 end
 
 def return_error_log(object)
-  puts "+++--------#{object.class.name} errors - #{object.errors.each { |error| p error.message }}--------+++"
+  Rails.logger.debug "+++--------#{object.class.name} errors - #{object.errors.each do |error|
+                                                                   Rails.logger.debug error.message
+                                                                 end}--------+++"
 end

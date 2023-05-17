@@ -3,7 +3,7 @@
 require "sidekiq/web"
 require "sidekiq/cron/web"
 Rails.application.routes.draw do
-  get :health, controller:"application"
+  get :health, controller: "application"
 
   namespace :api do
     mount Motor::Admin => "/motor_admin"

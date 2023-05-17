@@ -55,7 +55,7 @@ module Api
           user_information_id: @user.user_information.id,
           auth_token: token,
           user_id: @user.id,
-          status: 200
+          status: 200,
         }
       else
         render json: { errors: "Invalid credentials", status: 400 }
@@ -101,23 +101,22 @@ module Api
           "is_refuge_area": floor.is_refuge_area,
           "number": floor.number,
           "flats_details": flat_numbers,
-        }
+        },
       )
       @wings_details.append(
         {
           "id": wing.id,
           "name": wing.name,
           "floor_details": @floor_details,
-        }
+        },
       )
       @society_details.append(
-        {"buildings_details":
+        { "buildings_details":
           {
             "id": building.id,
             "name": building.name,
             "wings_details": @wings_details,
-          }
-        }
+          } },
       )
     end
 
@@ -125,9 +124,6 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      puts "++++++dddd++++++"
-      p params
-      puts "++++++dddd++++++"
       @user = User.find(params[:id])
     end
 

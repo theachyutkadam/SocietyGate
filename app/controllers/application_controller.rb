@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
     records = ApplicationRecord.record_count
     # render json: {count: records, routes: `Rails.application.routes.routes`}
     # routes = `rails routes --expand | grep api/`
-    render json: {count: records}
+    render json: { count: records }
   end
 
   private
