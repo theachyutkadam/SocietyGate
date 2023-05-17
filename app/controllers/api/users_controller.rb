@@ -71,36 +71,54 @@ module Api
     end
 
     def onboarding
-      society_details = []
-      wings = Wing.all
+      @society_details = []
 
-      wings.each do |wing|
-        floor_details = []
-        floors = wing.floors
+      Building.all.each do |building|
+        @wings_details = []
 
-        floors.each do |floor|
-          flat_numbers = []
-          flat_numbers = floor.flats.pluck(:number)
-          floor_details.append({
-            "id": floor.id,
-            "fire_exebution": floor.fire_exebution,
-            "is_refuge_area": floor.is_refuge_area,
-            "number": floor.number,
-            "flats_details": flat_numbers
-          })
-
-          society_details.append(
-            {"wings_details":
-              {
-                "id": wing.id,
-                "name": wing.name,
-                "floor_details": floor_details
-              }
-            }
-          )
+        building.wings.each do |wing|
+          collect_wing_details(wing, building)
         end
       end
-      render json: { data: society_details }
+      render json: { society_details: @society_details }
+    end
+
+    def collect_wing_details(wing, building)
+      @floor_details = []
+
+      wing.floors.each do |floor|
+        collect_floor_details(floor, wing, building)
+      end
+    end
+
+    def collect_floor_details(floor, wing, building)
+      flat_numbers = []
+      flat_numbers = floor.flats.pluck(:number)
+      @floor_details.append(
+        {
+          "id": floor.id,
+          "fire_exebution": floor.fire_exebution,
+          "is_refuge_area": floor.is_refuge_area,
+          "number": floor.number,
+          "flats_details": flat_numbers,
+        }
+      )
+      @wings_details.append(
+        {
+          "id": wing.id,
+          "name": wing.name,
+          "floor_details": @floor_details,
+        }
+      )
+      @society_details.append(
+        {"buildings_details":
+          {
+            "id": building.id,
+            "name": building.name,
+            "wings_details": @wings_details,
+          }
+        }
+      )
     end
 
     private
