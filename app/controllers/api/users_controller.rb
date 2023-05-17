@@ -50,7 +50,7 @@ module Api
         # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
         token = @user.generate_token
         @user.update(token: token)
-        ahoy.authenticate(@user)
+        # ahoy.authenticate(@user)
         render json: {
           user_information_id: @user.user_information.id,
           auth_token: token,

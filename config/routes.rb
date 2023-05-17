@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
     resources :users do
       get "onboarding", on: :collection
+      get "logout", on: :collection
+      post "login", on: :collection
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
