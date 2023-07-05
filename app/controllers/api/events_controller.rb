@@ -6,7 +6,7 @@ module Api
 
     # GET /events
     def index
-      @events = Event.all
+      @events = Event.page params[:page]
 
       render json: @events
     end

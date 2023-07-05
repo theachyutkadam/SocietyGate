@@ -6,7 +6,7 @@ module Api
 
     # GET /societies
     def index
-      @societies = Society.all
+      @societies = Society.page params[:page]
 
       render json: @societies
     end

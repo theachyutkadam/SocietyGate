@@ -6,7 +6,7 @@ module Api
 
     # GET /parkings
     def index
-      @parkings = Parking.all
+      @parkings = Parking.page params[:page]
 
       render json: @parkings
     end

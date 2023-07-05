@@ -8,7 +8,7 @@ module Api
     # GET /wings
     def index
       @wings = @building.wings
-      # @wings = Wing.includes(:building).all
+      # @wings = Wing.includes(:building).page params[:page]
 
       render json: @wings
     end

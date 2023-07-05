@@ -6,7 +6,7 @@ module Api
 
     # GET /buildings
     def index
-      @buildings = Building.all
+      @buildings = Building.page params[:page]
 
       render json: @buildings
     end

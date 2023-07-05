@@ -6,7 +6,7 @@ module Api
 
     # GET /vehicles
     def index
-      @vehicles = Vehicle.includes(:flat, :user).all
+      @vehicles = Vehicle.includes(:flat, :user).page params[:page]
 
       render json: @vehicles
     end

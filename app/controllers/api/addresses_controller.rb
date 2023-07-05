@@ -6,7 +6,7 @@ module Api
 
     # GET /addresses
     def index
-      @addresses = Address.all
+      @addresses = Address.page params[:page]
 
       render json: @addresses
     end

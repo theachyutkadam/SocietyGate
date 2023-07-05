@@ -7,7 +7,7 @@ module Api
 
     # GET /users
     def index
-      @users = User.includes(:society).last(25)
+      @users = User.includes(:society).page params[:page]
 
       render json: @users
     end
@@ -73,7 +73,7 @@ module Api
     def onboarding
       @society_details = []
 
-      Building.all.each do |building|
+      Building.page params[:page].each do |building|
         @wings_details = []
 
         building.wings.each do |wing|

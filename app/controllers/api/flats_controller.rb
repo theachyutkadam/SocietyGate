@@ -6,7 +6,7 @@ module Api
 
     # GET /flats
     def index
-      @flats = Flat.includes(:floor, :owner).all
+      @flats = Flat.includes(:floor, :owner).page params[:page]
       render json: @flats
     end
 

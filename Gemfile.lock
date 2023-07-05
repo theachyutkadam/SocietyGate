@@ -140,6 +140,18 @@ GEM
       reline (>= 0.3.0)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -305,6 +317,7 @@ DEPENDENCIES
   factory_bot_rails
   faker!
   image_processing (~> 1.2)
+  kaminari
   motor-admin (~> 0.4.4)
   overcommit
   pg (~> 1.1)

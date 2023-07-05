@@ -6,7 +6,7 @@ module Api
 
     # GET /tenant_histories
     def index
-      @tenant_histories = TenantHistory.includes(:tenant, :flat).all
+      @tenant_histories = TenantHistory.includes(:tenant, :flat).page params[:page]
 
       render json: @tenant_histories
     end
