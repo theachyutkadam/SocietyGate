@@ -7,7 +7,7 @@ module Api
 
     # GET /users
     def index
-      @users = User.includes(:society).all
+      @users = User.includes(:society).last(25)
 
       render json: @users
     end
