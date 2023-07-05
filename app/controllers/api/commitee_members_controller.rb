@@ -6,7 +6,7 @@ module Api
 
     # GET /commitee_members
     def index
-      @commitee_members = CommiteeMember.page params[:page]
+      @commitee_members = CommiteeMember.page(params[:page]).per(params[:per_page])
 
       render json: @commitee_members
     end

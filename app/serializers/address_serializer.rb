@@ -26,7 +26,7 @@
 include Rails.application.routes.url_helpers
 
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id, :link, :building, :flat_number, :road, :taluka, :district, :state, :pin_code
+  attributes :id, :link, :building, :city, :flat_number, :pin_code, :state, :street_name, :user_id
   has_one :user
   def link
     api_address_url(object)

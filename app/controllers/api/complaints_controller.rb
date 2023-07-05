@@ -6,7 +6,7 @@ module Api
 
     # GET /complaints
     def index
-      @complaints = Complaint.page params[:page]
+      @complaints = Complaint.page(params[:page]).per(params[:per_page])
 
       render json: @complaints
     end

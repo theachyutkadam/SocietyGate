@@ -6,7 +6,7 @@ module Api
 
     # GET /commities
     def index
-      @commities = Commity.page params[:page]
+      @commities = Commity.page(params[:page]).per(params[:per_page])
 
       render json: @commities
     end

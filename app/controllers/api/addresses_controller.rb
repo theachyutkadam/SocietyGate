@@ -6,7 +6,7 @@ module Api
 
     # GET /addresses
     def index
-      @addresses = Address.page params[:page]
+      @addresses = Address.page(params[:page]).per(params[:per_page])
 
       render json: @addresses
     end
@@ -50,7 +50,15 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.require(:address).permit(:building, :flat_number, :road, :taluka, :district, :state, :pin_code, :user_id)
+      params.require(:address).permit(
+        :building,
+        :city,
+        :flat_number,
+        :pin_code,
+        :state,
+        :street_name,
+        :user_id,
+      )
     end
   end
 end

@@ -6,7 +6,7 @@ module Api
 
     # GET /floors
     def index
-      @floors = Floor.includes(:wing).page params[:page]
+      @floors = Floor.includes(:wing).page(params[:page]).per(params[:per_page])
       render json: @floors
     end
 

@@ -7,7 +7,7 @@ module Api
 
     # GET /amenities
     def index
-      @amenities = @building.amenities
+      @amenities = @building.amenities.page(params[:page]).per(params[:per_page])
 
       render json: @amenities
     end

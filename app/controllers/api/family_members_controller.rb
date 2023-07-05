@@ -6,7 +6,7 @@ module Api
 
     # GET /family_members
     def index
-      @family_members = FamilyMember.page params[:page]
+      @family_members = FamilyMember.page(params[:page]).per(params[:per_page])
 
       render json: @family_members
     end

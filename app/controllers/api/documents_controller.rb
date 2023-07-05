@@ -6,7 +6,7 @@ module Api
 
     # GET /documents
     def index
-      @documents = Document.page params[:page]
+      @documents = Document.page(params[:page]).per(params[:per_page])
 
       render json: @documents
     end

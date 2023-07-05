@@ -6,7 +6,7 @@ module Api
 
     # GET /gate_entries
     def index
-      @gate_entries = GateEntry.page params[:page]
+      @gate_entries = GateEntry.page(params[:page]).per(params[:per_page])
 
       render json: @gate_entries
     end

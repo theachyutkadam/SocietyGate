@@ -6,7 +6,7 @@ module Api
 
     # GET /user_informations
     def index
-      @user_informations = UserInformation.includes(:user).page params[:page]
+      @user_informations = UserInformation.includes(:user).page(params[:page]).per(params[:per_page])
 
       render json: @user_informations
     end
