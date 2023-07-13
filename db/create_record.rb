@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
+@flats = 10
+@wings = 5
+@floors = 10
+@buildings = 5
 @counter = 0
 
 def start_seeding
   society = FactoryBot.create(:society)
-  3.times { |num| create_building(num, society) }
+  @buildings.times { |num| create_building(num, society) }
 end
 
 def create_building(num, society)
   building = FactoryBot.create(:building, name: "R#{num + 1}", society: society)
   puts
   Rails.logger.debug "building name - R#{num + 1}"
-  2.times do |num|
+  @wings.times do |num|
     create_amenity(building)
     Rails.logger.debug "Added amenity"
     create_wing(num, building)
@@ -23,7 +27,7 @@ def create_wing(num, building)
   wing = FactoryBot.build(:wing, building: building)
   Rails.logger.debug "wing name - #{building.name}/#{wing.name}"
   if wing.save
-    10.times { |num| create_floor(num + 1, wing, building.society) }
+    @floors.times { |num| create_floor(num + 1, wing, building.society) }
   else
     return_error_log(wing)
     create_wing(num, building)
@@ -33,7 +37,7 @@ end
 def create_floor(floor_num, wing, society)
   Rails.logger.debug "floor - #{wing.name}-#{floor_num.ordinalize}"
   floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing: wing, number_of_flats: 12)
-  6.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
+  @flats.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
 end
 
 def create_flat(flat_num, floor, floor_num, society)
@@ -123,6 +127,8 @@ def create_parking(building, owner, flat)
     return_error_log(parking)
     create_parking(building, owner, flat)
   end
+
+  create_complaint(flat, owner, building)
   # create_commitee_member(commity,  owner)
 end
 
@@ -138,22 +144,38 @@ end
 def create_family_member(flat)
   family_member = FactoryBot.build(:family_member, flat: flat)
   Rails.logger.debug "Add Family Member "
-  return family_member if family_member.save
-
-  return_error_log(family_member)
-  create_family_member(flat)
+  if family_member.save
+    create_document(flat.owner)
+    create_gate_entry(flat)
+    return family_member
+  else
+    return_error_log(family_member)
+    create_family_member(flat)
+  end
 end
 
-def create_document
-  FactoryBot.create(:document)
+def create_document(user)
+  document = FactoryBot.build(:document, user: user)
+  return document if document.save
+
+  return_error_log(document)
+  create_gate_entry(user)
 end
 
-def create_gate_entry
-  FactoryBot.create(:gate_entry)
+def create_gate_entry(flat)
+  gate_entry = FactoryBot.build(:gate_entry, flat: flat)
+  return gate_entry if gate_entry.save
+
+  return_error_log(gate_entry)
+  create_gate_entry(flat)
 end
 
-def create_complaint
-  FactoryBot.create(:complaint)
+def create_complaint(flat, user, building)
+  complaint = FactoryBot.build(:complaint, flat: flat, user: user, building: building)
+  return complaint if complaint.save
+
+  return_error_log(complaint)
+  create_complaint(flat, user, building)
 end
 
 def create_event

@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :document do
-    name { "Pan Card" }
+    name { ["Pan Card", "Addhar Card", "Birth Certificate", "Driving Licence"].shuffle.sample }
     images { "None" }
     description { Faker::Lorem.question(word_count: 10) }
   end
