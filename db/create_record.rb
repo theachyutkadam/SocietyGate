@@ -127,6 +127,8 @@ def create_parking(building, owner, flat)
     return_error_log(parking)
     create_parking(building, owner, flat)
   end
+
+  create_complaint(flat, owner, building)
   # create_commitee_member(commity,  owner)
 end
 
@@ -142,22 +144,38 @@ end
 def create_family_member(flat)
   family_member = FactoryBot.build(:family_member, flat: flat)
   Rails.logger.debug "Add Family Member "
-  return family_member if family_member.save
-
-  return_error_log(family_member)
-  create_family_member(flat)
+  if family_member.save
+    create_document(flat.owner)
+    create_gate_entry(flat)
+    return family_member
+  else
+    return_error_log(family_member)
+    create_family_member(flat)
+  end
 end
 
-def create_document
-  FactoryBot.create(:document)
+def create_document(user)
+  document = FactoryBot.build(:document, user: user)
+  return document if document.save
+
+  return_error_log(document)
+  create_gate_entry(user)
 end
 
-def create_gate_entry
-  FactoryBot.create(:gate_entry)
+def create_gate_entry(flat)
+  gate_entry = FactoryBot.build(:gate_entry, flat: flat)
+  return gate_entry if gate_entry.save
+
+  return_error_log(gate_entry)
+  create_gate_entry(flat)
 end
 
-def create_complaint
-  FactoryBot.create(:complaint)
+def create_complaint(flat, user, building)
+  complaint = FactoryBot.build(:complaint, flat: flat, user: user, building: building)
+  return complaint if complaint.save
+
+  return_error_log(complaint)
+  create_complaint(flat, user, building)
 end
 
 def create_event
