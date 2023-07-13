@@ -55,6 +55,7 @@ module Api
           user_information_id: @user.user_information.id,
           auth_token: token,
           user_id: @user.id,
+          user_details: {full_name: @user.user_information.full_name},
           status: 200,
         }
       else

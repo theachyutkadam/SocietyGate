@@ -79,4 +79,5 @@ class User < ApplicationRecord
   def set_token
     self.token = generate_token
   end
+
 end
