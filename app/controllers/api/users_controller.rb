@@ -44,7 +44,9 @@ module Api
 
     def login
       @user = User.find_by(email: params[:email])
+
       return render json: { errors: "User does not found", status: 400 } unless @user
+      return render json: { errors: "User has been #{@user.status}", status: 400 } unless @user.active?
 
       if @user.password == params[:password]
         # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token

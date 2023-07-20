@@ -8,7 +8,7 @@ module Api
     def index
       @buildings = Building.page(params[:page]).per(params[:per_page])
 
-      render json: @buildings
+      render json: { buildings: @buildings, total_count: @buildings.total_count, total_pages: @buildings.total_pages }
     end
 
     # GET /buildings/1
@@ -29,6 +29,8 @@ module Api
 
     # PATCH/PUT /buildings/1
     def update
+      puts "++++++++++++++++++++++"
+      puts building_params
       if @building.update(building_params)
         render json: @building
       else

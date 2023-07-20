@@ -57,7 +57,7 @@ class UserInformation < ApplicationRecord
   validates :adhaar_card_number, numericality: true, length: { is: 12 }
   validates :contact, numericality: true, length: { is: 10 }
   validates :pan_card_number, length: { is: 10 }
-  validates :user_id, :pan_card_number, :contact, uniqueness: true
+  validates :user_id, :pan_card_number, :adhaar_card_number, :contact, uniqueness: true
 
   def full_name
     "#{first_name} #{last_name}"

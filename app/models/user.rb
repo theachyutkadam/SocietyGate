@@ -66,7 +66,7 @@ class User < ApplicationRecord
     end
 
     event :delete do
-      transitions from: %i[active pending blocked deleted], to: :deleted
+      transitions from: %i[active pending blocked], to: :deleted
     end
   end
 
