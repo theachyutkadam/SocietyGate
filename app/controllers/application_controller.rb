@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:health]
 
   def current_user
     @login_user
@@ -13,14 +13,18 @@ class ApplicationController < ActionController::API
 
   def health
     records = ApplicationRecord.record_count
+    active_users = User.active.first(10).pluck(:email)
     # render json: {count: records, routes: `Rails.application.routes.routes`}
     # routes = `rails routes --expand | grep api/`
-    render json: { count: records }
+    render json: { count: records, active_users: active_users }
   end
 
   private
 
   def authenticate_user!
+    p "+++++++++++++++++"
+    p request.headers["authorization"]
+    p "+++++++++++++++++"
     if request.headers["authorization"]
       return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 

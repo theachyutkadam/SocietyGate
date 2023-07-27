@@ -43,4 +43,12 @@ class FlatSerializer < ActiveModel::Serializer
   def link
     api_flat_url(object)
   end
+
+  # def owner
+  #   ActiveModelSerializers::SerializableResource.new(object.owner, each_serializer: UserSerializer)
+  # end
+
+  # def tenant
+  #   ActiveModelSerializers::SerializableResource.new(object.tenant, each_serializer: UserSerializer)
+  # end
 end
