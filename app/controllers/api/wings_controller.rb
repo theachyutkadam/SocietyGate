@@ -7,7 +7,7 @@ module Api
 
     # GET /wings
     def index
-      @wings = @building.wings
+      @wings = @building.wings.page(params[:page]).per(params[:per_page])
       # @wings = Wing.includes(:building).page(params[:page]).per(params[:per_page])
 
       render json: @wings
@@ -47,11 +47,10 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_wing
-      @wing = @building.wings.where(id: params[:id]).first
+      @wing = @building.wings.find(params[:id])
     end
 
     def set_building
-      # @building = Building.find(1)
       @building = Building.find(params[:building_id])
     end
 
