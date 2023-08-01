@@ -8,7 +8,7 @@ module Api
     def index
       @societies = Society.page(params[:page]).per(params[:per_page])
 
-      render json: @societies
+      render json: @societies, meta: { total_count: @societies.total_count, total_pages: @societies.total_pages }
     end
 
     # GET /societies/1
