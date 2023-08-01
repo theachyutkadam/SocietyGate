@@ -32,5 +32,6 @@ module SocietyGate
     # config.logger = Logger.new(STDOUT)
     # config.logger = Logger::Logger.new("Application Log")
     # Rails.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
+    ActiveModel::Serializer.config.adapter = :json
   end
 end
