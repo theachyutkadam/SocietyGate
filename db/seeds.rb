@@ -19,4 +19,4 @@ start_seeding # create data from another file.
 end_time = Time.zone.now
 puts "Seeding done from #{start_time} to #{end_time}."
 puts "Total Time = #{end_time - start_time}"
-ApplicationRecord.record_count
+puts ApplicationRecord.record_count
