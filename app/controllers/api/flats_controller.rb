@@ -6,8 +6,8 @@ module Api
 
     # GET /flats
     def index
-      @flats = Flat.includes(:floor, :owner).page(params[:page]).per(params[:per_page])
-      render json: { flats: @flats, total_count: @flats.total_count, total_pages: @flats.total_pages }
+      @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page])
+      render json: @flats, meta: { total_count: @flats.total_count, total_pages: @flats.total_pages }
     end
 
     # GET /flats/1

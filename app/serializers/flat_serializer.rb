@@ -36,19 +36,26 @@ include Rails.application.routes.url_helpers
 
 class FlatSerializer < ActiveModel::Serializer
   attributes :id, :link, :number, :area_in_feet, :is_rented, :structure, :letter_box_number, :electricity_meter_number,
-             :gas_meter_number
-  has_one :owner
-  has_one :tenant
-  has_one :floor
+             :gas_meter_number, :owner, :tenant, :floor
+  # has_one :owner, serializer: UserSerializer
+  # has_one :tenant, serializer: UserSerializer
+  # has_one :floor
+
   def link
     api_flat_url(object)
   end
 
-  # def owner
-  #   ActiveModelSerializers::SerializableResource.new(object.owner, each_serializer: UserSerializer)
-  # end
+  def owner
+    object.owner.user_information
+    ActiveModelSerializers::SerializableResource.new(object.owner.user_information, each_serializer: UserInformationSerializer)
+  end
 
-  # def tenant
-  #   ActiveModelSerializers::SerializableResource.new(object.tenant, each_serializer: UserSerializer)
-  # end
+  def tenant
+    ActiveModelSerializers::SerializableResource.new(object.tenant.user_information, each_serializer: UserInformationSerializer) if object.tenant
+  end
+
+  def floor
+    object.floor
+  end
+
 end
