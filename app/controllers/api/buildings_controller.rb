@@ -8,7 +8,7 @@ module Api
     def index
       @buildings = Building.page(params[:page]).per(params[:per_page])
 
-      render json: { buildings: @buildings, total_count: @buildings.total_count, total_pages: @buildings.total_pages }
+      render json: @buildings, meta: { total_count: @buildings.total_count, total_pages: @buildings.total_pages }
     end
 
     # GET /buildings/1

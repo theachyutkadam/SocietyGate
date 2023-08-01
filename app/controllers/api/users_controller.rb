@@ -9,7 +9,7 @@ module Api
     def index
       @users = User.includes(:society).page(params[:page]).per(params[:per_page])
 
-      render json: { users: @users, total_count: @users.total_count, total_pages: @users.total_pages }
+      render json: @users,  meta: { total_count: @users.total_count, total_pages: @users.total_pages }
     end
 
     # GET /users/1
