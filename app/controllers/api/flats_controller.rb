@@ -29,7 +29,7 @@ module Api
     # PATCH/PUT /flats/1
     def update
       if @flat.update(flat_params)
-        render json: @flat
+        render json: @flat, status: 200
       else
         render json: @flat.errors, status: :unprocessable_entity
       end

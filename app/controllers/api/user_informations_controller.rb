@@ -8,7 +8,7 @@ module Api
     def index
       @user_informations = UserInformation.includes(:user).page(params[:page]).per(params[:per_page])
 
-      render json: @user_informations
+      render json: @user_informations, meta: { total_count: @user_informations.total_count, total_pages: @user_informations.total_pages }
     end
 
     # GET /user_informations/1
@@ -21,7 +21,7 @@ module Api
       @user_information = UserInformation.new(user_information_params)
 
       if @user_information.save
-        render json: @user_information, status: :created, location: @user_information
+        render json: @user_information, status: 200, location: @user_information
       else
         render json: @user_information.errors, status: :unprocessable_entity
       end
@@ -30,7 +30,7 @@ module Api
     # PATCH/PUT /user_informations/1
     def update
       if @user_information.update(user_information_params)
-        render json: @user_information
+        render json: @user_information, meta: { status: 200 }
       else
         render json: @user_information.errors, status: :unprocessable_entity
       end

@@ -29,14 +29,14 @@
 include Rails.application.routes.url_helpers
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :link, :email, :status, :is_admin, :user_type, :is_primary_user, :full_name
+  attributes :id, :link, :email, :status, :is_admin, :user_type, :is_primary_user, :society_name
   has_one :society
 
   def link
     api_user_url(object)
   end
 
-  def full_name
-    object.user_information.full_name
+  def society_name
+    object.society.name
   end
 end

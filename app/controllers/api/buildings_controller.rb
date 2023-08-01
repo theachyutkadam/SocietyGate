@@ -29,10 +29,8 @@ module Api
 
     # PATCH/PUT /buildings/1
     def update
-      puts "++++++++++++++++++++++"
-      puts building_params
       if @building.update(building_params)
-        render json: @building
+        render json: @building, meta: { status: 200 }
       else
         render json: @building.errors, status: :unprocessable_entity
       end
