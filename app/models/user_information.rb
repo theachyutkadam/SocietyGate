@@ -31,12 +31,16 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+require 'socket'
 class UserInformation < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar
 
   def avatar_url
-    Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
+    ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+    if avatar.attached?
+      Rails.application.routes.url_helpers.url_for(avatar).gsub! 'localhost:', "#{ip.ip_address}:"
+    end
   end
 
   enum gender: { male: 0, female: 1, other: 2 }
