@@ -22,7 +22,7 @@ module Api
       if @flat.save
         render json: @flat, status: :created, location: @flat
       else
-        render json: @flat.errors, status: :unprocessable_entity
+        render json: @flaterrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -31,7 +31,7 @@ module Api
       if @flat.update(flat_params)
         render json: @flat, status: 200
       else
-        render json: @flat.errors, status: :unprocessable_entity
+        render json: @flaterrors.full_messages, status: :unprocessable_entity
       end
     end
 

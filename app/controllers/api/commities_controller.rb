@@ -23,7 +23,7 @@ module Api
       if @commity.save
         render json: @commity, status: :created, location: @commity
       else
-        render json: @commity.errors, status: :unprocessable_entity
+        render json: @commityerrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @commity.update(commity_params)
         render json: @commity
       else
-        render json: @commity.errors, status: :unprocessable_entity
+        render json: @commityerrors.full_messages, status: :unprocessable_entity
       end
     end
 

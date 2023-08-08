@@ -23,7 +23,7 @@ module Api
       if @commitee_member.save
         render json: @commitee_member, status: :created, location: @commitee_member
       else
-        render json: @commitee_member.errors, status: :unprocessable_entity
+        render json: @commitee_membererrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @commitee_member.update(commitee_member_params)
         render json: @commitee_member
       else
-        render json: @commitee_member.errors, status: :unprocessable_entity
+        render json: @commitee_membererrors.full_messages, status: :unprocessable_entity
       end
     end
 

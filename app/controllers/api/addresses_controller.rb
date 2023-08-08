@@ -23,7 +23,7 @@ module Api
       if @address.save
         render json: @address, status: :created, location: @address
       else
-        render json: @address.errors, status: :unprocessable_entity
+        render json: @addresserrors.full_messages.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @address.update(address_params)
         render json: @address
       else
-        render json: @address.errors, status: :unprocessable_entity
+        render json: @addresserrors.full_messages.full_messages, status: :unprocessable_entity
       end
     end
 

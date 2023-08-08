@@ -23,7 +23,7 @@ module Api
       if @complaint.save
         render json: @complaint, status: :created, location: @complaint
       else
-        render json: @complaint.errors, status: :unprocessable_entity
+        render json: @complainterrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @complaint.update(complaint_params)
         render json: @complaint
       else
-        render json: @complaint.errors, status: :unprocessable_entity
+        render json: @complainterrors.full_messages, status: :unprocessable_entity
       end
     end
 

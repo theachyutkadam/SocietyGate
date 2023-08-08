@@ -23,7 +23,7 @@ module Api
       if @user_information.save
         render json: @user_information, status: 200, location: @user_information
       else
-        render json: @user_information.errors, status: :unprocessable_entity
+        render json: @user_informationerrors.full_messages.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @user_information.update(user_information_params)
         render json: @user_information, meta: { status: 200 }
       else
-        render json: @user_information.errors, status: :unprocessable_entity
+        render json: @user_informationerrors.full_messages.full_messages, status: :unprocessable_entity
       end
     end
 

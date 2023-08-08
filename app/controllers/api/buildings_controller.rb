@@ -23,7 +23,7 @@ module Api
       if @building.save
         render json: @building, status: :created, location: @building
       else
-        render json: @building.errors, status: :unprocessable_entity
+        render json: @buildingerrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @building.update(building_params)
         render json: @building, meta: { status: 200 }
       else
-        render json: @building.errors, status: :unprocessable_entity
+        render json: @buildingerrors.full_messages, status: :unprocessable_entity
       end
     end
 

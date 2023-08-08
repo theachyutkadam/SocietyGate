@@ -29,7 +29,7 @@
 include Rails.application.routes.url_helpers
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :link, :email, :status, :is_admin, :user_type, :is_primary_user, :society_name
+  attributes :id, :link, :email, :status, :is_admin, :user_type, :is_primary_user, :society_name, :full_name
   has_one :society
 
   def link
@@ -38,5 +38,9 @@ class UserSerializer < ActiveModel::Serializer
 
   def society_name
     object.society.name
+  end
+
+  def full_name
+    object.user_information.full_name
   end
 end

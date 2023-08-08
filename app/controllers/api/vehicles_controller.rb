@@ -23,7 +23,7 @@ module Api
       if @vehicle.save
         render json: @vehicle, status: :created, location: @vehicle
       else
-        render json: @vehicle.errors, status: :unprocessable_entity
+        render json: @vehicleerrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @vehicle.update(vehicle_params)
         render json: @vehicle
       else
-        render json: @vehicle.errors, status: :unprocessable_entity
+        render json: @vehicleerrors.full_messages, status: :unprocessable_entity
       end
     end
 

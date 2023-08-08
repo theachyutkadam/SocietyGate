@@ -23,7 +23,7 @@ module Api
       if @family_member.save
         render json: @family_member, status: :created, location: @family_member
       else
-        render json: @family_member.errors, status: :unprocessable_entity
+        render json: @family_membererrors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @family_member.update(family_member_params)
         render json: @family_member
       else
-        render json: @family_member.errors, status: :unprocessable_entity
+        render json: @family_membererrors.full_messages, status: :unprocessable_entity
       end
     end
 
