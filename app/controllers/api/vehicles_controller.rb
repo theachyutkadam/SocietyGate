@@ -8,7 +8,7 @@ module Api
     def index
       @vehicles = Vehicle.includes(:flat, :user).page(params[:page]).per(params[:per_page])
 
-      render json: @vehicles
+      render json: @vehicles, meta: pagination(@vehicles)
     end
 
     # GET /vehicles/1

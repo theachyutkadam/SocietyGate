@@ -10,7 +10,7 @@ module Api
       @wings = @building.wings.page(params[:page]).per(params[:per_page])
       # @wings = Wing.includes(:building).page(params[:page]).per(params[:per_page])
 
-      render json: @wings
+      render json: @wings, meta: pagination(@wings)
     end
 
     # GET /wings/1

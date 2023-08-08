@@ -8,7 +8,7 @@ module Api
     def index
       @events = Event.page(params[:page]).per(params[:per_page])
 
-      render json: @events
+      render json: @events, meta: pagination(@events)
     end
 
     # GET /events/1

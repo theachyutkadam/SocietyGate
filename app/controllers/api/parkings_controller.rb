@@ -8,7 +8,7 @@ module Api
     def index
       @parkings = Parking.page(params[:page]).per(params[:per_page])
 
-      render json: @parkings
+      render json: @parkings, meta: pagination(@parkings)
     end
 
     # GET /parkings/1

@@ -7,7 +7,7 @@ module Api
     # GET /floors
     def index
       @floors = Floor.includes(:wing).page(params[:page]).per(params[:per_page])
-      render json: @floors
+      render json: @floors, meta: pagination(@floors)
     end
 
     # GET /floors/1

@@ -8,7 +8,7 @@ module Api
     def index
       @family_members = FamilyMember.page(params[:page]).per(params[:per_page])
 
-      render json: @family_members
+      render json: @family_members, meta: pagination(@family_members)
     end
 
     # GET /family_members/1

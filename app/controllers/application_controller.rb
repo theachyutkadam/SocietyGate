@@ -19,6 +19,16 @@ class ApplicationController < ActionController::API
     render json: { count: records, active_users: active_users }
   end
 
+  def pagination(object)
+    {
+      current_page: object.current_page,
+      next_page: object.next_page,
+      prev_page: object.prev_page, # use object.previous_page when using will_paginate
+      total_pages: object.total_pages,
+      total_count: object.total_count
+    }
+  end
+
   private
 
   def authenticate_user!

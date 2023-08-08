@@ -8,7 +8,7 @@ module Api
     def index
       @gate_entries = GateEntry.page(params[:page]).per(params[:per_page])
 
-      render json: @gate_entries
+      render json: @gate_entries, meta: pagination(@gate_entries)
     end
 
     # GET /gate_entries/1

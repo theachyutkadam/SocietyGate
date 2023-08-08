@@ -8,7 +8,7 @@ module Api
     def index
       @addresses = Address.page(params[:page]).per(params[:per_page])
 
-      render json: @addresses
+      render json: @addresses, meta: pagination(@addresses)
     end
 
     # GET /addresses/1

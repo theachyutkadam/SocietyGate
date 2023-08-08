@@ -8,7 +8,7 @@ module Api
     def index
       @commities = Commity.page(params[:page]).per(params[:per_page])
 
-      render json: @commities
+      render json: @commities, meta: pagination(@commities)
     end
 
     # GET /commities/1

@@ -14,5 +14,3 @@ class PaginationSerializer < ActiveModel::Serializer::ArraySerializer
     super(object, options)
   end
 end
-
-# frozen_string_literal: true

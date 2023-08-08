@@ -8,8 +8,7 @@ module Api
     def index
       @user_informations = UserInformation.includes(:user).page(params[:page]).per(params[:per_page])
 
-      # render json: @user_informations, meta: { total_count: @user_informations.total_count, total_pages: @user_informations.total_pages }
-      render json: @user_informations, serializer: PaginationSerializer
+      render json: @user_informations, meta: pagination(@user_informations)
     end
 
     # GET /user_informations/1
