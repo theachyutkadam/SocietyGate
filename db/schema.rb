@@ -483,6 +483,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_163507) do
     t.string "number"
     t.string "company"
     t.string "name"
+    t.integer "status"
     t.integer "vehicle_type"
     t.string "color"
     t.bigint "flat_id", null: false

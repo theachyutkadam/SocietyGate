@@ -9,6 +9,7 @@
 #  company      :string
 #  name         :string
 #  number       :string
+#  status       :integer
 #  vehicle_type :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
