@@ -6,6 +6,7 @@ class CreateVehicles < ActiveRecord::Migration[7.0]
       t.string :number
       t.string :company
       t.string :name
+      t.integer :status
       t.integer :vehicle_type
       t.string :color
       t.references :flat, null: false, foreign_key: true

@@ -28,7 +28,7 @@
 include Rails.application.routes.url_helpers
 
 class VehicleSerializer < ActiveModel::Serializer
-  attributes :id, :link, :number, :name, :vehicle_type, :color
+  attributes :id, :link, :number, :name, :vehicle_type, :color, :company, :status
   has_one :flat
   has_one :user
   def link

@@ -30,6 +30,7 @@ FactoryBot.define do
     number { Faker::Base.bothify("??##??####") }
     company { Faker::Vehicle.make }
     name { Faker::Vehicle.model }
+    status { Vehicle.statuses.keys.sample }
     vehicle_type { Vehicle.vehicle_types.keys.sample }
     color { Faker::Vehicle.color }
   end

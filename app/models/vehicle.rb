@@ -30,6 +30,7 @@ class Vehicle < ApplicationRecord
   belongs_to :user
   delegate :society, to: :user
 
+  enum status: { active: 0, blocked: 1, deleted: 2, pending: 3 }, _default: "active"
   enum vehicle_type: { bike: 0, car: 1, other: 2 }
 
   validates :color, :company, :name, :number, :vehicle_type, presence: true
