@@ -66,8 +66,10 @@ module Api
     end
 
     def logout
-      if current_user.update(token: nil)
-        render json: { auth_token: "Logout successfully!!!" }
+      user = User.find(current_user.id)
+      user.update_columns(token: '')
+      if user.token.empty?
+        render json: { auth_token: nil, status: 200 }
       else
         render json: { errors: "Something went wrong" }, status: :unauthorized
       end
