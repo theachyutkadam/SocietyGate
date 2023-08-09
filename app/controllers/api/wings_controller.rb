@@ -25,7 +25,7 @@ module Api
       if @wing.save
         render json: @wing, status: :created, location: @wing
       else
-        render json: @wingerrors.full_messages, status: :unprocessable_entity
+        render json: @wing.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -34,7 +34,7 @@ module Api
       if @wing.update(wing_params)
         render json: @wing
       else
-        render json: @wingerrors.full_messages, status: :unprocessable_entity
+        render json: @wing.errors.full_messages, status: :unprocessable_entity
       end
     end
 

@@ -23,7 +23,7 @@ module Api
       if @tenant_history.save
         render json: @tenant_history, status: :created, location: @tenant_history
       else
-        render json: @tenant_historyerrors.full_messages, status: :unprocessable_entity
+        render json: @tenant_history.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @tenant_history.update(tenant_history_params)
         render json: @tenant_history
       else
-        render json: @tenant_historyerrors.full_messages, status: :unprocessable_entity
+        render json: @tenant_history.errors.full_messages, status: :unprocessable_entity
       end
     end
 

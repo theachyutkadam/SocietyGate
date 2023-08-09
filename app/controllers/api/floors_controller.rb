@@ -22,7 +22,7 @@ module Api
       if @floor.save
         render json: @floor, status: :created, location: @floor
       else
-        render json: @floorerrors.full_messages, status: :unprocessable_entity
+        render json: @floor.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -31,7 +31,7 @@ module Api
       if @floor.update(floor_params)
         render json: @floor
       else
-        render json: @floorerrors.full_messages, status: :unprocessable_entity
+        render json: @floor.errors.full_messages, status: :unprocessable_entity
       end
     end
 

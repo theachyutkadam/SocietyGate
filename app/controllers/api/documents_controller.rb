@@ -23,7 +23,7 @@ module Api
       if @document.save
         render json: @document, status: :created, location: @document
       else
-        render json: @documenterrors.full_messages, status: :unprocessable_entity
+        render json: @document.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @document.update(document_params)
         render json: @document
       else
-        render json: @documenterrors.full_messages, status: :unprocessable_entity
+        render json: @document.errors.full_messages, status: :unprocessable_entity
       end
     end
 

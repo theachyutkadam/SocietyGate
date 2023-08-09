@@ -23,7 +23,7 @@ module Api
       if @gate_entry.save
         render json: @gate_entry, status: :created, location: @gate_entry
       else
-        render json: @gate_entryerrors.full_messages, status: :unprocessable_entity
+        render json: @gate_entry.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @gate_entry.update(gate_entry_params)
         render json: @gate_entry
       else
-        render json: @gate_entryerrors.full_messages, status: :unprocessable_entity
+        render json: @gate_entry.errors.full_messages, status: :unprocessable_entity
       end
     end
 

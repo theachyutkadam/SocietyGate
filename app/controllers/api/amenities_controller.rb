@@ -24,7 +24,7 @@ module Api
       if @amenity.save
         render json: @amenity, status: :created, location: @amenity
       else
-        render json: @amenityerrors.full_messages, status: :unprocessable_entity
+        render json: @amenity.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -33,7 +33,7 @@ module Api
       if @amenity.update(amenity_params)
         render json: @amenity
       else
-        render json: @amenityerrors.full_messages, status: :unprocessable_entity
+        render json: @amenity.errors.full_messages, status: :unprocessable_entity
       end
     end
 

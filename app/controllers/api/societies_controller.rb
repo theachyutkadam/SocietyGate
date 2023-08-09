@@ -23,7 +23,7 @@ module Api
       if @society.save
         render json: @society, status: :created, location: @society
       else
-        render json: @societyerrors.full_messages, status: :unprocessable_entity
+        render json: @society.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @society.update(society_params)
         render json: @society
       else
-        render json: @societyerrors.full_messages, status: :unprocessable_entity
+        render json: @society.errors.full_messages, status: :unprocessable_entity
       end
     end
 

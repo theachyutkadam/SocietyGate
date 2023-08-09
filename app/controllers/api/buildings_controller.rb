@@ -18,12 +18,15 @@ module Api
 
     # POST /buildings
     def create
+      p "+++++++++++++++"
+      p building_params
+      p "+++++++++++++++"
       @building = Building.new(building_params)
 
       if @building.save
         render json: @building, status: :created, location: @building
       else
-        render json: @buildingerrors.full_messages, status: :unprocessable_entity
+        render json: @building.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +35,7 @@ module Api
       if @building.update(building_params)
         render json: @building, meta: { status: 200 }
       else
-        render json: @buildingerrors.full_messages, status: :unprocessable_entity
+        render json: @building.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -45,6 +48,9 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_building
+      p "+++++++++++++++"
+      p params
+      p "+++++++++++++++"
       @building = Building.find(params[:id])
     end
 

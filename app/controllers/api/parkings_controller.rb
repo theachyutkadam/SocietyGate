@@ -23,7 +23,7 @@ module Api
       if @parking.save
         render json: @parking, status: :created, location: @parking
       else
-        render json: @parkingerrors.full_messages, status: :unprocessable_entity
+        render json: @parking.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @parking.update(parking_params)
         render json: @parking
       else
-        render json: @parkingerrors.full_messages, status: :unprocessable_entity
+        render json: @parking.errors.full_messages, status: :unprocessable_entity
       end
     end
 
