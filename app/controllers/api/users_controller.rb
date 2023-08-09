@@ -67,7 +67,7 @@ module Api
 
     def logout
       user = User.find(current_user.id)
-      user.update_columns(token: '')
+      user.update(token: '')
       if user.token.empty?
         render json: { auth_token: nil, status: 200 }
       else
