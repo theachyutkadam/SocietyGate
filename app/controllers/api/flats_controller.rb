@@ -2,11 +2,16 @@
 
 module Api
   class FlatsController < ApplicationController
+    before_action :set_floor
     before_action :set_flat, only: %i[show update destroy]
 
     # GET /flats
     def index
-      @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
+      if @floor
+        @flats = @floor.flats.includes(:owner, :tenant).order("number asc").page(params[:page]).per(params[:per_page])
+      else
+        @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
+      end
       render json: @flats, meta: pagination(@flats)
     end
 
@@ -44,7 +49,11 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_flat
-      @flat = Flat.find(params[:id])
+      @flat = @floor.flats.find(params[:id])
+    end
+
+    def set_floor
+      @floor = Floor.find(params[:floor_id])
     end
 
     # Only allow a list of trusted parameters through.

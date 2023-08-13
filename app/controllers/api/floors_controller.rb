@@ -2,11 +2,12 @@
 
 module Api
   class FloorsController < ApplicationController
+    before_action :set_wing
     before_action :set_floor, only: %i[show update destroy]
 
     # GET /floors
     def index
-      @floors = Floor.includes(:wing).page(params[:page]).per(params[:per_page])
+      @floors = @wing.floors.order("created_at asc").page(params[:page]).per(params[:per_page])
       render json: @floors, meta: pagination(@floors)
     end
 
@@ -44,7 +45,11 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_floor
-      @floor = Floor.find(params[:id])
+      @floor = @wing.floors.find(params[:id])
+    end
+
+    def set_wing
+      @wing = Wing.find(params[:wing_id])
     end
 
     # Only allow a list of trusted parameters through.

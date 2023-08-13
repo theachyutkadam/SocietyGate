@@ -7,9 +7,8 @@ module Api
 
     # GET /wings
     def index
-      @wings = @building.wings.page(params[:page]).per(params[:per_page])
+      @wings = @building.wings.order('name asc').page(params[:page]).per(params[:per_page])
       # @wings = Wing.includes(:building).page(params[:page]).per(params[:per_page])
-
       render json: @wings, meta: pagination(@wings)
     end
 
