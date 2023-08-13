@@ -6,7 +6,7 @@ module Api
 
     # GET /buildings
     def index
-      @buildings = Building.page(params[:page]).per(params[:per_page])
+      @buildings = Building.page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
 
       render json: @buildings, meta: pagination(@buildings)
     end
@@ -18,9 +18,6 @@ module Api
 
     # POST /buildings
     def create
-      p "+++++++++++++++"
-      p building_params
-      p "+++++++++++++++"
       @building = Building.new(building_params)
 
       if @building.save
@@ -48,9 +45,6 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_building
-      p "+++++++++++++++"
-      p params
-      p "+++++++++++++++"
       @building = Building.find(params[:id])
     end
 

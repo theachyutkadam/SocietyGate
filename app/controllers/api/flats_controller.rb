@@ -6,7 +6,7 @@ module Api
 
     # GET /flats
     def index
-      @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page])
+      @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
       render json: @flats, meta: pagination(@flats)
     end
 
@@ -29,7 +29,7 @@ module Api
     # PATCH/PUT /flats/1
     def update
       if @flat.update(flat_params)
-        render json: @flat, status: 200
+        render json: @flat, meta: { status: 200 }
       else
         render json: @flat.errors.full_messages, status: :unprocessable_entity
       end
