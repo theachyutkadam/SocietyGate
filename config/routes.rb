@@ -21,12 +21,13 @@ Rails.application.routes.draw do
     resources :amenities
     resources :addresses
     resources :tenant_histories
-    resources :flats
     resources :floors
     resources :wings
     resources :buildings
     resources :user_informations
     resources :societies
+
+    resources :flats
 
     resources :users do
       get "onboarding", on: :collection

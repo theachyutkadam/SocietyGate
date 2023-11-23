@@ -56,13 +56,25 @@ class Flat < ApplicationRecord
 
   validate :tenant_available?
 
-  before_create :set_letter_box_number
+  before_validation :set_letter_box_number
 
   def tenant_available?
     errors.add(:tenant, "is required") if is_rented && !tenant
   end
 
   def set_letter_box_number
-    self.letter_box_number = "#{wing.building.name}-#{wing.name}-#{number}"
+    self.number = self.wing.flats.last.number + 1
+    self.letter_box_number = "#{self.wing.building.name}/#{self.wing.name}-#{number}"
+    set_flat_details unless self.valid?
+  end
+
+  def set_flat_details
+    unique_number = Faker::Base.numerify("##########")
+    if Flat.where("gas_meter_number = ?  OR electricity_meter_number = ?", unique_number, unique_number).any
+      set_flat_details
+    else
+      self.gas_meter_number = unique_number
+      self.electricity_meter_number = unique_number
+    end
   end
 end

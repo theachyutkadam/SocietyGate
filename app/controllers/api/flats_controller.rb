@@ -2,7 +2,7 @@
 
 module Api
   class FlatsController < ApplicationController
-    before_action :set_floor
+    before_action :set_floor, only: %i[index]
     before_action :set_flat, only: %i[show update destroy]
 
     # GET /flats
@@ -49,11 +49,11 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_flat
-      @flat = @floor.flats.find(params[:id])
+      @flat = Flat.find(params[:id])
     end
 
     def set_floor
-      @floor = Floor.find(params[:floor_id])
+      @floor = Floor.find(params[:floor_id]) if params[:floor_id]
     end
 
     # Only allow a list of trusted parameters through.
@@ -61,5 +61,7 @@ module Api
       params.require(:flat).permit(:number, :owner_id, :floor_id, :area_in_feet, :is_rented, :tenant_id, :structure,
                                    :letter_box_number, :electricity_meter_number, :gas_meter_number)
     end
+
+    # Following are Operations methods TODO:
   end
 end

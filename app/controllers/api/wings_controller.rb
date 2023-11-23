@@ -2,7 +2,7 @@
 
 module Api
   class WingsController < ApplicationController
-    before_action :set_building
+    before_action :set_building, only: %i[index]
     before_action :set_wing, only: %i[show update destroy]
 
     # GET /wings
@@ -46,7 +46,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_wing
-      @wing = @building.wings.find(params[:id])
+      @wing = Wing.find(params[:id])
     end
 
     def set_building

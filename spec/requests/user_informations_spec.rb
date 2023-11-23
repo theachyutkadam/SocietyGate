@@ -11,7 +11,7 @@ RSpec.describe UserInformation, type: :request do
     let!(:user_informations) { FactoryBot.create_list(:user_information, 1, user: user) }
     before { get "/api/user_informations", headers: { Authorization: user.token } }
     it "returns all user_informations" do
-      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body)['user_informations'].count).to eq(1)
     end
     it "returns status code 200" do
       expect(response).to have_http_status(:success)
