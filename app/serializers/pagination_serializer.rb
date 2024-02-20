@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PaginationSerializer < ActiveModel::Serializer::ArraySerializer
-  def initialize(object, options={})
+  def initialize(object, options = {})
     meta_key = options[:meta_key] || :meta
     options[meta_key] ||= {}
     options[meta_key][:pagination] = {
@@ -9,7 +9,7 @@ class PaginationSerializer < ActiveModel::Serializer::ArraySerializer
       next_page: object.next_page,
       prev_page: object.prev_page,
       total_pages: object.total_pages,
-      total_count: object.total_count
+      total_count: object.total_count,
     }
     super(object, options)
   end

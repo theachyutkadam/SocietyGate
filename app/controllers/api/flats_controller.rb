@@ -10,7 +10,8 @@ module Api
       if @floor
         @flats = @floor.flats.includes(:owner, :tenant).order("number asc").page(params[:page]).per(params[:per_page])
       else
-        @flats = Flat.includes(:floor, :owner, :tenant).page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
+        @flats = Flat.includes(:floor, :owner,
+                               :tenant).page(params[:page]).per(params[:per_page]).order("#{params[:column]} #{params[:order_by]}")
       end
       render json: @flats, meta: pagination(@flats)
     end

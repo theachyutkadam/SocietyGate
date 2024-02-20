@@ -48,8 +48,7 @@ gem "sidekiq-cron"
 
 # Use for pagination
 # gem 'api-pagination'
-gem 'kaminari'
-
+gem "kaminari"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

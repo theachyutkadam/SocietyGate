@@ -33,7 +33,7 @@ class Wing < ApplicationRecord
   validate :check_wing_uniqueness
 
   def check_wing_uniqueness
-    return unless Wing.where(name: name, building_id: building_id).any?
+    return unless Wing.where(name:, building_id:).any?
 
     errors.add(:name, "already exists")
   end

@@ -21,7 +21,7 @@ module Api
       @user_information = UserInformation.new(user_information_params)
 
       if @user_information.save
-        render json: @user_information, status: 200, location: @user_information
+        render json: @user_information, status: :ok, location: @user_information
       else
         render json: @user_information.errors.full_messages.full_messages, status: :unprocessable_entity
       end

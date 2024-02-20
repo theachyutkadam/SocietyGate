@@ -63,9 +63,9 @@ class Flat < ApplicationRecord
   end
 
   def set_letter_box_number
-    self.number = self.wing.flats.last.number + 1
-    self.letter_box_number = "#{self.wing.building.name}/#{self.wing.name}-#{number}"
-    set_flat_details unless self.valid?
+    self.number = wing.flats.last.number + 1
+    self.letter_box_number = "#{wing.building.name}/#{wing.name}-#{number}"
+    set_flat_details unless valid?
   end
 
   def set_flat_details
