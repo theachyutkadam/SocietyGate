@@ -6,7 +6,7 @@ module Api
 
     # GET /user_informations
     def index
-      @user_informations = UserInformation.includes(:user).page(params[:page]).per(params[:per_page])
+      @user_informations = UserInformation.includes(:user).order('updated_at desc').page(params[:page]).per(params[:per_page])
 
       render json: @user_informations, meta: pagination(@user_informations)
     end
@@ -39,6 +39,7 @@ module Api
     # DELETE /user_informations/1
     def destroy
       @user_information.destroy
+      render json: {message: "User deleted successfully"}, status: 200
     end
 
     private

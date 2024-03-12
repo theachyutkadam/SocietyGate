@@ -47,11 +47,16 @@ class FlatSerializer < ActiveModel::Serializer
 
   def owner
     object.owner.user_information
-    ActiveModelSerializers::SerializableResource.new(object.owner.user_information, each_serializer: UserInformationSerializer)
+
+    ActiveModelSerializers::SerializableResource.new(
+      object.owner.user_information, each_serializer: UserInformationSerializer
+    ) if object.owner.user_information
   end
 
   def tenant
-    ActiveModelSerializers::SerializableResource.new(object.tenant.user_information, each_serializer: UserInformationSerializer) if object.tenant
+    ActiveModelSerializers::SerializableResource.new(
+      object.tenant.user_information, each_serializer: UserInformationSerializer
+    ) if object.tenant
   end
 
   def floor

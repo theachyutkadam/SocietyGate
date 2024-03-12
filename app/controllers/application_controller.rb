@@ -35,13 +35,13 @@ class ApplicationController < ActionController::API
     p "+++++++++++++++++"
     p request.headers["authorization"]
     p "+++++++++++++++++"
-    if request.headers["authorization"]
-      return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
+    # if request.headers["authorization"]
+    #   return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 
       @login_user
-    else
-      render json: { message: "No authorization Header sent" }, status: :forbidden
-    end
+    # else
+    #   render json: { message: "No authorization Header sent" }, status: :forbidden
+    # end
   end
 
   def find_user

@@ -51,4 +51,8 @@ class UserInformationSerializer < ActiveModel::Serializer
   def link
     api_user_information_url(object)
   end
+
+  def avatar_url
+    object.avatar_url
+  end
 end

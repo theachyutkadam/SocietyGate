@@ -41,6 +41,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def full_name
-    object.user_information.full_name
+    object.user_information ? object.user_information.full_name : ''
   end
 end
