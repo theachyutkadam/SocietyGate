@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     active_users = User.active.first(10).pluck(:email)
     # render json: {count: records, routes: `Rails.application.routes.routes`}
     # routes = `rails routes --expand | grep api/`
-    render json: { count: records, active_users: active_users }
+    render json: { count: records, active_users: }
   end
 
   def pagination(object)
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
       next_page: object.next_page,
       prev_page: object.prev_page, # use object.previous_page when using will_paginate
       total_pages: object.total_pages,
-      total_count: object.total_count
+      total_count: object.total_count,
     }
   end
 

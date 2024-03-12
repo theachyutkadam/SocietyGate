@@ -51,13 +51,13 @@ module Api
       if @user.password == params[:password]
         # return render json: { user_information_id: @user.user_information.id, auth_token: @user.token, status: 200 } if @user.token
         token = @user.generate_token
-        @user.update(token: token)
+        @user.update(token:)
         # ahoy.authenticate(@user)
         render json: {
           user_information_id: @user.user_information.id,
           auth_token: token,
           user_id: @user.id,
-          user_details: {full_name: @user.user_information.full_name},
+          user_details: { full_name: @user.user_information.full_name },
           status: 200,
         }
       else
@@ -67,7 +67,7 @@ module Api
 
     def logout
       user = User.find(current_user.id)
-      user.update(token: '')
+      user.update(token: "")
       if user.token.empty?
         render json: { auth_token: nil, status: 200 }
       else

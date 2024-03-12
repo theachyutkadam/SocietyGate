@@ -12,7 +12,7 @@ def start_seeding
 end
 
 def create_building(num, society)
-  building = FactoryBot.create(:building, name: "R#{num + 1}", society: society)
+  building = FactoryBot.create(:building, name: "R#{num + 1}", society:)
   puts
   puts "building name - R#{num + 1}"
   @wings.times do |num|
@@ -24,7 +24,7 @@ def create_building(num, society)
 end
 
 def create_wing(num, building)
-  wing = FactoryBot.build(:wing, building: building)
+  wing = FactoryBot.build(:wing, building:)
   puts "wing name - #{building.name}/#{wing.name}"
   if wing.save
     @floors.times { |num| create_floor(num + 1, wing, building.society) }
@@ -36,14 +36,14 @@ end
 
 def create_floor(floor_num, wing, society)
   puts "floor - #{wing.name}-#{floor_num.ordinalize}"
-  floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing: wing, number_of_flats: 12)
+  floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing:, number_of_flats: 12)
   @flats.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
 end
 
 def create_flat(flat_num, floor, floor_num, society)
   number = "#{floor_num}#{format('%02d', flat_num)}"
   puts "flat #{number} "
-  flat = FactoryBot.build(:flat, number: number, floor: floor, owner: create_user(society))
+  flat = FactoryBot.build(:flat, number:, floor:, owner: create_user(society))
   puts "Added Owner with UI "
 
   flat.tenant = create_user(society, user_type: "tenant") if flat.is_rented
@@ -62,7 +62,7 @@ def create_flat(flat_num, floor, floor_num, society)
 end
 
 def create_user(society, user_type: "owner")
-  user = FactoryBot.build(:user, society: society, user_type: user_type)
+  user = FactoryBot.build(:user, society:, user_type:)
   if user.save
     create_user_information(user)
     create_address(user)
@@ -75,7 +75,7 @@ def create_user(society, user_type: "owner")
 end
 
 def create_user_information(user)
-  user_info = FactoryBot.build(:user_information, user: user)
+  user_info = FactoryBot.build(:user_information, user:)
   return user_info if user_info.save
 
   return_error_log(user_info)
@@ -91,8 +91,8 @@ def create_tenant_history(flat, tenant, number)
     move_in_at = Date.today
     move_out_at = nil
   end
-  tenant_history = FactoryBot.build(:tenant_history, flat: flat, tenant: tenant_user, move_in_at: move_in_at,
-                                                     move_out_at: move_out_at)
+  tenant_history = FactoryBot.build(:tenant_history, flat:, tenant: tenant_user, move_in_at:,
+                                                     move_out_at:)
   return tenant_history if tenant_history.save
 
   return_error_log(tenant_history)
@@ -100,7 +100,7 @@ def create_tenant_history(flat, tenant, number)
 end
 
 def create_address(user)
-  address = FactoryBot.build(:address, user: user)
+  address = FactoryBot.build(:address, user:)
   return address if address.save
 
   return_error_log(address)
@@ -108,7 +108,7 @@ def create_address(user)
 end
 
 def create_amenity(building)
-  amenity = FactoryBot.build(:amenity, building: building)
+  amenity = FactoryBot.build(:amenity, building:)
   return amenity if amenity.save
 
   return_error_log(amenity)
@@ -117,8 +117,8 @@ end
 
 def create_parking(building, owner, flat)
   owner = flat.tenant if flat.is_rented
-  parking = FactoryBot.build(:parking, number: flat.letter_box_number.to_s, building: building, owner: owner,
-                                       flat: flat)
+  parking = FactoryBot.build(:parking, number: flat.letter_box_number.to_s, building:, owner:,
+                                       flat:)
   puts "Assign Parking "
   if parking.save
     rand(1..4).times { |_num| create_vehicle(flat, owner) }
@@ -134,7 +134,7 @@ end
 
 def create_vehicle(flat, user)
   puts "Add Vehicle "
-  vehicle = FactoryBot.build(:vehicle, flat: flat, user: user)
+  vehicle = FactoryBot.build(:vehicle, flat:, user:)
   return vehicle if vehicle.save
 
   return_error_log(vehicle)
@@ -142,7 +142,7 @@ def create_vehicle(flat, user)
 end
 
 def create_family_member(flat)
-  family_member = FactoryBot.build(:family_member, flat: flat)
+  family_member = FactoryBot.build(:family_member, flat:)
   puts "Add Family Member "
   if family_member.save
     create_document(flat.owner)
@@ -156,7 +156,7 @@ end
 
 def create_document(user)
   puts "Create Document"
-  document = FactoryBot.build(:document, user: user)
+  document = FactoryBot.build(:document, user:)
   return document if document.save
 
   return_error_log(document)
@@ -165,7 +165,7 @@ end
 
 def create_gate_entry(flat)
   puts "Create Gate Entry"
-  gate_entry = FactoryBot.build(:gate_entry, flat: flat)
+  gate_entry = FactoryBot.build(:gate_entry, flat:)
   return gate_entry if gate_entry.save
 
   return_error_log(gate_entry)
@@ -174,7 +174,7 @@ end
 
 def create_complaint(flat, user, building)
   puts "Create Complaint"
-  complaint = FactoryBot.build(:complaint, flat: flat, user: user, building: building)
+  complaint = FactoryBot.build(:complaint, flat:, user:, building:)
   return complaint if complaint.save
 
   return_error_log(complaint)
@@ -187,18 +187,18 @@ end
 
 def create_commity(building)
   puts "Add Commity"
-  commity = FactoryBot.build(:commity, building: building, title: "#{building.name} Admin")
+  commity = FactoryBot.build(:commity, building:, title: "#{building.name} Admin")
   return commity if commity.save
 
   create_commity(building)
 end
 
 def create_commitee_member(commity, user)
-  FactoryBot.create(:commitee_member, commity: commity, user: user)
+  FactoryBot.create(:commitee_member, commity:, user:)
 end
 
 def return_error_log(object)
   puts "+++--------#{object.class.name} errors - #{object.errors.each do |error|
-                                                                   puts error.message
-                                                                 end}--------+++"
+                                                     puts error.message
+                                                   end}--------+++"
 end

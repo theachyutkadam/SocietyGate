@@ -36,7 +36,7 @@ class Amenity < ApplicationRecord
   validate :amenity_uniqueness
 
   def amenity_uniqueness
-    return unless Amenity.where(name: name, building_id: building_id).any?
+    return unless Amenity.where(name:, building_id:).any?
 
     errors.add(:name, "already exists")
   end

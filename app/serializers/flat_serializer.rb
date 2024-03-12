@@ -40,14 +40,13 @@ class FlatSerializer < ActiveModel::Serializer
   # has_one :owner, serializer: UserSerializer
   # has_one :tenant, serializer: UserSerializer
   # has_one :floor
+  delegate :floor, to: :object
 
   def link
     api_flat_url(object)
   end
 
   def owner
-    object.owner.user_information
-
     ActiveModelSerializers::SerializableResource.new(
       object.owner.user_information, each_serializer: UserInformationSerializer
     ) if object.owner.user_information
@@ -57,10 +56,6 @@ class FlatSerializer < ActiveModel::Serializer
     ActiveModelSerializers::SerializableResource.new(
       object.tenant.user_information, each_serializer: UserInformationSerializer
     ) if object.tenant
-  end
-
-  def floor
-    object.floor
   end
 
 end
