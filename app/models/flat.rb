@@ -63,11 +63,14 @@ class Flat < ApplicationRecord
   end
 
   def set_letter_box_number
-    self.number = if wing.floors.last.flats.any?
-      "#{wing.floors.last.flats.last.number}1"
-    else
-      "101"
-    end
+    # self.number = if wing.floors.last.flats.any?
+    #   puts "==================="
+    #   puts wing.floors.last.flats.last.inspect
+    #   puts "==================="
+    #   wing.floors.last.flats.last.number.to_i + 1
+    # else
+    #   101
+    # end
     self.letter_box_number = "#{wing.building.name}/#{wing.name}-#{number}"
 
     set_flat_details unless valid?
