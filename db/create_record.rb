@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@flats = 10
+@flats = 6
 @wings = 3
 @floors = 10
 @buildings = 3
@@ -43,7 +43,7 @@ end
 def create_flat(flat_num, floor, floor_num, society)
   number = "#{floor_num}#{format('%02d', flat_num)}"
   puts "flat #{number} "
-  flat = FactoryBot.build(:flat, number:, floor:, owner: create_user(society))
+  flat = FactoryBot.build(:flat, number: number, floor: floor, owner: create_user(society))
   puts "Added Owner with UI "
 
   flat.tenant = create_user(society, user_type: "tenant") if flat.is_rented
@@ -88,7 +88,7 @@ def create_tenant_history(flat, tenant, number)
   move_out_at = Faker::Date.backward(days: 25)
   if number == 2
     tenant_user = tenant
-    move_in_at = Date.today
+    move_in_at = Time.zone.today
     move_out_at = nil
   end
   tenant_history = FactoryBot.build(:tenant_history, flat:, tenant: tenant_user, move_in_at:,
@@ -199,6 +199,6 @@ end
 
 def return_error_log(object)
   puts "+++--------#{object.class.name} errors - #{object.errors.each do |error|
-                                                     puts error.message
-                                                   end}--------+++"
+                                                                   puts error.message
+                                                                 end}--------+++"
 end

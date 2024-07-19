@@ -56,15 +56,20 @@ class Flat < ApplicationRecord
 
   validate :tenant_available?
 
-  before_validation :set_letter_box_number
+  before_create :set_letter_box_number
 
   def tenant_available?
     errors.add(:tenant, "is required") if is_rented && !tenant
   end
 
   def set_letter_box_number
-    self.number = wing.flats.last.number + 1
+    if wing.floors.last.flats.any?
+      self.number = wing.floors.last.flats.last.number + '1'
+    else
+      self.number = '101'
+    end
     self.letter_box_number = "#{wing.building.name}/#{wing.name}-#{number}"
+
     set_flat_details unless valid?
   end
 
