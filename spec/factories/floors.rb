@@ -28,6 +28,6 @@ FactoryBot.define do
     number_of_flats { Faker::Base.numerify("##") }
     is_refuge_area { Faker::Boolean.boolean }
     fire_exebution { Faker::Boolean.boolean }
-    service_at { Date.today }
+    service_at { Time.zone.today }
   end
 end

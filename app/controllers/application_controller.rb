@@ -32,13 +32,13 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
-    p "+++++++++++++++++"
-    p request.headers["authorization"]
-    p "+++++++++++++++++"
+    Rails.logger.debug "+++++++++++++++++"
+    Rails.logger.debug request.headers["authorization"]
+    Rails.logger.debug "+++++++++++++++++"
     # if request.headers["authorization"]
     #   return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 
-      @login_user
+    @login_user
     # else
     #   render json: { message: "No authorization Header sent" }, status: :forbidden
     # end

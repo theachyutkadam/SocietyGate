@@ -44,7 +44,7 @@ RSpec.describe Api::SocietiesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      society = Society.create! valid_attributes
+      Society.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end

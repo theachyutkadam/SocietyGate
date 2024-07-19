@@ -63,10 +63,10 @@ class Flat < ApplicationRecord
   end
 
   def set_letter_box_number
-    if wing.floors.last.flats.any?
-      self.number = wing.floors.last.flats.last.number + '1'
+    self.number = if wing.floors.last.flats.any?
+      "#{wing.floors.last.flats.last.number}1"
     else
-      self.number = '101'
+      "101"
     end
     self.letter_box_number = "#{wing.building.name}/#{wing.name}-#{number}"
 

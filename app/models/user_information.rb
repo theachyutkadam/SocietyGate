@@ -37,7 +37,7 @@ class UserInformation < ApplicationRecord
   has_one_attached :avatar
 
   def avatar_url
-    ip = Socket.ip_address_list.detect { |intf| intf.ipv4_private? }
+    ip = Socket.ip_address_list.detect(&:ipv4_private?)
     return unless avatar.attached?
 
     Rails.application.routes.url_helpers.url_for(avatar).gsub! "localhost:", "#{ip.ip_address}:"

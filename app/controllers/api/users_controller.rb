@@ -97,7 +97,6 @@ module Api
     end
 
     def collect_floor_details(floor, wing, building)
-      flat_numbers = []
       flat_numbers = floor.flats.pluck(:number)
       @floor_details.append(
         {

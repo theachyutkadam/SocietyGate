@@ -44,7 +44,7 @@ RSpec.describe Api::FamilyMembersController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      family_member = FamilyMember.create! valid_attributes
+      FamilyMember.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end

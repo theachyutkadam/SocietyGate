@@ -44,7 +44,7 @@ RSpec.describe Api::FlatsController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      flat = Flat.create! valid_attributes
+      Flat.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end

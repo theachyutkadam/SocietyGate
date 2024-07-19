@@ -44,7 +44,7 @@ RSpec.describe Api::CommitiesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      commity = Commity.create! valid_attributes
+      Commity.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end

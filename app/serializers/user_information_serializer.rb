@@ -52,7 +52,5 @@ class UserInformationSerializer < ActiveModel::Serializer
     api_user_information_url(object)
   end
 
-  def avatar_url
-    object.avatar_url
-  end
+  delegate :avatar_url, to: :object
 end
