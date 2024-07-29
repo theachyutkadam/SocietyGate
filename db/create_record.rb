@@ -198,7 +198,5 @@ def create_commitee_member(commity, user)
 end
 
 def return_error_log(object)
-  puts "+++--------#{object.class.name} errors - #{object.errors.each do |error|
-                                                                   puts error.message
-                                                                 end}--------+++"
+  puts "+++#{object.class.name} Err- #{object.errors.each {|error| puts error.message}}+++"
 end
