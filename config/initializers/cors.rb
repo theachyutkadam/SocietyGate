@@ -32,7 +32,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       "http://192.168.137.232:1025",
       "http://192.168.1.14:1025",
       "http://192.168.1.33:1025",
-      "http://192.168.1.36:1025"
+      "http://192.168.1.36:1025",
+      "http://192.168.1.35:1025",
+      "http://192.168.1.39:1025"
     ]
     resource "*", headers: :any, methods: %i[get post patch put delete options]
   end

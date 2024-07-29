@@ -13,11 +13,11 @@ end
 
 def create_building(num, society)
   building = FactoryBot.create(:building, name: "R#{num + 1}", society:)
-  Rails.logger.debug
-  Rails.logger.debug "building name - R#{num + 1}"
+  puts
+  puts "building name - R#{num + 1}"
   @wings.times do |num|
     create_amenity(building)
-    Rails.logger.debug "Added amenity"
+    puts "Added amenity"
     create_wing(num, building)
   end
   create_commity(building)
@@ -25,7 +25,7 @@ end
 
 def create_wing(num, building)
   wing = FactoryBot.build(:wing, building:)
-  Rails.logger.debug "wing name - #{building.name}/#{wing.name}"
+  puts "wing name - #{building.name}/#{wing.name}"
   if wing.save
     @floors.times { |num| create_floor(num + 1, wing, building.society) }
   else
@@ -35,16 +35,16 @@ def create_wing(num, building)
 end
 
 def create_floor(floor_num, wing, society)
-  Rails.logger.debug "floor - #{wing.name}-#{floor_num.ordinalize}"
+  puts "floor - #{wing.name}-#{floor_num.ordinalize}"
   floor = FactoryBot.create(:floor, number: floor_num.ordinalize.to_s, wing:, number_of_flats: 12)
   @flats.times { |flat_num| create_flat(flat_num + 1, floor, floor_num, society) }
 end
 
 def create_flat(flat_num, floor, floor_num, society)
   number = "#{floor_num}#{format('%02d', flat_num)}"
-  Rails.logger.debug "flat #{number} "
+  puts "flat #{number} "
   flat = FactoryBot.build(:flat, number:, floor:, owner: create_user(society))
-  Rails.logger.debug "Added Owner with UI "
+  puts "Added Owner with UI "
 
   flat.tenant = create_user(society, user_type: "tenant") if flat.is_rented
   flat.save
@@ -52,13 +52,13 @@ def create_flat(flat_num, floor, floor_num, society)
   if flat.is_rented
     3.times do |number|
       create_tenant_history(flat, flat.tenant, number)
-      Rails.logger.debug "tenant history created"
+      puts "tenant history created"
     end
   end
 
   create_parking(flat.wing.building, flat.owner, flat)
   rand(1..4).times { |_num| create_family_member(flat) }
-  Rails.logger.debug
+  puts
 end
 
 def create_user(society, user_type: "owner")
@@ -66,7 +66,7 @@ def create_user(society, user_type: "owner")
   if user.save
     create_user_information(user)
     create_address(user)
-    Rails.logger.debug "address created"
+    puts "address created"
     user
   else
     return_error_log(user)
@@ -119,7 +119,7 @@ def create_parking(building, owner, flat)
   owner = flat.tenant if flat.is_rented
   parking = FactoryBot.build(:parking, number: flat.letter_box_number.to_s, building:, owner:,
                                        flat:)
-  Rails.logger.debug "Assign Parking "
+  puts "Assign Parking "
   if parking.save
     rand(1..4).times { |_num| create_vehicle(flat, owner) }
     nil
@@ -133,7 +133,7 @@ def create_parking(building, owner, flat)
 end
 
 def create_vehicle(flat, user)
-  Rails.logger.debug "Add Vehicle "
+  puts "Add Vehicle "
   vehicle = FactoryBot.build(:vehicle, flat:, user:)
   return vehicle if vehicle.save
 
@@ -143,7 +143,7 @@ end
 
 def create_family_member(flat)
   family_member = FactoryBot.build(:family_member, flat:)
-  Rails.logger.debug "Add Family Member "
+  puts "Add Family Member "
   if family_member.save
     create_document(flat.owner)
     rand(1..4).times { |_num| create_gate_entry(flat) }
@@ -155,7 +155,7 @@ def create_family_member(flat)
 end
 
 def create_document(user)
-  Rails.logger.debug "Create Document"
+  puts "Create Document"
   document = FactoryBot.build(:document, user:)
   return document if document.save
 
@@ -164,7 +164,7 @@ def create_document(user)
 end
 
 def create_gate_entry(flat)
-  Rails.logger.debug "Create Gate Entry"
+  puts "Create Gate Entry"
   gate_entry = FactoryBot.build(:gate_entry, flat:)
   return gate_entry if gate_entry.save
 
@@ -173,7 +173,7 @@ def create_gate_entry(flat)
 end
 
 def create_complaint(flat, user, building)
-  Rails.logger.debug "Create Complaint"
+  puts "Create Complaint"
   complaint = FactoryBot.build(:complaint, flat:, user:, building:)
   return complaint if complaint.save
 
@@ -186,7 +186,7 @@ def create_event
 end
 
 def create_commity(building)
-  Rails.logger.debug "Add Commity"
+  puts "Add Commity"
   commity = FactoryBot.build(:commity, building:, title: "#{building.name} Admin")
   return commity if commity.save
 
@@ -198,7 +198,7 @@ def create_commitee_member(commity, user)
 end
 
 def return_error_log(object)
-  Rails.logger.debug "+++--------#{object.class.name} errors - #{object.errors.each do |error|
-                                                                   Rails.logger.debug error.message
+  puts "+++--------#{object.class.name} errors - #{object.errors.each do |error|
+                                                                   puts error.message
                                                                  end}--------+++"
 end
