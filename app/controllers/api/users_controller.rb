@@ -54,10 +54,13 @@ module Api
         @user.update(token:)
         # ahoy.authenticate(@user)
         render json: {
-          user_information_id: @user.user_information.id,
           auth_token: token,
-          user_id: @user.id,
-          user_details: { full_name: @user.user_information.full_name },
+          user_details: {
+            user_id: @user.id,
+            email: @user.email,
+            # user_information_id: @user.user_information.id,
+            full_name: @user.user_information.full_name,
+          },
           status: 200,
         }
       else
@@ -76,53 +79,94 @@ module Api
     end
 
     def onboarding
-      @society_details = []
+      @building_details = []
+      @society_details = [
+        "society": current_user.society,
+        "building_details": @building_details
+      ]
 
       Building.page(params[:page]).per(params[:per_page]).each do |building|
         @wings_details = []
 
+        @building_details.append(
+          {
+            "id": building.id,
+            "name": building.name,
+            "wings_details": @wings_details,
+          },
+        )
         building.wings.each do |wing|
-          collect_wing_details(wing, building)
+          @floor_details = []
+          @wings_details.append(
+            {
+              "id": wing.id,
+              "name": wing.name,
+              "floor_details": @floor_details,
+            },
+          )
+          wing.floors.each do |floor|
+            @flat_details = []
+            flat_numbers = floor.flats.pluck(:number)
+            @floor_details.append(
+              {
+                "id": floor.id,
+                "number": floor.number,
+                "flat_numbers": flat_numbers,
+                # "flat_details": @flat_details,
+              },
+            )
+            floor.flats.each do |flat|
+              @flat_details.append(
+                {
+                  "id": flat.id,
+                  "number": flat.number,
+                  "flat_details": flat
+                },
+              )
+            end
+          end
         end
       end
       render json: { society_details: @society_details }
     end
 
-    def collect_wing_details(wing, building)
-      @floor_details = []
+    # def collect_wing_details(wing, building)
+    #   @floor_details = []
 
-      wing.floors.each do |floor|
-        collect_floor_details(floor, wing, building)
-      end
-    end
+    #   wing.floors.each do |floor|
+    #     collect_floor_details(floor, wing, building)
+    #   end
+    # end
 
-    def collect_floor_details(floor, wing, building)
-      flat_numbers = floor.flats.pluck(:number)
-      @floor_details.append(
-        {
-          "id": floor.id,
-          "fire_exebution": floor.fire_exebution,
-          "is_refuge_area": floor.is_refuge_area,
-          "number": floor.number,
-          "flats_details": flat_numbers,
-        },
-      )
-      @wings_details.append(
-        {
-          "id": wing.id,
-          "name": wing.name,
-          "floor_details": @floor_details,
-        },
-      )
-      @society_details.append(
-        { "buildings_details":
-          {
-            "id": building.id,
-            "name": building.name,
-            "wings_details": @wings_details,
-          } },
-      )
-    end
+    # def collect_floor_details(floor, wing, building)
+    #   flat_numbers = floor.flats.pluck(:number)
+    #   @floor_details.append(
+    #     {
+    #       "id": floor.id,
+    #       "fire_exebution": floor.fire_exebution,
+    #       "is_refuge_area": floor.is_refuge_area,
+    #       "number": floor.number,
+    #       "flats_details": flat_numbers,
+    #     },
+    #   )
+    #   @wings_details.append(
+    #     {
+    #       "id": wing.id,
+    #       "name": wing.name,
+    #       "floor_details": @floor_details,
+    #     },
+    #   )
+    #   @society_details.append(
+    #     {
+    #        "buildings_details":
+    #       {
+    #         "id": building.id,
+    #           "name": building.name,
+    #         "wings_details": @wings_details,
+    #       }
+    #     },
+    #   )
+    # end
 
     private
 
