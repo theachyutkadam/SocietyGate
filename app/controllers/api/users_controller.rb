@@ -57,6 +57,7 @@ module Api
           auth_token: token,
           user_details: {
             user_id: @user.id,
+            user_information_id: @user.user_information.id,
             email: @user.email,
             # user_information_id: @user.user_information.id,
             full_name: @user.user_information.full_name,

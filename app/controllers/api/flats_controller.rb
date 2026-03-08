@@ -63,6 +63,5 @@ module Api
                                    :letter_box_number, :electricity_meter_number, :gas_meter_number)
     end
 
-    # Following are Operations methods TODO:
   end
 end
