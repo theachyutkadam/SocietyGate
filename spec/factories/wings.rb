@@ -22,6 +22,8 @@
 #
 FactoryBot.define do
   factory :wing do
+    association :building
+
     name { [*("A".."Z")].shuffle.sample }
     number_of_lifts { rand(0..10) }
     structure { Wing.structures.keys.sample }

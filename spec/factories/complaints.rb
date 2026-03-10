@@ -29,8 +29,15 @@
 #
 FactoryBot.define do
   factory :complaint do
-    title { "Not Now" }
-    complaint_type { Complaint.complaint_types.keys.sample }
-    description { Faker::Lorem.question(word_count: 10) }
+    association :user
+    association :building
+    association :flat
+
+    title { Faker::Lorem.word }
+    description { Faker::Lorem.sentence }
+
+    status { 0 }
+    complaint_type { 0 }
   end
+
 end

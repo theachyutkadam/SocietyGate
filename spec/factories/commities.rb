@@ -19,9 +19,12 @@
 #
 #  fk_rails_...  (building_id => buildings.id)
 #
+
 FactoryBot.define do
   factory :commity do
-    title { "Marvel" }
-    members_limit { rand(3..50) }
+    association :building
+    title { Faker::Team.name }
+    members_limit { rand(3..10) }
   end
 end
+

@@ -22,6 +22,8 @@
 #
 FactoryBot.define do
   factory :building do
+    association :society
+
     name { Faker::Base.bothify("??####") }
     location { Faker::Address.city }
     status { 1 }

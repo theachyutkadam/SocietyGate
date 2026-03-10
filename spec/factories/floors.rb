@@ -24,10 +24,12 @@
 #
 FactoryBot.define do
   factory :floor do
-    number { Faker::Base.numerify("###") }
-    number_of_flats { Faker::Base.numerify("##") }
-    is_refuge_area { Faker::Boolean.boolean }
-    fire_exebution { Faker::Boolean.boolean }
-    service_at { Time.zone.today }
+    association :wing
+
+    number { rand(1..20).to_s }
+    number_of_flats { rand(2..8) }
+    is_refuge_area { false }
+    fire_exebution { false }
+    service_at { Time.current }
   end
 end

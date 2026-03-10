@@ -58,6 +58,7 @@ group :development, :test do
   gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "main"
   gem "rspec-rails", "~> 3.6"
   gem "simplecov"
+  gem 'shoulda-matchers'
 end
 
 group :development do

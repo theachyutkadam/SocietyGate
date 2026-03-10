@@ -34,12 +34,19 @@
 #
 FactoryBot.define do
   factory :flat do
-    number { Faker::Base.numerify("####") }
+    association :floor
+    association :owner, factory: :user
+    association :tenant, factory: :user
+
+    # number { Faker::Number.number(digits: 4) }
+    sequence(:number) { |n| n.to_s.rjust(4, '0') }
+
     area_in_feet { 550 }
-    is_rented { Faker::Boolean.boolean }
-    structure { Flat.structures.keys.sample }
-    letter_box_number { Faker::Base.numerify("######") }
-    electricity_meter_number { Faker::Base.numerify("##########") }
-    gas_meter_number { Faker::Base.numerify("##########") }
+    is_rented { false }
+    structure { 0 }
+    letter_box_number { Faker::Number.number(digits: 6) }
+    electricity_meter_number { Faker::Number.unique.number(digits: 10).to_s }
+    gas_meter_number { Faker::Number.unique.number(digits: 10).to_s }
   end
+
 end

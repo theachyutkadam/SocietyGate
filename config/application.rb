@@ -27,8 +27,8 @@ module SocietyGate
     config.api_only = true
     config.active_record.belongs_to_required_by_default = false
 
-    Rails.logger = Logger.new(STDOUT)
-    Rails.logger.level = Logger::DEBUG
+    # Rails.logger = Logger.new(STDOUT)
+    # Rails.logger.level = Logger::DEBUG
     # config.logger = Logger.new(STDOUT)
     # config.logger = Logger::Logger.new("Application Log")
     # Rails.logger.datetime_format = "%Y-%m-%d %H:%M:%S"

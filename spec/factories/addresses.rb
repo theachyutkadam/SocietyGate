@@ -25,6 +25,8 @@
 #
 FactoryBot.define do
   factory :address do
+    association :user
+
     flat_number { Faker::Address.zip }
     building { Faker::Address.building_number }
     street_name { Faker::Address.street_address }

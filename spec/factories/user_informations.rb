@@ -31,28 +31,32 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+
 FactoryBot.define do
   factory :user_information do
+    # association :user
+    user
+
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.middle_name }
     last_name { Faker::Name.last_name }
-    contact { Faker::Base.numerify("##########") }
-    birth_date { 18.years.ago }
+    contact { Faker::Number.unique.number(digits: 10).to_s }
+    birth_date { 20.years.ago }
     gender { UserInformation.genders.keys.sample }
     maritial_status { UserInformation.maritial_statuses.keys.sample }
-    pan_card_number { Faker::Base.bothify("?????####?") }
-    adhaar_card_number { Faker::Number.number(digits: 12) }
+    pan_card_number { Faker::Alphanumeric.unique.alphanumeric(number: 10).upcase }
+    adhaar_card_number { Faker::Number.unique.number(digits: 12).to_s }
     is_handicap { false }
-    handicap_details { Faker::Lorem.question(word_count: 4) }
-    # avatar_url { Faker::Avatar.image }
-    # transient do
-    #   # avatar { file_fixture("avatar.jpg") }
-    #   after :build do |user_information, evaluator|
-    #     user_information.avatar.attach(
-    #       io: evaluator.avatar.open,
-    #       filename: Faker::Avatar.image,
-    #     )
-    #   end
-    # end
+    handicap_details { "N/A" }
+
+    trait :with_avatar do
+      after(:build) do |user_information|
+        user_information.avatar.attach(
+          io: File.open(Rails.root.join("spec/fixtures/files/avatar.png")),
+          filename: "avatar.png",
+          content_type: "image/png"
+        )
+      end
+    end
   end
 end

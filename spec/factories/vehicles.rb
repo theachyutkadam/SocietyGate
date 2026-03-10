@@ -28,9 +28,12 @@
 #
 FactoryBot.define do
   factory :vehicle do
+    association :user
+    association :flat
+
     number { Faker::Base.bothify("??##??####") }
-    company { Faker::Vehicle.make }
     name { Faker::Vehicle.model }
+    company { Faker::Vehicle.make }
     status { Vehicle.statuses.keys.sample }
     vehicle_type { Vehicle.vehicle_types.keys.sample }
     color { Faker::Vehicle.color }

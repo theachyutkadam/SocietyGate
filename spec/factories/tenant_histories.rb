@@ -24,7 +24,11 @@
 #
 FactoryBot.define do
   factory :tenant_history do
-    move_in_at { Faker::Date.backward(days: 2000) }
-    move_out_at { Faker::Date.backward(days: 25) }
+    association :tenant, factory: :user
+    association :flat
+
+    move_in_at { 1.year.ago }
+    move_out_at { Date.today }
   end
+
 end

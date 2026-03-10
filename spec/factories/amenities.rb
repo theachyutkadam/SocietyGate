@@ -26,6 +26,8 @@
 #
 FactoryBot.define do
   factory :amenity do
+    association :building
+
     name { %w[SwimmingPool Garden Clubhouse Tennies Carrom Chess Piano].shuffle.sample }
     open_time { Faker::Time.backward(period: :morning).strftime("%I:%M %p") }
     close_time { Faker::Time.backward(period: :evening).strftime("%I:%M %p") }

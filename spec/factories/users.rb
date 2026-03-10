@@ -28,9 +28,11 @@
 #
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.email }
+    association :society
+
+    sequence(:email) { |n| "user#{n}@test.com" }
     password { "123456" }
-    token { Faker::Internet.device_token }
+    token { SecureRandom.hex(10) }
     is_admin { false }
     status { User.statuses.keys.sample }
     user_type { User.user_types.keys.sample }

@@ -28,6 +28,10 @@
 #
 FactoryBot.define do
   factory :parking do
+    association :building
+    association :flat
+    association :owner, factory: :user
+
     number { Faker::Base.bothify("??####") }
     is_covered { false }
     size_in_feet { Faker::Base.bothify("###") }

@@ -25,8 +25,11 @@
 #
 FactoryBot.define do
   factory :commitee_member do
+    association :user
+    association :commity
+
     name { Faker::Name.name }
-    designation { CommiteeMember.designations.keys.sample }
-    members_count { 1 }
+    members_count { rand(1..5) }
+    designation { 0 }
   end
 end
