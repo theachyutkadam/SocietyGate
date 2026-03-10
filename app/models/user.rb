@@ -37,8 +37,8 @@ class User < ApplicationRecord
   has_many :complaints, dependent: :destroy
   has_many :vehicles, dependent: :destroy
   has_many :parkings, class_name: "Parking", dependent: :destroy, foreign_key: :owner_id
-  has_many :flat_tenants, class_name: "Flat", dependent: :destroy, foreign_key: :tenant_id
-  has_many :flat_owners, class_name: "Flat", dependent: :destroy, foreign_key: :owner_id
+  has_many :flat_tenants, class_name: "Flat", foreign_key: :tenant_id
+  has_many :flat_owners, class_name: "Flat", foreign_key: :owner_id
   has_many :tenant_histories, class_name: "TenantHistory", dependent: :destroy, foreign_key: :tenant_id
   has_many :flats, dependent: :destroy
 

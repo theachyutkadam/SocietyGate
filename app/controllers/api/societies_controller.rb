@@ -21,7 +21,7 @@ module Api
       @society = Society.new(society_params)
 
       if @society.save
-        render json: @society, status: :created, location: @society
+        render json: @society, status: :created
       else
         render json: @society.errors.full_messages, status: :unprocessable_entity
       end
